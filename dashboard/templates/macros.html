@@ -1,0 +1,336 @@
+{% macro render_transaction_alert(type, message) -%}
+    <div class="alert {{ type }}">
+        <button class="close" data-dismiss="alert"></button>
+        {{ message }}
+    </div>
+{%- endmacro %}
+
+{% macro render_campaign_steps(campaign_id, step_one, step_two, step_three, step_four, step_five, step_six, step_seven) -%}
+    <div class="row">
+        <div class="form-wizard-steps" dir="ltr">
+            <ul class="wizard-steps">
+                <li class="{{ step_seven }}">
+                    <a href="{% if campaign_id %} {{ url_for('advertiser_campaign_steps', campaign_id=campaign_id, campaign_step='seven') }} {% else %} {{ url_for('advertiser_campaign_new') }} {% endif %}">
+                        <span class="step">7</span>
+                        <span class="title">بازبینی<br></span>
+                    </a>
+                </li>
+                <li class="{{ step_six }}">
+                    <a href="{% if campaign_id %} {{ url_for('advertiser_campaign_steps', campaign_id=campaign_id, campaign_step='six') }} {% else %} {{ url_for('advertiser_campaign_new') }} {% endif %}">
+                        <span class="step">6</span>
+                        <span class="title">هدف گذاری<br></span>
+                    </a>
+                </li>
+                <li class="{{ step_five }}">
+                    <a href="{% if campaign_id %} {{ url_for('advertiser_campaign_steps', campaign_id=campaign_id, campaign_step='five') }} {% else %} {{ url_for('advertiser_campaign_new') }} {% endif %}">
+                        <span class="step">5</span>
+                        <span class="title">لینک مقصد<br></span>
+                    </a>
+                </li>
+                <li class="{{ step_four }}">
+                    <a href="{% if campaign_id %} {{ url_for('advertiser_campaign_steps', campaign_id=campaign_id, campaign_step='four') }} {% else %} {{ url_for('advertiser_campaign_new') }} {% endif %}">
+                        <span class="step">4</span>
+                        <span class="title">انتخاب بنر<br></span>
+                    </a>
+                </li>
+                <li class="{{ step_three }}">
+                    <a href="{% if campaign_id %} {{ url_for('advertiser_campaign_steps', campaign_id=campaign_id, campaign_step='three') }} {% else %} {{ url_for('advertiser_campaign_new') }} {% endif %}">
+                        <span class="step">3</span>
+                        <span class="title">بودجه بندی<br></span>
+                    </a>
+                </li>
+                <li class="{{ step_two }}">
+                    <a href="{% if campaign_id %} {{ url_for('advertiser_campaign_steps', campaign_id=campaign_id, campaign_step='two') }} {% else %} {{ url_for('advertiser_campaign_new') }} {% endif %}">
+                        <span class="step">2</span>
+                        <span class="title">انتخاب نام کمپین<br></span>
+                    </a>
+                </li>
+                <li class="{{ step_one }}">
+                    <a href="{% if campaign_id %} {{ url_for('advertiser_campaign_steps', campaign_id=campaign_id, campaign_step='one') }} {% else %} {{ url_for('advertiser_campaign_new') }} {% endif %}">
+                        <span class="step">1</span>
+                        <span class="title">تعیین نوع کمپین<br></span>
+                    </a>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+{%- endmacro %}
+
+
+{% macro render_campaign_steps_search_engine(campaign_id, step_one, step_two, step_three, step_four, step_five, step_six, step_seven) -%}
+    <div class="row">
+        <div class="form-wizard-steps" dir="ltr">
+            <ul class="wizard-steps">
+                <li class="{{ step_seven }}">
+                    <a href="{% if campaign_id %} {{ url_for('advertiser_campaign_steps', campaign_id=campaign_id, campaign_step='seven') }} {% else %} {{ url_for('advertiser_campaign_new') }} {% endif %}">
+                        <span class="step">7</span>
+                        <span class="title">بازبینی<br></span>
+                    </a>
+                </li>
+                <li class="{{ step_six }}">
+                    <a href="{% if campaign_id %} {{ url_for('advertiser_campaign_steps', campaign_id=campaign_id, campaign_step='six') }} {% else %} {{ url_for('advertiser_campaign_new') }} {% endif %}">
+                        <span class="step">6</span>
+                        <span class="title">هدف گذاری<br></span>
+                    </a>
+                </li>
+                <li class="{{ step_five }}">
+                    <a href="{% if campaign_id %} {{ url_for('advertiser_campaign_steps', campaign_id=campaign_id, campaign_step='five') }} {% else %} {{ url_for('advertiser_campaign_new') }} {% endif %}">
+                        <span class="step">5</span>
+                        <span class="title">لینک مقصد<br></span>
+                    </a>
+                </li>
+                <li class="{{ step_four }}">
+                    <a href="{% if campaign_id %} {{ url_for('advertiser_campaign_steps', campaign_id=campaign_id, campaign_step='four') }} {% else %} {{ url_for('advertiser_campaign_new') }} {% endif %}">
+                        <span class="step">4</span>
+                        <span class="title">توضیحات تبلیغ<br></span>
+                    </a>
+                </li>
+                <li class="{{ step_three }}">
+                    <a href="{% if campaign_id %} {{ url_for('advertiser_campaign_steps', campaign_id=campaign_id, campaign_step='three') }} {% else %} {{ url_for('advertiser_campaign_new') }} {% endif %}">
+                        <span class="step">3</span>
+                        <span class="title">بودجه بندی<br></span>
+                    </a>
+                </li>
+                <li class="{{ step_two }}">
+                    <a href="{% if campaign_id %} {{ url_for('advertiser_campaign_steps', campaign_id=campaign_id, campaign_step='two') }} {% else %} {{ url_for('advertiser_campaign_new') }} {% endif %}">
+                        <span class="step">2</span>
+                        <span class="title">انتخاب نام کمپین<br></span>
+                    </a>
+                </li>
+                <li class="{{ step_one }}">
+                    <a href="{% if campaign_id %} {{ url_for('advertiser_campaign_steps', campaign_id=campaign_id, campaign_step='one') }} {% else %} {{ url_for('advertiser_campaign_new') }} {% endif %}">
+                        <span class="step">1</span>
+                        <span class="title">تعیین نوع کمپین<br></span>
+                    </a>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+{%- endmacro %}
+
+
+{% macro render_page_title(module, url_index, action) -%}
+    <ul class="breadcrumb">
+        <li>
+            <a href="{{ url_for('dashboard') }}">داشبورد</a>
+        </li>
+        <li><a href="{{ url_for(url_index) }}" class="active">{{ module }}</a></li>
+    </ul>
+    <div class="page-title"><i class="icon-custom-right"></i>
+        <h3>{{ action }}</h3>
+    </div>
+{%- endmacro %}
+
+{# Renders field for bootstrap 3 standards.
+
+    Params:
+        field - WTForm field
+        kwargs - pass any arguments you want in order to put them into the html attributes.
+        There are few exceptions: for - for_, class - class_, class__ - class_
+
+    Example usage:
+        {{ macros.render_field(form.email, placeholder='Input email', type='email') }}
+#}
+{% macro render_field(field, label_visible=true) -%}
+    {% if field.type == 'CSRFTokenField' %}
+        {{ field }}
+
+        {% if field.errors %}
+            <div class="warning">You have submitted an invalid CSRF token</div>
+        {% endif %}
+    {% elif field.type == 'HiddenField' %}
+        {{ field }}
+        {# any other special case you may need #}
+    {% else %}
+        <div class="form-group {{ field.id }}">
+            <label for="{{ field.label.field_id }}" class="form-label">{{ field.label.text }}</label>
+            <span class="help">{{ field.description }}</span>
+            <div class="controls">
+                <div class="input-with-icon  right">
+                    <i class=""></i>
+                    {{ field(class_="form-control") }}
+                </div>
+                {% if field.errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {% for err in field.errors %}
+                            <p>{{ err|e }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+{%- endmacro %}
+
+{# Renders checkbox fields since they are represented differently in bootstrap
+    Params:
+        field - WTForm field (there are no check, but you should put here only BooleanField.
+        kwargs - pass any arguments you want in order to put them into the html attributes.
+        There are few exceptions: for - for_, class - class_, class__ - class_
+
+    Example usage:
+        {{ macros.render_checkbox_field(form.remember_me) }}
+ #}
+
+{% macro render_checkbox_field(field) -%}
+    <div class="form-group {{ field.id }}">
+        <div class="checkbox check-success">
+            {{ field(type='checkbox', **kwargs) }} {{ field.label }}
+        </div>
+    </div>
+{%- endmacro %}
+
+
+{% macro render_submit_field(field) -%}
+    <div class="form-group {{ field.id }}">
+        <input class="form-control btn btn-success btn-cons" id="submit" name="submit" value="{{ field.description }}"
+               type="submit">
+    </div>
+{%- endmacro %}
+
+{% macro render_button_recaptcha_field(field) -%}
+    <div class="form-group {{ field.id }}">
+        <button class="g-recaptcha form-control btn btn-success btn-cons"
+            data-sitekey="6LeatygUAAAAAFfE7zwQCzvgFZ2X-QnRmzvYOv5l"
+            data-callback="onSubmit">{{ field.description }}</button>
+    </div>
+{%- endmacro %}
+
+{# Renders radio field
+    Params:
+        field - WTForm field (there are no check, but you should put here only BooleanField.
+        kwargs - pass any arguments you want in order to put them into the html attributes.
+        There are few exceptions: for - for_, class - class_, class__ - class_
+
+    Example usage:
+        {{ macros.render_radio_field(form.answers) }}
+ #}
+{% macro render_radio_field(field) -%}
+    <div class="form-group {{ field.id }}">
+        {{ field.label }}
+        {% if field.data %} {% set checked = field.data %} {% else %} {% set checked = field.default %} {% endif %}
+        <div class="radio radio-success">
+            {% for value, label, _ in field.iter_choices() %}
+                <input type="radio" {% if value == checked %} checked="checked" {% endif %} name="{{ field.id }}"
+                       id="{{ field.id }}_{{ value }}" value="{{ value }}">
+                <label for="{{ field.id }}_{{ value }}">{{ label }}</label>
+            {% endfor %}
+        </div>
+    </div>
+{%- endmacro %}
+
+
+
+
+{% macro render_multicheckbox_field(field) -%}
+    <div class="form-group
+            {{ field.id }}{% if field.data is defined and field.data|length > 0 %} {{ field.id }}-open{% endif %}">
+        {{ field.label }}
+        <div class="checkbox check-success">
+            {% for value, label, _ in field.iter_choices() %}
+                <input type="checkbox" {% if value in field.data %} checked="checked" {% endif %} name="{{ field.id }}"
+                       id="{{ field.id }}_{{ value }}" value="{{ value }}">
+                <label for="{{ field.id }}_{{ value }}">{{ label }}</label>
+            {% endfor %}
+        </div>
+    </div>
+{%- endmacro %}
+
+
+
+{% macro render_select_multiple_field(field, label_visible=true) -%}
+    <div class="form-group {{ field.id }}">
+        <select id="{{ field.id }}" class="select2-offscreen" multiple="multiple" name="{{ field.id }}" tabindex="-1">
+            {% for value, label, _ in field.iter_choices() %}
+                <option value="{{ value }}">{{ label }}</option>
+            {% endfor %}
+        </select>
+    </div>
+{%- endmacro %}
+
+
+{# Renders WTForm in bootstrap way. There are two ways to call function:
+     - as macros: it will render all field forms using cycle to iterate over them
+     - as call: it will insert form fields as you specify:
+     e.g. {% call macros.render_form(form, action_url=url_for('login_view'), action_text='Login',
+                                        class_='login-form') %}
+                {{ macros.render_field(form.email, placeholder='Input email', type='email') }}
+                {{ macros.render_field(form.password, placeholder='Input password', type='password') }}
+                {{ macros.render_checkbox_field(form.remember_me, type='checkbox') }}
+            {% endcall %}
+
+     Params:
+        form - WTForm class
+        action_url - url where to submit this form
+        action_text - text of submit button
+        class_ - sets a class for form
+    #}
+{% macro render_form(form, action_url='', action_text='Submit', class_='', btn_class='btn btn-default') -%}
+    <form method="POST" action="{{ action_url }}" role="form" class="{{ class_ }}">
+        {{ form.hidden_tag() if form.hidden_tag }}
+        {% if caller %}
+            {{ caller() }}
+        {% else %}
+            {% for f in form %}
+                {% if f.type == 'CSRFTokenField' %}
+                    {{ f }}
+                    {% if f.errors %}
+                        <div class="warning">You have submitted an invalid CSRF token</div>
+                    {% endif %}
+                {% elif f.type == 'BooleanField' %}
+                    {{ render_checkbox_field(f) }}
+                {% elif f.type == 'RadioField' %}
+                    {{ render_radio_field(f) }}
+                {% elif f.type == 'MultiCheckboxField' %}
+                    {{ render_multicheckbox_field(f) }}
+                {% elif f.type == 'SelectMultipleField' %}
+                    {{ render_select_multiple_field(f) }}
+                {% elif f.type == 'SubmitField' %}
+                    {{ render_submit_field(f) }}
+                {% else %}
+                    {{ render_field(f) }}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        <button type="submit" class="{{ btn_class }}">{{ action_text }} </button>
+    </form>
+{%- endmacro %}
+
+{% macro render_form_security(form, action_url='', action_text='Submit', class_='', btn_class='btn btn-default') -%}
+    <form method="POST" id="security-form" action="{{ action_url }}" role="form" class="{{ class_ }}">
+        {{ form.hidden_tag() if form.hidden_tag }}
+        {% if caller %}
+            {{ caller() }}
+        {% else %}
+            {% for f in form %}
+                {% if f.type == 'CSRFTokenField' %}
+                    {{ f }}
+                    {% if f.errors %}
+                        <div class="warning">You have submitted an invalid CSRF token</div>
+                    {% endif %}
+                {% elif f.type == 'BooleanField' %}
+                    {{ render_checkbox_field(f) }}
+                {% elif f.type == 'RadioField' %}
+                    {{ render_radio_field(f) }}
+                {% elif f.type == 'MultiCheckboxField' %}
+                    {{ render_multicheckbox_field(f) }}
+                {% elif f.type == 'SelectMultipleField' %}
+                    {{ render_select_multiple_field(f) }}
+                {% elif f.type == 'SubmitField' %}
+                {% else %}
+                    {{ render_field(f) }}
+                {% endif %}
+            {% endfor %}
+
+            <button type="submit" class="{{ btn_class }}">{{ action_text }}</button>
+{#            <button type="submit" class="g-recaptcha {{ btn_class }}"#}
+{#                data-sitekey="6LcaHCoUAAAAAOzHY41s7iww8oRvO6pUmCkeUnOo"#}
+{#  adcore      data-sitekey="6LeyUjYUAAAAADNWD_6q4DZHtN5R_Jb2kj0cgYKY"#}
+{#  ad.ir       data-sitekey="6Le0ClkUAAAAAEpMV7AXGEuVGXfhbuTJfpsx9qaT"#}
+{#            data-callback="onSubmit">{{ action_text }}</button>#}
+
+        {% endif %}
+    </form>
+{%- endmacro %}

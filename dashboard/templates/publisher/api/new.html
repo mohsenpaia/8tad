@@ -1,0 +1,71 @@
+{% extends "layout.html" %}
+{% from 'macros.html' import render_form, render_page_title %}
+
+{% block title %}
+    {{ title | default_title }}
+{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block content %}
+    {{ render_page_title(configs.module, configs.url_index, configs.action) }}
+    <!-- BEGIN BASIC FORM ELEMENTS-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="grid simple">
+                <div class="grid-title no-border">
+                    <h4>&nbsp;</h4>
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse"></a>
+                        <a href="#grid-config" data-toggle="modal" class="config"></a>
+                        <a href="javascript:;" class="reload"></a>
+                        <a href="javascript:;" class="remo ve"></a>
+                    </div>
+                </div>
+                <div class="grid-body no-border">
+                    <br>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-4 col-xs-4">
+                        </div>
+                        <div class="col-md-8 col-sm-8 col-xs-8">
+
+                            <div class="form-group">
+                                <label for="title" class="form-label">
+                                    جهت استفاده از وب سرويس بايد از آدرس زير در داخل كد وب سايت خود استفاده نماييد:
+                                </label>
+                                <span class="help"></span>
+                                <div class="controls">
+                                    <input dir="ltr" type="text" class="form-control"
+                                           value="http://31.184.132.191:4444/cgi-bin/ws.sh" readonly>
+                                </div>
+                            </div>
+
+                            <div class="form-group p-t-15">
+                                <label for="comment">
+                                    پارمترهایی که در قالب json به وسیله متد post به آدرس فوق ارسال می شوند به شرح زير مي باشند:
+                                </label>
+                                <textarea dir="ltr" spellcheck="false" class="form-control" rows="8" readonly>
+{
+	"user_resolution": "مشخصات صفحه نمایش کاربر ",
+	"username": "نام کاربری موتور جستجو",
+	"password": "کلمه عبور موتور جستجو",
+	"query": "پرس و جوی کاربر",
+	"size": تعداد تبلیغات جهت نمایش در نتایج جستجو
+}
+                                </textarea>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END BASIC FORM ELEMENTS-->
+{% endblock %}
+
+{% block js %}
+
+{% endblock %}

@@ -1,0 +1,237 @@
+{% extends "layout.html" %}
+{% from 'macros.html' import render_form, render_page_title, render_transaction_alert %}
+
+{% block title %}
+    {{ configs.page_title | default_title }}
+{% endblock %}
+
+{% block css %}
+    <!-- BEGIN PLUGIN CSS -->
+    <link href="{{ url_for('static', filename='assets/plugins/font-awesome/css/font-awesome.css') }}" rel="stylesheet"
+          type="text/css"/>
+    <link href="{{ url_for('static', filename='assets/plugins/bootstrap-select2/select2.css') }}" rel="stylesheet"
+          type="text/css" media="screen"/>
+    <link href="{{ url_for('static', filename='assets/plugins/jquery-datatable/css/jquery.dataTables.css') }}"
+          rel="stylesheet"
+          type="text/css"/>
+    <link href="{{ url_for('static', filename='assets/plugins/datatables-responsive/css/datatables.responsive.css') }}"
+          rel="stylesheet"
+          type="text/css" media="screen"/>
+    <!-- END PLUGIN CSS -->
+{% endblock %}
+
+{% block content %}
+    {{ render_page_title(configs.module, configs.url_index, configs.action) }}
+
+    {% if message %}
+        {{ render_transaction_alert(message.type,message.message) }}
+    {% endif %}
+
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="grid simple ">
+                <div class="grid-title">
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse"></a>
+                        <a href="#grid-config" data-toggle="modal" class="config"></a>
+                        <a href="javascript:;" class="reload"></a>
+                        <a href="javascript:;" class="remove"></a>
+                    </div>
+                </div>
+                <div class="grid-body ">
+                    <form action="{{ url_for(configs.url_index) }}" method="POST">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                        <table class="table table-striped table-condensed" id="example">
+                            <thead>
+                            <tr>
+                                <th style="width:25px;">
+                                </th>
+                                <th>
+                                    کاربر
+                                </th>
+
+                                <th>
+                                    عنوان
+                                </th>
+                                <th>
+                                    بودجه
+                                </th>
+                                <th>
+                                    وضعیت
+                                </th>
+                                <th class="defaultSort">
+                                    تاریخ
+                                </th>
+                                <th style="width:160px;">
+                                    عملیات
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {% for record in result %}
+                                <tr>
+                                    <td class="v-align-middle">
+                                        <div class="checkbox check-default">
+                                            <input type="checkbox" value="{{ record[configs.id_name] }}"
+                                                   id="checkbox{{ record[configs.id_name] }}">
+                                            <label for="checkbox{{ record[configs.id_name] }}"></label>
+                                        </div>
+                                    </td>
+                                    <td class="v-align-middle">
+                                        <a target="_blank"
+                                           href="{{ url_for('user', user_id = record.campaign_author_user_id ) }}"><span
+                                                class="muted">{{ authors[record.campaign_author_user_id | string]["fullname"] }}</span></a>
+                                    </td>
+
+                                    <td class="v-align-middle">
+                                        نام کمپین: <span class="muted">{{ record["campaign_name"] }}</span><br>
+                                        نوع:<span
+                                            class="muted">{{ record["campaign_type"]["campaign_type_title"] }}</span><br>
+                                        تاریخ ایجاد:<span dir="ltr"
+                                                          class="muted">{{ record["campaign_created_at"] | gregorian_date_to_persian_date | enToPersianNumb }}</span><br>
+                                    </td>
+
+
+                                    <td class="v-align-middle">
+                                        بودجه کل: <span
+                                            class="muted">
+                                              {% if record["campaign_total_budget_main"] is none %} تعیین
+                                                  نشده  {% else %}
+                                                  {{ record["campaign_total_budget_main"] | format_currency | enToPersianNumb }}
+                                              {% endif %}
+
+                                    </span><br>
+                                        بودجه باقیمانده: <span
+                                            class="muted">
+                                              {% if record["campaign_total_budget"] is none %} تعیین
+                                                  نشده  {% elif record["campaign_active_by_admin"] %}
+                                                  {{ record[configs.id_name] | campaign_total_budget  | format_currency | enToPersianNumb }}
+                                              {% else %}
+                                                  {{ record["campaign_total_budget"] | format_currency | enToPersianNumb }}
+                                              {% endif %}
+
+                                    </span><br>
+                                        بودجه روزانه:
+
+                                        <span
+                                                class="muted">{% if record["campaign_daily_budget"] is none %} تعیین
+                                            نشده  {% else %}
+                                            {{ record["campaign_daily_budget"] | format_currency | enToPersianNumb }}{% endif %}</span><br>
+                                                                          قیمت هر کلیک:<span
+                                            class="muted">{% if record["campaign_click_price"] is none %} تعیین
+                                        نشده  {% else %}
+                                        {{ record["campaign_click_price"] | format_currency | enToPersianNumb }}{% endif %}</span>
+                                    </td>
+
+                                    <td class="v-align-middle">
+                                        تایید مدیر:<span
+                                            class="muted{% if record["campaign_active_by_admin"] %} text-success{% else %} text-error{% endif %}">{{ record["campaign_active_by_admin"] | boolean_status | safe }}</span><br>
+                                        تایید کاربر:<span
+                                            class="muted{% if record["campaign_active_by_user"] %} text-success{% else %} text-error{% endif %}">{{ record["campaign_active_by_user"] | boolean_status | safe }}</span><br>
+                                        کمپین پیش فرض:<span
+                                            class="muted{% if record["campaign_default"] %} text-success{% else %} text-error{% endif %}">{{ record["campaign_default"] | boolean_status | safe }}</span><br>
+                                        وضعیت حذف:<span
+                                            class="muted{% if record["campaign_is_deleted"] %} text-success{% else %} text-error{% endif %}">{{ record["campaign_is_deleted"] | boolean_status | safe }}</span>
+                                    </td>
+                                    <td class="v-align-middle text-right">
+                                    <span dir="ltr" class="muted">
+                                        {{ record["campaign_updated_at"] | gregorian_date_to_persian_date | enToPersianNumb }}
+                                    </span>
+
+                                    </td>
+
+                                    <td class="actions_column">
+                                        <div class="btn-group ">
+                                            <a href="{{ url_for('campaign_admin_edit', id=record["campaign_id"]) }}"
+                                               class="btn btn-white btn-demo-space">
+                                                ویرایش
+                                            </a>
+
+                                            <a class="btn btn-white dropdown-toggle btn-demo-space"
+                                               data-toggle="dropdown"
+                                               href="">
+                                            <span class="caret">
+
+                                            </span>
+                                            </a>
+                                            <ul class="dropdown-menu row_actions dropdown-menu-right clearfix">
+                                                <li>
+                                                    <a href="{{ url_for('advertiser_dashboard_statistics', campaign_id=record["campaign_id"]) }}">
+                                                        نمایش آمار
+                                                    </a>
+                                                </li>
+                                                {% if not record["campaign_active_by_admin"] %}
+                                                    <li>
+                                                        <a href="{{ url_for('campaign_activate', campaign_id=record["campaign_id"]) }}">
+                                                            فعال سازی
+                                                        </a>
+                                                    </li>
+                                                {% endif %}
+                                                {% if record["campaign_active_by_admin"] %}
+                                                    <li>
+                                                        <a href="{{ url_for('campaign_deactivate', campaign_id=record["campaign_id"]) }}">
+                                                            غیر فعال کردن
+                                                        </a>
+                                                    </li>
+                                                {% endif %}
+                                                {% if not record["campaign_default"] %}
+                                                    <li>
+                                                        <a href="{{ url_for('campaign_default_activate', campaign_id=record["campaign_id"]) }}">
+                                                            کمپین پیش فرض
+                                                        </a>
+                                                    </li>
+                                                {% endif %}
+                                                {% if record["campaign_default"] %}
+                                                    <li>
+                                                        <a href="{{ url_for('campaign_default_deactivate', campaign_id=record["campaign_id"]) }}">
+                                                            غیر فعال کردن پیش فرض
+                                                        </a>
+                                                    </li>
+                                                {% endif %}
+                                                <li>
+                                                    <a href="{{ url_for('advertiser_campaign_steps', campaign_id=record["campaign_id"], campaign_step='two') }}">
+                                                        ویرایش از دید کاربر
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <button class="btn btn-default btn-md btn-danger btn-block"
+                                                            value="{{ record["campaign_id"] }}"
+                                                            name="action"
+                                                            type="submit">
+                                                        حذف
+                                                    </button>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+
+                                </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <script src="{{ url_for('static', filename='assets/plugins/bootstrap-select2/select2.min.js') }}"
+            type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='assets/plugins/jquery-datatable/js/jquery.dataTables.min.js') }}"
+            type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='assets/plugins/jquery-datatable/extra/js/dataTables.tableTools.min.js') }}"
+            type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='assets/plugins/datatables-responsive/js/datatables.responsive.js') }}"
+            type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='assets/plugins/datatables-responsive/js/lodash.min.js') }}"
+            type="text/javascript"></script>
+    <!-- END PAGE LEVEL JS INIT -->
+    <script src="{{ url_for('static', filename='assets/js/datatables.js') }}"
+            type="text/javascript"></script>
+    <!-- END JAVASCRIPTS -->
+{% endblock %}

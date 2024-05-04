@@ -1,0 +1,159 @@
+{% extends "layout.html" %}
+{% from 'macros.html' import render_form, render_page_title, render_transaction_alert %}
+
+{% block title %}
+    {{ configs.page_title | default_title }}
+{% endblock %}
+
+{% block css %}
+    <!-- BEGIN PLUGIN CSS -->
+    <link href="{{ url_for('static', filename='assets/plugins/font-awesome/css/font-awesome.css') }}" rel="stylesheet"
+          type="text/css"/>
+    <link href="{{ url_for('static', filename='assets/plugins/bootstrap-select2/select2.css') }}" rel="stylesheet"
+          type="text/css" media="screen"/>
+    <link href="{{ url_for('static', filename='assets/plugins/jquery-datatable/css/jquery.dataTables.css') }}"
+          rel="stylesheet"
+          type="text/css"/>
+    <link href="{{ url_for('static', filename='assets/plugins/datatables-responsive/css/datatables.responsive.css') }}"
+          rel="stylesheet"
+          type="text/css" media="screen"/>
+    <!-- END PLUGIN CSS -->
+{% endblock %}
+
+{% block content %}
+    {{ render_page_title(configs.module, configs.url_index, configs.action) }}
+
+    {% if message %}
+        {{ render_transaction_alert(message.type,message.message) }}
+    {% endif %}
+
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="grid simple ">
+                <div class="grid-title">
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse"></a>
+                        <a href="#grid-config" data-toggle="modal" class="config"></a>
+                        <a href="javascript:;" class="reload"></a>
+                        <a href="javascript:;" class="remove"></a>
+                    </div>
+                </div>
+                <div class="grid-body ">
+
+                    <div class="col-lg-10 col-lg-offset-1">
+                        <div class="col-lg-3 p-b-10">
+                            شماره تیکت:&nbsp;{{ ticket.ticket_id }}
+                        </div>
+                        <div class="col-lg-9 p-b-10">
+                            عنوان:&nbsp;{{ ticket.ticket_title }}
+                        </div>
+                        <table class="table table-condensed ticket-table">
+                            <tbody>
+                            <tr>
+                                <th>بخش</th>
+                                <th>اولویت</th>
+                                <th>وضعیت</th>
+                                <th>ایجاد شده</th>
+                                <th>آخرین به روزرسانی</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    {{ ticket.ticket_category.ticket_category_title }}
+                                </td>
+                                <td>
+                                    {% if ticket["ticket_priority"]=='normal' %} عادی
+                                    {% elif ticket["ticket_priority"]=='high' %} زیاد
+                                    {% elif ticket["ticket_priority"]=='very_high' %}خیلی زیاد
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if ticket["ticket_status"]=='open' %} در انتظار پاسخ
+                                    {% elif ticket["ticket_status"]=='close' %} بسته شده
+                                    {% elif ticket["ticket_status"]=='respond' %}پاسخ داده شد
+                                    {% endif %}
+                                </td>
+                                <td dir="ltr">
+                                    {{ ticket.ticket_created_at | gregorian_date_to_persian_date | enToPersianNumb }}
+                                </td>
+                                <td dir="ltr">
+                                    {{ replies[replies.keys()[-1]]["reply_created_at"] | gregorian_date_to_persian_date | enToPersianNumb }}
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <ul class="m-t-20 ticket-replies">
+                            {% for key, value in replies.iteritems() %}
+                                <li class="ticket-reply">
+                                    <div class="col-lg-8">
+                                        <small>
+                                            {{ value.reply_created_at | gregorian_date_to_persian_date | enToPersianNumb }}
+                                        </small>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <i class="material-icons ticket-reply-author-image">account_circle</i>
+                                        <b class="ticket-reply-author-name">
+                                            {{ authors[value.reply_author_user_id | string]["fullname"] }}
+                                        </b>
+                                    </div>
+                                    <div class="col-lg-12 p-r-60">
+                                        <p>
+                                            {{ value.reply_description | linebreaks }}
+                                        </p>
+
+                                        {% if value.reply_attachments %}
+                                            <div class="col-lg-7 reply-attachments">
+                                                <ul>
+                                                    {% for attachment in value.reply_attachments %}
+                                                        <li>
+                                                            <a target="_blank"
+                                                               href="/static/uploads/{{ attachment[0]['file_path'] }}/{{ attachment[0]['file_name'] }}">
+                                                                {{ attachment[0]['file_name'] }}&nbsp;<i
+                                                                    class="fa fa-paperclip" aria-hidden="true"></i>
+                                                            </a>
+                                                        </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        {% endif %}
+
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+
+
+                        <div id="{{ configs.from_id }}" class="col-lg-12">
+
+                            {{ render_form(form, action_url=url_for(request.endpoint, id=configs.id), action_text='ارسال', btn_class='btn btn-primary btn-cons') }}
+
+                        </div>
+
+                        {% if ticket.ticket_status!= 'close' %}
+                            <div class="col-lg-12 p-t-50 p-b-50 text-center">
+                                <form action="{{ url_for('ticket_close', id=configs.id) }}" method="post">
+                                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                                    <div class="col-lg-12 p-b-20">
+                                        کاربر گرامی درصورتی‌که مشکل مطرح‌ شده در تیکت حل ‌شده است و یا دیگر نیازی به
+                                        بررسی
+                                        از سوی کارشناسان هشتاد وجود ندارد می‌ توانید تیکت را ببندید.
+
+                                    </div>
+                                    <button type="submit" class="btn btn-default btn-cons">بستن تیکت</button>
+                                </form>
+                            </div>
+                        {% endif %}
+
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    {% include 'uploads/attachment.html' %}
+{% endblock %}

@@ -1,0 +1,199 @@
+{% extends "frontend_layout.html" %}
+{% block content %}
+    <!-- Page Title
+            ============================================= -->
+    <section id="page-title" class="page-title-parallax page-title-dark"
+             style="background-image: url('/static/frontend/images/teheranbanner.jpg'); padding: 120px 0;"
+             >
+
+        <div class="container clearfix">
+            <h1>تکنولوژی</h1>
+            <span>تبلیغات دیجیتال، هوشمند تر از همیشه</span>
+            <ol class="breadcrumb">
+                <li><a href="{{ url_for('home') }}">صفحه اصلی</a></li>
+                <li class="active">تکنولوژی</li>
+            </ol>
+        </div>
+
+    </section><!-- #page-title end -->
+
+    <!-- Content
+    ============================================= -->
+    <section id="content">
+
+        <div class="content-wrap">
+
+            <div class="container clearfix">
+
+                <div class="divcenter center clearfix bottommargin-lg" style="max-width: 900px;">
+                    <h1>انواع تبلیغات آنلاین</h1>
+                    <h2>
+                        تبلیغات شما در محیط آنلاین توسط میلیون‌ها نفر دیده می شود
+                    </h2>
+                </div>
+
+
+                <div class="col_one_third">
+                    <div class="feature-box fbox-border fbox-effect">
+                        <div class="fbox-icon">
+                            <a href="#"><i class="icon-screen i-alt"></i></a>
+                        </div>
+                        <h3>هوشمندی کلیدواژه</h3>
+                        <p>
+                            همانند سرویس های قدرتمند گوگل، موتور تبلیغات هشتاد دارای قدرت زیادی در پردازش متن است. که
+                            سامانه را قادر می سازد آگهی را در صفحاتی نمایش دهد که کلیدواژه¬های مورد نظر در محتوای اصلی
+                            آن وجود داشته باشد.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col_one_third">
+                    <div class="feature-box fbox-border fbox-effect">
+                        <div class="fbox-icon">
+                            <a href="#"><i class="icon-eye i-alt"></i></a>
+                        </div>
+                        <h3>
+                            افزایش بهره وری کمپین و افزایش درآمد نمایش دهنده
+                        </h3>
+                        <p>
+                            موتور هوشمند هشتاد، تبلیغاتی را برای کاربر نمایش می¬دهند که دارای قیمت بالاتر و نرخ کلیک
+                            بالاتر باشد. بنابراین نمایش دهنده می تواند به درآمد بالاتری دست یابد.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col_one_third col_last">
+                    <div class="feature-box fbox-border fbox-effect">
+                        <div class="fbox-icon">
+                            <a href="#"><i class="icon-beaker i-alt"></i></a>
+                        </div>
+                        <h3>
+                            تشخیص تقلب
+                        </h3>
+                        <p>
+                            تشخیص تقلب به صورت آنلاین و آفلاین محاسبه می شود. در حالت آنلاین پس از کلیک کاربر بر روی
+                            آگهی، با ایجاد پروفایل کاربر بر اساس IP و نام کمپین، کلیک¬های بعدی کاربر غیرواقعی تشخیص داده
+                            می¬شود. به صورت روزانه کلیک های واقعی توسط الگوریتم آفلاین بررسی مجدد می¬شود و پس از
+                            تحلیل¬های جامع، در صورت تقلبی بودن، وضعیت آنها غیرواقعی شده و مبلغ به حساب آگهی دهنده
+                            برگردانده می¬شود.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="clear"></div>
+
+                <div class="col_one_third">
+                    <div class="feature-box fbox-border fbox-effect">
+                        <div class="fbox-icon">
+                            <a href="#"><i class="icon-stack i-alt"></i></a>
+                        </div>
+                        <h3>
+                            قیمت گذاری رقابتی
+                        </h3>
+                        <p>
+                            در سامانه هشتاد، شما می توانید انواع هدف مندی را انتخاب کنید و قیمت کلیک را خودتان تعیین
+                            کنید.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col_one_third">
+                    <div class="feature-box fbox-border fbox-effect">
+                        <div class="fbox-icon">
+                            <a href="#"><i class="icon-tint i-alt"></i></a>
+                        </div>
+                        <h3>
+                            تنوع قالب نمایش
+                        </h3>
+                        <p>
+                            امکان نمایش آگهی در قالب های مختلف مانند لایت باکس، موبایل و حالت های پویا(HTML) می¬تواند به
+                            جذاب کردن تبلیغ شما کمک کند.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col_one_third col_last">
+                    <div class="feature-box fbox-border fbox-effect">
+                        <div class="fbox-icon">
+                            <a href="#"><i class="icon-text-width i-alt"></i></a>
+                        </div>
+                        <h3>
+                            ساخت سریع کمپین
+                        </h3>
+                        <p>
+                            آگهی دهنده می¬تواند علاوه بر استفاده از پنل موجود برای ایجاد کمپین از API های موجود استفاده
+                            کرده و روزانه تعداد زیادی کمپین ایجاد کند. قالب نمایش آگهی به صورت پویا با امکانات بیشتر و
+                            زیباتر ارائه می¬شود.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="clear"></div>
+
+                <div class="col_one_third">
+                    <div class="feature-box fbox-border fbox-effect">
+                        <div class="fbox-icon">
+                            <a href="#"><i class="icon-stack i-alt"></i></a>
+                        </div>
+                        <h3>
+                            هوشمندی جغرافیای و زمانی
+                        </h3>
+                        <p>
+                            توسط این هوشمندی آگهی دهنده قادر است مشتریان خود را در زمان و مکان مشخص هدفگیری کند.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col_one_third">
+                    <div class="feature-box fbox-border fbox-effect">
+                        <div class="fbox-icon">
+                            <a href="#"><i class="icon-tint i-alt"></i></a>
+                        </div>
+                        <h3>
+                            هوشمندی سیستم عامل و موبایل
+                        </h3>
+                        <p>
+                            آگهی دهنده می¬تواند محصول خود را متناسب با سیستم عامل های مختلف اندروید، ویندوز، مک و IOS
+                            انتخاب کند.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col_one_third col_last">
+                    <div class="feature-box fbox-border fbox-effect">
+                        <div class="fbox-icon">
+                            <a href="#"><i class="icon-text-width i-alt"></i></a>
+                        </div>
+                        <h3>
+                            هدف گیری مجدد Re-Targeting
+                        </h3>
+                        <p>
+                            نمایش آگهی مورد علاقه کاربر که از آن در وب سایت شما بازدید کرده است می¬تواند منجر به بالا
+                            رفتن جذب کاربر شود.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="clear"></div>
+
+                <div class="col_one_third">
+                    <div class="feature-box fbox-border fbox-effect">
+                        <div class="fbox-icon">
+                            <a href="#"><i class="icon-stack i-alt"></i></a>
+                        </div>
+                        <h3>
+تنوع در شبکه¬ی نمایش دهنده
+                        </h3>
+                        <p>
+موتور تبلیغات هشتاد، علاوه بر وب سایت ها قادر است نمایش را مانند سرویس Adwords گوگل بر بستر موتورهای جستجوی بومی و قسمت های جستجوی وب سایت ها نمایش دهد. این سزویس دارای نرخ بالاتری از کلیک است.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="clear"></div>
+
+
+            </div>
+        </div>
+    </section>
+{% endblock %}

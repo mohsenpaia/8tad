@@ -1,0 +1,136 @@
+{% extends "layout.html" %}
+{% from 'macros.html' import render_form, render_page_title %}
+
+{% block title %}
+    {{ title | default_title }}
+{% endblock %}
+
+{% block css %}
+    <link href="{{ url_for('static', filename='dashboards/css/persian-datepicker.min.css') }}" rel="stylesheet"
+          type="text/css" media="screen"/>
+{% endblock %}
+
+{% block content %}
+    {{ render_page_title(configs.module, configs.url_index, configs.action) }}
+    <!-- BEGIN BASIC FORM ELEMENTS-->
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="grid simple vertical blue">
+                <div class="grid-title no-border">
+                    <h4>گزارش تاریخ</h4>
+                </div>
+                <div class="grid-body no-border">
+                    <div class="row-fluid">
+
+                        <form action="{{ url_for('advertiser_dashboard_statistics', campaign_id=configs.campaign_id) }}" method="post">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                            <div id="report-range-selector">
+                                <input type="text" value="{{ from_date }}" name="from_date" class="input-persian-calendar"/>
+
+                                <span>تا</span>
+
+                                <input type="text" value="{{ to_date }}" name="to_date" class="input-persian-calendar"/>
+
+                                <button type="submit" class="btn btn-success btn-cons">نمایش گزارش</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="grid simple">
+                <div class="grid-title no-border">
+                    <h4>&nbsp;</h4>
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse"></a>
+                        <a href="#grid-config" data-toggle="modal" class="config"></a>
+                        <a href="javascript:;" class="reload"></a>
+                        <a href="javascript:;" class="remove"></a>
+                    </div>
+                </div>
+                <div class="grid-body no-border">
+                    <br>
+                    <div class="row">
+                        {% if clicks or shows %}
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div dir="ltr" id="container" style="height: 400px; min-width: 310px"></div>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12 p-r-90 p-l-90 p-t-30">
+
+                                <table class="table table-hover no-more-tables">
+                                    <thead>
+                                    <tr>
+
+                                        <th>تاریخ</th>
+                                        <th>تعداد نمایش</th>
+                                        <th>تعداد کلیک</th>
+                                        <th>CTR</th>
+                                        <th class="text-center">عملیات</th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+
+                                    {% for key,value in clicks_shows.items() %}
+                                        <tr>
+                                            <td class="text-right" dir="ltr">{{ key | epoch_date_to_persian_date }}</td>
+                                            <td>{{ value.show }}</td>
+                                            <td>{{ value.click }}</td>
+                                            <td>
+                                                {% if value.show > 0 and value.click > 0 %}
+                                                    {% set ctr = value.click / value.show * 100 %}
+                                                    {{ '%0.3f' % ctr|float }}
+                                                    %
+                                                {% else %}0{% endif %}</td>
+                                            <td class="text-center">
+                                                <a href="{{ url_for("advertiser_dashboard_daily_details", campaign_id=configs.campaign_id, day=key) }}">جزئیات
+                                                    کلیک</a> &nbsp;&nbsp;&nbsp;
+                                                <a href="{{ url_for("advertiser_dashboard_daily_statistics", campaign_id=configs.campaign_id, day=key) }}">جزئیات
+                                                    نمایش</a></td>
+                                        </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        {% else %}
+                            <p class="text-center">
+                                اطلاعاتی برای نمایش وجود ندارد.
+                            </p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END BASIC FORM ELEMENTS-->
+{% endblock %}
+
+{% block js %}
+    {#    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>#}
+    <script src="{{ url_for('static', filename='dashboards/js/persian-date.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='dashboards/js/persian-datepicker.min.js') }}"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".input-persian-calendar").persianDatepicker({
+                format: 'YYYY-MM-DD',
+                calendar:{
+                    persian: {
+                        locale: 'en'
+                    }
+                }
+            });
+        });
+    </script>
+
+
+    {% if clicks or shows %}
+        {% include 'dashboard/chart/column.html' %}
+    {% endif %}
+{% endblock %}

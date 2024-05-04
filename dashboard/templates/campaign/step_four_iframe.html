@@ -1,0 +1,295 @@
+{% extends "layout.html" %}
+{% from 'macros.html' import render_page_title, render_campaign_steps, render_form, render_campaign_steps_search_engine %}
+
+{% block title %}
+    {{ configs.page_title | default_title }}
+{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block content %}
+    {{ render_page_title(configs.module, configs.url_index, configs.action) }}
+
+    {% if configs.campaign_type_name == 'banner' or configs.campaign_type_name == 'mobile' or configs.campaign_type_name == 'iframe' %}
+        {{ render_campaign_steps(configs.campaign_id,'active','active','active','current','','','') }}
+    {% elif configs.campaign_type_name == 'search_engine' %}
+        {{ render_campaign_steps_search_engine(configs.campaign_id,'active','active','active','current','','','') }}
+    {% endif %}
+
+    <!-- BEGIN BASIC FORM ELEMENTS-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="grid simple">
+                <div class="grid-title no-border">
+                    <h4>انتخاب بنر</h4>
+
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse"></a>
+                        <a href="#grid-config" data-toggle="modal" class="config"></a>
+                        <a href="javascript:;" class="reload"></a>
+                        <a href="javascript:;" class="remove"></a>
+                    </div>
+                </div>
+                <div class="grid-body no-border">
+
+                    <form class="" method="POST"
+                          action="{{ url_for('advertiser_campaign_steps', campaign_id=configs.campaign_id, campaign_step='four') }}"
+                          role="form">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+
+                        {% set banner_description = {'description': ''} %}
+                        {% for size in banner_sizes %}
+                            {% if banner_description.update({'description': ''}) %}
+                            {% endif %}
+
+                            {% for campaign_banner in campaign_banners %}
+                                {% if campaign_banner['banner']['banner_size'] == size['banner_size_id'] %}
+                                    {% if banner_description.update({'description': campaign_banner['banner']['banner_description'] }) %}
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+
+                            <div data-width="{{ size['banner_size_width'] }}"
+                                 data-height="{{ size['banner_size_height'] }}"
+                                 class="banner-size-item bnr{{ size["banner_size_width"] }}x{{ size["banner_size_height"] }}"
+                                 style="width:{{ size["banner_size_width"] }}px;height:{{ size["banner_size_height"] }}px">
+                                <div class="banner-size-content">
+                                    <iframe id="iframe{{ size["banner_size_width"] }}x{{ size["banner_size_height"] }}"
+                                            width="{{ size["banner_size_width"] }}"
+                                            height="{{ size["banner_size_height"] }}" frameborder="0" scrolling="no"
+                                            class="banner-size-content-iframe"></iframe>
+                                    {% if banner_description.description %}
+                                    {% else %}
+                                        <div class="content-without-html">
+                                            <p>
+                                                {{ size["banner_size_width"] }}
+                                                در
+                                                {{ size["banner_size_height"] }}
+                                                پیکسل
+                                            </p>
+                                        </div>
+                                    {% endif %}
+                                    <div class="banner-bottom-lable" style="display:none;">
+                                        <p>
+                                            {{ size["banner_size_width"] }}
+                                            در
+                                            {{ size["banner_size_height"] }}
+                                            پیکسل
+                                        </p>
+                                    </div>
+                                </div>
+                                <input type="hidden" class="banner-size-input"
+                                       value="{{ banner_description.description }}"
+                                       name="banners[{{ size["banner_size_width"] }}][{{ size["banner_size_height"] }}]">
+                                <div class="banner-size-toolbar">
+
+                                </div>
+                            </div>
+
+                        {% endfor %}
+                        <div class="clearfix"></div>
+                        <button type="submit" class="btn btn-primary btn-cons">ثبت و ادامه</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END BASIC FORM ELEMENTS-->
+
+    <div id="iframe-content-modal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <textarea id="iframe-banner-html-textarea" dir="ltr" style="width:100%" rows="18"></textarea>
+                    </div>
+
+
+                    <div class="form-group">
+                        <button id="iframe-banner-html-btn" class="btn btn-primary btn-cons">ثبت</button>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+{% endblock %}
+
+{% block js %}
+    <style>
+
+        .banner-bottom-lable p {
+            text-align: center;
+        }
+
+        .modal-body, .modal-footer {
+            background-color: #fff;
+        }
+
+        .nav-tabs > .active > a, .nav-tabs > .active > a:hover, .nav-tabs > .active > a:focus {
+            -webkit-border-radius: 0;
+            -moz-border-radius: 0;
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        .banner-frame {
+            display: inline-block;
+            float: right;
+            position: relative;
+            width: 100%;
+            height: 105px;
+        }
+
+        .banner-frame img {
+            border: 1px solid #eee;
+        }
+
+        .banner-description p {
+            text-align: center;
+            margin: 0;
+            padding: 5px 0;
+        }
+
+        .banner-description {
+            float: right;
+            width: 100%;
+        }
+
+        .banner-size-item {
+            background-color: #D1DADE;
+            float: right;
+            margin-bottom: 50px;
+            margin-left: 50px;
+            cursor: pointer;
+            position: relative;
+            background-size: cover;
+            position: relative;
+        }
+
+        .banner-size-item .banner-size-toolbar {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            -webkit-transition: all 0.3s;
+            -o-transition: all 0.3s;
+            transition: all 0.3s;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .banner-size-item:hover .banner-size-toolbar {
+            opacity: 1;
+        }
+
+        .banner-size-item .banner-size-toolbar .tool-icon-remove {
+            top: 15px;
+            left: 10px;
+            transform: translateY(-50%);
+            display: inline-block;
+            position: absolute;
+        }
+
+        .banner-size-item .banner-size-toolbar a i {
+            color: #fff;
+            font-size: 15px;
+        }
+
+        .banner-size-item .banner-size-content .content-without-html {
+            position: absolute;
+            text-align: center;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+        }
+
+        .banner-size-item .banner-size-content .content-without-html p {
+            margin: 0;
+            padding: 0;
+        }
+
+        .modal-header .close {
+            margin-top: 0px;
+            float: left;
+        }
+
+        .modal-header {
+            text-align: right;
+        }
+    </style>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('.banner-size-item').each(function (index, item) {
+                var iframe = document.getElementById("iframe" + $(item).attr("data-width") + "x" + $(item).attr("data-height"));
+                var frameDoc = iframe.document;
+
+                if (iframe.contentWindow)
+                    frameDoc = iframe.contentWindow.document;
+
+                frameDoc.open();
+                frameDoc.writeln($(item).children('.banner-size-input').val());
+                frameDoc.close();
+
+                if ($(item).children('.banner-size-input').val()){
+                    $(item).find('.banner-bottom-lable').css("display", "block");
+                }
+
+            });
+
+            $(document).on('click', ".banner-size-item", function () {
+                $("#iframe-content-modal .modal-title").text("محتوای بنر " + $(this).attr("data-width") + " در " + $(this).attr("data-height") + " پیکسل ");
+                $("#iframe-banner-html-textarea").val($(".bnr" + $(this).attr("data-width") + "x" + $(this).attr("data-height") + " .banner-size-input").val());
+                $("#iframe-banner-html-btn").attr('data-width', $(this).attr("data-width"));
+                $("#iframe-banner-html-btn").attr('data-height', $(this).attr("data-height"));
+                $('#iframe-content-modal').modal('show');
+            });
+
+            $(document).on('click', "#iframe-banner-html-btn", function () {
+                $(".bnr" + $(this).attr("data-width") + "x" + $(this).attr("data-height") + " .banner-size-input").val($("#iframe-banner-html-textarea").val());
+
+                var iframe = document.getElementById("iframe" + $(this).attr("data-width") + "x" + $(this).attr("data-height"));
+                var frameDoc = iframe.document;
+
+                if (iframe.contentWindow)
+                    frameDoc = iframe.contentWindow.document;
+
+                frameDoc.open();
+                frameDoc.writeln($("#iframe-banner-html-textarea").val());
+                frameDoc.close();
+
+                if ($("#iframe-banner-html-textarea").val()){
+                    $(".bnr" + $(this).attr("data-width") + "x" + $(this).attr("data-height") + " .banner-size-content .content-without-html").css("display", "none");
+                    $(".bnr" + $(this).attr("data-width") + "x" + $(this).attr("data-height") + " .banner-size-content .banner-bottom-lable").css("display", "block");
+                }else{
+                    $(".bnr" + $(this).attr("data-width") + "x" + $(this).attr("data-height") + " .banner-size-content .content-without-html").css("display", "block");
+                    $(".bnr" + $(this).attr("data-width") + "x" + $(this).attr("data-height") + " .banner-size-content .banner-bottom-lable").css("display", "none");
+                }
+
+                $("#iframe-content-modal .modal-header .close").click();
+            });
+        })
+    </script>
+
+
+
+
+{% endblock %}

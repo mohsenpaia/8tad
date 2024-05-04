@@ -1,0 +1,75 @@
+{% extends "layout.html" %}
+{% from 'macros.html' import render_page_title, render_campaign_steps, render_campaign_steps_search_engine %}
+
+{% block title %}
+    {{ configs.page_title | default_title }}
+{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block content %}
+    {{ render_page_title(configs.module, configs.url_index, configs.action) }}
+
+    {% if configs.campaign_type_name == 'banner' or configs.campaign_type_name == 'mobile' or configs.campaign_type_name == 'native' or configs.campaign_type_name == 'iframe' %}
+        {{ render_campaign_steps(configs["campaign_id"],'current','','','','','') }}
+    {% elif configs.campaign_type_name == 'search_engine' %}
+        {{ render_campaign_steps_search_engine(configs["campaign_id"],'current','','','','','') }}
+    {% endif %}
+
+    <!-- BEGIN BASIC FORM ELEMENTS-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="grid simple">
+                <div class="grid-title no-border">
+                    <h4>تعیین نوع کمپین</h4>
+
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse"></a>
+                        <a href="#grid-config" data-toggle="modal" class="config"></a>
+                        <a href="javascript:;" class="reload"></a>
+                        <a href="javascript:;" class="remove"></a>
+                    </div>
+                </div>
+                <div class="grid-body no-border">
+                    <br>
+
+                    <div class="row">
+                        {% for type in types %}
+                            <div class="col-md-4 col-sm-6 col-xs-6 campaign-type-item">
+                                <div class="campaign-type-frame">
+                                    <a href="{% if configs["campaign_id"] %} {{ url_for('advertiser_campaign_steps', campaign_id=configs.campaign_id, campaign_step='one') }} {% else %} {{ url_for('advertiser_campaign_create', type_name=type.campaign_type_name) }} {% endif %}">
+                                        <div class="title">
+                                            <div class="title-icon pull-left">
+                                                <i class="{{ type.campaign_type_icon }}"></i>
+                                            </div>
+                                            <div class="title-content pull-left">
+                                                <p>
+                                                    {{ type.campaign_type_title }}
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div class="body">
+                                            <p>
+                                                {{ type.campaign_type_description }}
+                                            </p>
+                                        </div>
+                                        <div class="footer">
+                                            <button type="button" class="btn btn-success btn-cons">انتخاب کمپین</button>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END BASIC FORM ELEMENTS-->
+{% endblock %}
+
+{% block js %}
+{% endblock %}

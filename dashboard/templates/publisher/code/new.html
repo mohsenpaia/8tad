@@ -1,0 +1,463 @@
+{% extends "layout.html" %}
+{% from 'macros.html' import render_form, render_page_title %}
+
+{% block title %}
+    {{ configs.page_title | default_title }}
+{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block content %}
+    {{ render_page_title(configs.module, configs.url_index, configs.action) }}
+    <!-- BEGIN BASIC FORM ELEMENTS-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="grid simple">
+                <div class="grid-title no-border">
+                    <h4>&nbsp;</h4>
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse"></a>
+                        <a href="#grid-config" data-toggle="modal" class="config"></a>
+                        <a href="javascript:;" class="reload"></a>
+                        <a href="javascript:;" class="remo ve"></a>
+                    </div>
+                </div>
+                <div class="grid-body no-border">
+                    <br>
+                    <div class="row">
+                        <div class="col-md-2 col-sm-2 col-xs-2">
+                        </div>
+                        <div id="publisher-website-container" class="col-md-10 col-sm-10 col-xs-10">
+
+
+                            <div class="radio radio-success website-code-type">
+                                <input name="website_code" checked="checked" id="website-code-banner" value="banner" type="radio">
+                                <label for="website-code-banner">دریافت کد بنری ساده</label>
+
+                                <input name="website_code" id="website-code-banner-mobile" value="mobile" type="radio">
+                                <label for="website-code-banner-mobile">دریافت کد موبایل و تبلت</label>
+
+{#                                <input name="website_code" id="website-code-banner-lightbox" value="lightbox" type="radio">#}
+{#                                <label for="website-code-banner-lightbox">دریافت کد لایت باکس</label>#}
+
+                                <input name="website_code" id="website-code-banner-static" value="static" type="radio">
+                                <label for="website-code-banner-static">دریافت کد ثابت</label>
+
+                                <input name="website_code" id="website-code-native" value="native" type="radio">
+                                <label for="website-code-native">دریافت کد همسان</label>
+
+                                <input name="website_code" id="website-code-search-engine" value="search" type="radio">
+                                <label for="website-code-search-engine">دریافت وب سرویس موتور جستجو</label>
+                            </div>
+
+                            <div id="website-code-banner-elements">
+                                <div class="form-group">
+                                    <label for="website" class="form-label">وب سایت</label>
+                                    <span class="help"></span>
+                                    <div class="controls">
+                                        <select class="form-control" id="website" name="website">
+                                            <option value="">انتخاب کنید</option>
+                                            {% for website in websites %}
+                                                <option value="{{ website['publisher_website_id'] }}">{{ website['publisher_website_title'] }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="banner-size" class="form-label">اندازه بنر</label>
+                                    <span class="help"></span>
+                                    <div class="controls">
+                                        <select class="form-control" id="banner-size" name="banner-size">
+                                            <option value="">انتخاب کنید</option>
+                                            {% for banner in banners %}
+                                                <option value="{{ banner["banner_size_width"] }}x{{ banner["banner_size_height"] }}">{{ banner["banner_size_width"] | enToPersianNumb }} در {{ banner["banner_size_height"] | enToPersianNumb }} پیکسل </option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+
+                            <div class="form-group p-t-15">
+                                <label for="comment">کد زیر را در هر کجا که قرار دهید، تبلیغ در آن قسمت نمایش داده خواهد
+                                    شد.</label>
+                                <textarea dir="ltr" readonly spellcheck="false" id="publisher-website-code-content" class="form-control" rows="5"></textarea>
+                                <textarea dir="ltr" style="display:none" id="publisher-website-code-content-sample"
+                                          class="form-control" rows="5">
+<script type="text/javascript">
+    !function(t,i){"use strict";var e={width:0,height:0,host:0},r="http:";i.write('<div style="display:inline-block;max-width:'+e.width+"px;max-height:"+e.height+'px;width:100%;height:auto;transform-origin: 100% 0px 0px;transform: scale(1);"><iframe src="'+r+"//click.8tad.ir/click/wp.sh?host_id="+e.host+"&banner_width="+e.width+"&banner_height="+e.height+'" height="'+e.height+'" width="100%" height="'+e.height+'px" frameborder="0" scrolling="no" style="background:url('+r+'//8tad.ir/static/frontend/images/loader.gif) no-repeat center;"></iframe></div>')}(this,document);
+</script>
+                                </textarea>
+                            </div>
+                            </div>
+
+
+
+                          <div id="website-code-banner-mobile-elements" style="display:none">
+                                <div class="form-group">
+                                    <label for="website" class="form-label">وب سایت</label>
+                                    <span class="help"></span>
+                                    <div class="controls">
+                                        <select class="form-control" id="website-banner-mobile" name="website">
+                                            <option value="">انتخاب کنید</option>
+                                            {% for website in websites %}
+                                                <option value="{{ website['publisher_website_id'] }}">{{ website['publisher_website_title'] }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                            <div class="form-group p-t-15">
+                                <label for="comment">کد زیر را در هر کجا که قرار دهید، تبلیغ در آن قسمت نمایش داده خواهد
+                                    شد.</label>
+                                <textarea dir="ltr" readonly spellcheck="false" id="publisher-website-code-content-mobile" class="form-control" rows="5"></textarea>
+                                <textarea dir="ltr" style="display:none" id="publisher-website-code-content-sample-mobile"
+                                          class="form-control" rows="5">
+<script type="text/javascript">
+    !function(i,t){"use strict";var e=navigator.userAgent,h=/ipod|iphone|android|mobile/gi.test(e),r=/ipad|tablet/gi.test(e)||/android/gi.test(e)&&!/mobile/gi.test(e),n=(Math.min(innerWidth||1/0,screen.width,screen.availWidth),Math.min(innerHeight||1/0,screen.height,screen.availHeight),{width:r&&480||h&&320||!1,height:r&&72||h&&48||!1,host:0}),d="http:";(h||r)&&t.write('<div id="ad-frame" style="bottom: 0; left: 0; right: 0; position: fixed; z-index: 9999; text-align:center; width: 100%; height: '+n.height+'px;"><iframe src="'+d+"//click.8tad.ir/click/wp.sh?host_id="+n.host+"&banner_width="+n.width+"&banner_height="+n.height+'" height="'+n.height+'" width="'+n.width+'" frameborder="0" scrolling="no" style="width: '+n.width+"px; height: "+n.height+"px; border: 0; outline: 0; background: #FFF url("+d+'//8tad.ir/static/frontend/images/loader.gif) no-repeat center;"></iframe></div>')}(this,document);
+</script>
+                                </textarea>
+                            </div>
+                          </div>
+
+
+
+                          <div id="website-code-banner-lightbox-elements" style="display:none">
+                                <div class="form-group">
+                                    <label for="website" class="form-label">وب سایت</label>
+                                    <span class="help"></span>
+                                    <div class="controls">
+                                        <select class="form-control" id="website-banner-lightbox" name="website">
+                                            <option value="">انتخاب کنید</option>
+                                            {% for website in websites %}
+                                                <option value="{{ website['publisher_website_id'] }}">{{ website['publisher_website_title'] }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                            <div class="form-group p-t-15">
+                                <label for="comment">کد زیر را در هر کجا که قرار دهید، تبلیغ در آن قسمت نمایش داده خواهد
+                                    شد.</label>
+                                <textarea dir="ltr" readonly spellcheck="false" id="publisher-website-code-content-lightbox" class="form-control" rows="5"></textarea>
+                                <textarea dir="ltr" style="display:none" id="publisher-website-code-content-sample-lightbox"
+                                          class="form-control" rows="5">
+<script type="text/javascript">
+    function createCookie(t,e,i){var o="";if(i){var n=new Date;n.setTime(n.getTime()+24*i*60*60*1e3),o="; expires="+n.toUTCString()}document.cookie=t+"="+e+o+"; path=/"}function readCookie(t){for(var e=t+"=",i=document.cookie.split(";"),o=0;o<i.length;o++){for(var n=i[o];" "==n.charAt(0);)n=n.substring(1,n.length);if(0==n.indexOf(e))return n.substring(e.length,n.length)}return null}!function(t,e){"use strict";var i=readCookie("lightbox");if(!i){var o=Math.min(innerWidth||1/0,screen.width,screen.availWidth),n=Math.min(innerHeight||1/0,screen.height,screen.availHeight),r={width:o>=768?600:400>n?468:250,height:o>=768?300:400>n?60:250,host:0},a="http:";t.onload=function(){e.getElementById("ad-close").onclick=function(){var t=e.getElementById("ad-frame-lightbox");t.parentNode.removeChild(t),createCookie("lightbox","close",1)}},e.write('<div id="ad-frame-lightbox" style="top: 0; left: 0; right: 0; bottom: 0; position: fixed; background: #333; background: rgba( 0, 0, 0, .8 ); -webkit-transition: .2s; -moz-transition: .2s; transition: .2s; z-index: 9999;"><style>#ad-close:before {content: "بستن تبليغ";position: absolute;font-size: 13px;display: block;white-space: nowrap;left: -100%;top: 50%;margin-top: -11px;}</style><a style="text-decoration: none; font: 24px tahoma, sans-serif; color: #fff;background: #11B0BF; padding: 20px 28px 23px; position: absolute; right: 25px; top: 25px; display: inline-block;" id="ad-close" href="javascript:void(0)">×</a><iframe src="'+a+"//click.8tad.ir/click/wp.sh?host_id="+r.host+"&banner_width="+r.width+"&banner_height="+r.height+'" height="'+r.height+'" width="'+r.width+'" frameborder="0" scrolling="no" style="width: '+r.width+"px; height: "+r.height+"px; border: 0; outline: 0;position: absolute; top: 50%; margin-top: -"+r.height/2+"px; left: 50%; margin-left: -"+r.width/2+"px; background: #FFF url("+a+'//8tad.ir/static/frontend/images/loader.gif) no-repeat center;"></iframe></div>')}}(this,document);
+</script>
+                                </textarea>
+                            </div>
+
+                          </div>
+
+
+
+                          <div id="website-code-banner-static-elements" style="display:none">
+                                <div class="form-group">
+                                    <label for="website" class="form-label">وب سایت</label>
+                                    <span class="help"></span>
+                                    <div class="controls">
+                                        <select class="form-control" id="website-banner-static" name="website">
+                                            <option value="">انتخاب کنید</option>
+                                            {% for website in websites %}
+                                                <option value="{{ website['publisher_website_id'] }}">{{ website['publisher_website_title'] }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                              <div class="form-group">
+                                    <label for="position" class="form-label">محل قرارگیری بنر</label>
+                                    <span class="help"></span>
+                                    <div class="controls">
+                                        <select class="form-control" id="position_banner_static" name="position">
+                                            <option value="">انتخاب کنید</option>
+                                                <option value="'top:5px; right:5px;'">بالا، راست</option>
+                                                <option value="'top:5px; left:5px;'">بالا، چپ</option>
+                                                <option value="'bottom:5px; right:5px;'">پایین، راست</option>
+                                                <option value="'bottom:5px; left:5px;'">پایین، چپ</option>
+                                        </select>
+                                    </div>
+                             </div>
+
+
+                            <div class="form-group p-t-15">
+                                <label for="comment">کد زیر را در هر کجا که قرار دهید، تبلیغ در آن قسمت نمایش داده خواهد
+                                    شد.</label>
+                                <textarea dir="ltr" readonly spellcheck="false" id="publisher-website-code-content-static" class="form-control" rows="5"></textarea>
+                                <textarea dir="ltr" style="display:none" id="publisher-website-code-content-sample-static"
+                                          class="form-control" rows="5">
+<script type="text/javascript">
+    !function(t,i){"use strict";var e=Math.min(innerWidth||1/0,screen.width,screen.availWidth),h={position:0,width:120,height:240,host:0},r="http:";e>=992&&i.write('<div id="ad-frame" style="position: fixed; z-index: 9999; width: 120px; height: 240px;'+h.position+'"><iframe src="'+r+"//click.8tad.ir/click/wp.sh?host_id="+h.host+"&banner_width="+h.width+"&banner_height="+h.height+'" height="240px" width="120px" frameborder="0" scrolling="no" style="width: 120px; height: 240px; border: 0; outline: 0; background: #FFF url('+r+'//8tad.ir/static/frontend/images/loader.gif) no-repeat center;"></iframe></div>')}(this,document);
+</script>
+                                </textarea>
+                            </div>
+                          </div>
+
+
+
+                        <div id="website-code-banner-native-elements" style="display:none">
+                                <div class="form-group">
+                                    <label for="website" class="form-label">وب سایت</label>
+                                    <span class="help"></span>
+                                    <div class="controls">
+                                        <select class="form-control" id="website-banner-native" name="website">
+                                            <option value="">انتخاب کنید</option>
+                                            {% for website in websites %}
+                                                <option value="{{ website['publisher_website_id'] }}">{{ website['publisher_website_title'] }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                             <div class="form-group">
+                                    <label for="position" class="form-label">نوع نمایش پیشنهادها</label>
+                                    <span class="help"></span>
+                                    <div class="controls">
+                                        <select class="form-control" id="position_native" name="position">
+                                            <option value="">انتخاب کنید</option>
+                                                <option value="'1x4'">افقی</option>
+                                                <option value="'4x1'">عمودی</option>
+                                        </select>
+                                    </div>
+                             </div>
+
+
+                            <div class="form-group p-t-15">
+                                <label for="comment">کد زیر را در هر کجا که قرار دهید، تبلیغ در آن قسمت نمایش داده خواهد
+                                    شد.</label>
+                                <textarea dir="ltr" readonly spellcheck="false" id="publisher-website-code-content-native" class="form-control" rows="5"></textarea>
+                                <textarea dir="ltr" style="display:none" id="publisher-website-code-content-sample-native"
+                                          class="form-control" rows="5">
+<script type="text/javascript">
+   !function(t,i){"use strict";var c={width:0,height:0,host:0,count:0},h="http:",e="native_8tad_ad_"+~~(999999*Math.random()),n=h+"//click.8tad.ir/click/capi.sh?host_id="+c.host+"&banner_width="+c.width+"&banner_height="+c.height+"&count="+c.count+"&element_id="+e;i.write('<div id="'+e+'"></div>'),i.write('<script type="text/javascript" src="'+n+'" async></scri'+'pt>')}(this,document);
+</script>
+                                </textarea>
+                            </div>
+                          </div>
+
+
+                            <div id="website-code-search-engine-elements" style="display:none">
+
+
+                                <div class="form-group">
+                                <label for="title" class="form-label">
+                                    جهت استفاده از وب سرويس بايد از آدرس زير در داخل كد وب سايت خود استفاده نماييد:
+                                </label>
+                                <span class="help"></span>
+                                <div class="controls">
+                                    <input dir="ltr" type="text" class="form-control"
+                                           value="http://click.8tad.ir/click/ws.sh" readonly>
+                                </div>
+                            </div>
+
+                            <div class="form-group p-t-15">
+                                <label for="comment">
+                                    پارمترهایی که در قالب json به وسیله متد post به آدرس فوق ارسال می شوند به شرح زير مي باشند:
+                                </label>
+                                <textarea dir="ltr" spellcheck="false" class="form-control" rows="8" readonly>
+{
+     "username": "نام کاربری موتور جستجو",
+	"password": "کلمه عبور موتور جستجو",
+	"user_agent": "مشخصات مرورگر و سیستم عامل کاربر ",
+     "user_ip": "کاربر ip",
+     "user_resolution": "مشخصات صفحه نمایش کاربر ",
+	"query": "پرس و جوی کاربر",
+	"size": "تعداد تبلیغات جهت نمایش در نتایج جستجو"
+}
+                                </textarea>
+                            </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END BASIC FORM ELEMENTS-->
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#banner-size").on('change', function() {
+                var size = $("#banner-size").val();
+                if (size == ""){
+                    $("#publisher-website-code-content").val('');
+                    return
+                }
+
+                if ($("#website").val()==''){
+                    $("#publisher-website-code-content").val('');
+                    return
+                }
+
+                var script = $("#publisher-website-code-content-sample").val();
+                script = script.replace('width:0', 'width:' + size.substring(0,size.indexOf("x")));
+                script = script.replace('height:0', 'height:' + size.substring(size.indexOf("x")+1));
+                script = script.replace('host:0', 'host:' + $("#website").val());
+                $("#publisher-website-code-content").val(script);
+            });
+
+            $("#website").on('change', function() {
+                $("#banner-size").val('');
+                $("#publisher-website-code-content").val('');
+            });
+
+            $("#website-banner-mobile").on('change', function() {
+
+                if ($('#website-banner-mobile').val()==''){
+                    $("#publisher-website-code-content-mobile").val('');
+                    return;
+                }
+
+                var script = $("#publisher-website-code-content-sample-mobile").val();
+                script = script.replace('host:0', 'host:' + $("#website-banner-mobile").val());
+                $("#publisher-website-code-content-mobile").val(script);
+            });
+
+
+            $("#website-banner-lightbox").on('change', function() {
+
+                if ($('#website-banner-lightbox').val()==''){
+                    $("#publisher-website-code-content-lightbox").val('');
+                    return;
+                }
+
+                var script = $("#publisher-website-code-content-sample-lightbox").val();
+                script = script.replace('host:0', 'host:' + $("#website-banner-lightbox").val());
+                $("#publisher-website-code-content-lightbox").val(script);
+            });
+
+            $("#website-banner-static").on('change', function() {
+                $("#position_banner_static").val('');
+                $("#publisher-website-code-content-static").val('');
+            });
+
+
+            $("#position_banner_static").on('change', function() {
+
+                if ($("#position_banner_static").val() == ""){
+                    $("#publisher-website-code-content-static").val('');
+                    return
+                }
+
+                if ($("#website-banner-static").val()==''){
+                    $("#publisher-website-code-content-static").val('');
+                    return
+                }
+
+
+                var script = $("#publisher-website-code-content-sample-static").val();
+                script = script.replace('host:0', 'host:' + $("#website-banner-static").val());
+                script = script.replace('position:0', 'position:' + $("#position_banner_static").val());
+                $("#publisher-website-code-content-static").val(script);
+            });
+
+
+            $("#website-banner-native").on('change', function() {
+                $("#position_native").val('');
+                $("#publisher-website-code-content-native").val('');
+            });
+
+
+            $("#position_native").on('change', function() {
+
+                if ($("#position_native").val() == ""){
+                    $("#publisher-website-code-content-native").val('');
+                    return
+                }
+
+                if ($("#website-banner-native").val()==''){
+                    $("#publisher-website-code-content-native").val('');
+                    return
+                }
+
+
+                var script = $("#publisher-website-code-content-sample-native").val();
+                script = script.replace('host:0', 'host:' + $("#website-banner-native").val());
+                script = script.replace('width:0', 'width:225');
+                script = script.replace('height:0', 'height:150');
+                script = script.replace('count:0', 'count:' + $("#position_native").val());
+                $("#publisher-website-code-content-native").val(script);
+            });
+
+
+
+            $("#publisher-website-code-content, #publisher-website-code-content-static, #publisher-website-code-content-lightbox, #publisher-website-code-content-mobile").focus(function() {
+                var $this = $(this);
+                $this.select();
+                $this.mouseup(function() {
+                    $this.unbind("mouseup");
+                    return false;
+                });
+            });
+
+            $(".website-code-type input[type=radio][name=website_code]").change(function () {
+                if (this.value == 'banner') {
+                    $("#website-code-search-engine-elements").css('display', 'none');
+                    $("#website-code-banner-mobile-elements").css('display', 'none');
+                    $("#website-code-banner-lightbox-elements").css('display', 'none');
+                    $("#website-code-banner-static-elements").css('display', 'none');
+                    $("#website-code-banner-native-elements").css('display', 'none');
+                    $("#website-code-banner-elements").slideDown(600);
+                }
+                else if(this.value == 'search') {
+                    $("#website-code-banner-elements").css('display', 'none');
+                    $("#website-code-banner-mobile-elements").css('display', 'none');
+                    $("#website-code-banner-lightbox-elements").css('display', 'none');
+                    $("#website-code-banner-static-elements").css('display', 'none');
+                    $("#website-code-banner-native-elements").css('display', 'none');
+                    $("#website-code-search-engine-elements").slideDown(600);
+                }
+
+                else if(this.value == 'mobile') {
+                    $("#website-code-banner-elements").css('display', 'none');
+                    $("#website-code-search-engine-elements").css('display', 'none');
+                    $("#website-code-banner-lightbox-elements").css('display', 'none');
+                    $("#website-code-banner-static-elements").css('display', 'none');
+                    $("#website-code-banner-native-elements").css('display', 'none');
+                    $("#website-code-banner-mobile-elements").slideDown(600);
+                }
+
+                else if(this.value == 'lightbox') {
+                    $("#website-code-banner-elements").css('display', 'none');
+                    $("#website-code-search-engine-elements").css('display', 'none');
+                    $("#website-code-banner-mobile-elements").css('display', 'none');
+                    $("#website-code-banner-static-elements").css('display', 'none');
+                    $("#website-code-banner-native-elements").css('display', 'none');
+                    $("#website-code-banner-lightbox-elements").slideDown(600);
+                }
+
+                else if(this.value == 'static') {
+                    $("#website-code-banner-elements").css('display', 'none');
+                    $("#website-code-search-engine-elements").css('display', 'none');
+                    $("#website-code-banner-mobile-elements").css('display', 'none');
+                    $("#website-code-banner-lightbox-elements").css('display', 'none');
+                    $("#website-code-banner-native-elements").css('display', 'none');
+                    $("#website-code-banner-static-elements").slideDown(600);
+                }
+
+                else if(this.value == 'native') {
+                    $("#website-code-banner-elements").css('display', 'none');
+                    $("#website-code-search-engine-elements").css('display', 'none');
+                    $("#website-code-banner-mobile-elements").css('display', 'none');
+                    $("#website-code-banner-lightbox-elements").css('display', 'none');
+                    $("#website-code-banner-static-elements").css('display', 'none');
+                    $("#website-code-banner-native-elements").slideDown(600);
+                }
+
+            });
+
+        });
+    </script>
+
+
+{% endblock %}

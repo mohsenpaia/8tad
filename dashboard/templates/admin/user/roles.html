@@ -1,0 +1,14 @@
+<form id="roles-modal-form" method="post">
+    <select id="roles" class="select2-offscreen" multiple="multiple" name="roles">
+        {% for role in roles %}
+            <option {% for user_role in user_roles %} {% if user_role["role"]["role_id"] == role["role_id"] %} selected
+            {% endif %}{% endfor %}                 value="{{ role['role_id'] }}">{{ role['role_name'] }}</option>
+        {% endfor %}
+    </select>
+</form>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#roles").val($("#roles").val()).select2();
+    })
+</script>

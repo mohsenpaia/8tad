@@ -1,0 +1,87 @@
+{% extends "layout.html" %}
+{% from 'macros.html' import render_form, render_page_title %}
+
+{% block title %}
+    {{ configs.page_title | default_title }}
+{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block content %}
+    {{ render_page_title(configs.module, configs.url_index, configs.action) }}
+    <!-- BEGIN DASHBOARD TILES -->
+    <div class="row">
+        <div class="col-md-3 col-vlg-3 col-sm-6">
+            <div class="tiles green m-b-10">
+                <div class="tiles-body">
+                    <div class="controller">
+                        <a href="javascript:;" class="reload"></a>
+                        <a href="javascript:;" class="remove"></a>
+                    </div>
+                    <h4 class="no-margin semi-bold">کل نمایش نمودار</h4>
+                    <div class="heading"><span class="animate-number" data-value="{{ dashboard["shows_count"] }}"
+                                               data-animation-duration="1000">0</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-vlg-3 col-sm-6">
+            <div class="tiles blue m-b-10">
+                <div class="tiles-body">
+                    <div class="controller">
+                        <a href="javascript:;" class="reload"></a>
+                        <a href="javascript:;" class="remove"></a>
+                    </div>
+                    <h4 class="no-margin semi-bold">کل کلیک نمودار</h4>
+                    <div class="heading"><span class="animate-number" data-value="{{ dashboard["clicks_count"] }}"
+                                               data-animation-duration="1000">0</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-vlg-3 col-sm-6">
+            <div class="tiles purple m-b-10">
+                <div class="tiles-body">
+                    <div class="controller">
+                        <a href="javascript:;" class="reload"></a>
+                        <a href="javascript:;" class="remove"></a>
+                    </div>
+                    <h4 class="no-margin semi-bold">وب سایت های فعال</h4>
+                    <div class="heading"><span class="animate-number" data-value="{{ dashboard["websites_count"] }}"
+                                               data-animation-duration="1000">0</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-vlg-3 col-sm-6">
+            <div class="tiles red m-b-10">
+                <div class="tiles-body">
+                    <div class="controller">
+                        <a href="javascript:;" class="reload"></a>
+                        <a href="javascript:;" class="remove"></a>
+                    </div>
+                    <h4 class="no-margin semi-bold">کمپین های فعال</h4>
+                    <div class="heading"><span class="animate-number" data-value="{{ dashboard["campaigns_count"] }}"
+                                               data-animation-duration="1000">0</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END DASHBOARD TILES -->
+
+    <div class="row">
+        {% if clicks or shows %}
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div dir="ltr" id="container" style="height: 400px; min-width: 310px"></div>
+            </div>
+        {% else %}
+            <p class="text-center p-t-100">
+                اطلاعاتی برای نمایش وجود ندارد.
+            </p>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block js %}
+    {% if clicks or shows %}
+        {% include 'dashboard/chart/column.html' %}
+    {% endif %}
+{% endblock %}

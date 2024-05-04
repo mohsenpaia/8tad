@@ -1,0 +1,194 @@
+{% extends "frontend_layout.html" %}
+{% block content %}
+    <!-- Page Title
+            ============================================= -->
+    <section id="page-title" class="page-title-parallax page-title-dark"
+             style="background-image: url('/static/frontend/images/teheranbanner.jpg'); padding: 120px 0;"
+             >
+
+        <div class="container clearfix">
+            <h1>تعرفه ی تبلیغات</h1>
+            <span>با هر بودجه ای تبلیغات شما را مدیریت می کنیم</span>
+            <ol class="breadcrumb">
+                <li><a href="{{ url_for('home') }}">صفحه اصلی</a></li>
+                <li class="active">تعرفه ی تبلیغات</li>
+            </ol>
+        </div>
+
+    </section><!-- #page-title end -->
+
+    <!-- Content
+    ============================================= -->
+    <section id="content">
+
+        <div class="content-wrap">
+
+            <div class="container clearfix">
+
+                <div class="divcenter center clearfix bottommargin-lg" style="max-width: 900px;">
+                    <h1>تعرفه ی تبلیغات</h1>
+                    <h2>
+                        با هر بودجه ای تبلیغات شما را مدیریت می کنیم
+                    </h2>
+                </div>
+
+
+                <div class="pricing bottommargin clearfix">
+
+                    <div class="col-md-3">
+
+                        <div class="pricing-box">
+                            <div class="pricing-title">
+                                <h3>پایه</h3>
+                                <span>&nbsp;</span>
+                            </div>
+                            <div class="pricing-price">
+                                500,000<span class="price-unit">تومان</span>
+                            </div>
+                            <div class="pricing-features">
+                                <ul>
+                                    <li>حدوداً 2,500,000 نمایش</li>
+                                    <li>بیش از 3,100 کلیک</li>
+                                    <li>طراحی بنر رایگان</li>
+                                    <li>&nbsp;</li>
+                                </ul>
+                            </div>
+                            <div class="pricing-action">
+                                <a href="{{ url_for('advertiser_campaign_new') }}" class="btn btn-danger btn-block btn-lg">ساخت کمپین</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-3">
+
+                        <div class="pricing-box">
+                            <div class="pricing-title">
+                                <h3>حرفه ای</h3>
+                                <span>5% شارژ بیشتر</span>
+                            </div>
+                            <div class="pricing-price">
+                                2,000,000<span class="price-unit">تومان</span>
+                            </div>
+                            <div class="pricing-features">
+                                <ul>
+                                    <li>حدوداً 10,000,000 نمایش</li>
+                                    <li>بیش از 12 هزار کلیک</li>
+                                    <li>طراحی بنر رایگان</li>
+                                    <li>طراحی صفحه فرود رایگان</li>
+                                </ul>
+                            </div>
+                            <div class="pricing-action">
+                                <a href="{{ url_for('advertiser_campaign_new') }}" class="btn btn-danger btn-block btn-lg">ساخت کمپین</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-3">
+
+                        <div class="pricing-box  best-price">
+                            <div class="pricing-title">
+                                <h3>تجاری</h3>
+                                <span>10% شارژ بیشتر</span>
+                            </div>
+                            <div class="pricing-price">
+                                5,000,000<span class="price-unit">تومان</span>
+                            </div>
+                            <div class="pricing-features">
+                                <ul>
+                                    <li>حدوداً 25,000,000 نمایش</li>
+                                    <li>بیش از 31 هزار کلیک</li>
+                                    <li>طراحی بنر رایگان</li>
+                                    <li>طراحی صفحه فرود رایگان</li>
+                                </ul>
+                            </div>
+                            <div class="pricing-action">
+                                <a href="{{ url_for('advertiser_campaign_new') }}" class="btn btn-danger btn-block btn-lg bgcolor border-color">ساخت کمپین</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-3">
+
+                        <div class="pricing-box">
+                            <div class="pricing-title">
+                                <h3>سازمانی</h3>
+                                <span>20% شارژ بیشتر</span>
+                            </div>
+                            <div class="pricing-price">
+                                10,000,000<span class="price-unit">تومان</span>
+                            </div>
+                            <div class="pricing-features">
+                                <ul>
+                                    <li>حدوداً 50,000,000 نمایش</li>
+                                    <li>بیش از 62 هزار کلیک</li>
+                                    <li>طراحی بنر رایگان</li>
+                                    <li>طراحی صفحه فرود رایگان</li>
+                                </ul>
+                            </div>
+                            <div class="pricing-action">
+                                <a href="{{ url_for('advertiser_campaign_new') }}" class="btn btn-danger btn-block btn-lg">ساخت کمپین</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <p style="margin-bottom:5px;" >قیمت کلیک عادی در نظر گرفته شده است.</p>
+                <p>به ازای هر IP تنها یکبار کلیک محاسبه می شود.</p>
+
+                <div class="line"></div>
+
+
+                <div class="divcenter center clearfix bottommargin-lg" style="max-width: 900px;">
+                    <h1>قیمت کلیک</h1>
+                    <h2>
+                        حداقل قیمت هر کلیک در وب و وب موبایل 200 تومان
+                    </h2>
+                </div>
+
+                <div class="col_full">
+                    در سامانه هشتاد شما قادرید  مبالغ را کاهش یا افزایش دهید. تعرفه های ارائه شده صرفا جهت پیشنهاد
+                    هستند. افزایش قیمت کلیک، شما را در نمایش بیشتر کمک می کند و کاهش قیمت، احتمال نمایش را کاهش می دهد.
+                </div>
+
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th class="text-center">عادی</th>
+                        <th class="text-center">کلمات کلیدی</th>
+                        <th class="text-center">موضوعی</th>
+                        <th class="text-center">جغرافیایی</th>
+                        <th class="text-center">زمان پخش</th>
+                        <th class="text-center">سیستم عامل</th>
+{#                        <th class="text-center">وب سایت های پخش کننده</th>#}
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="text-center">
+                        <td>200</td>
+                        <td>*</td>
+                        <td>+40</td>
+                        <td>+40</td>
+                        <td>+40</td>
+                        <td>+40</td>
+{#                        <td>150+ تا 300+</td>#}
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div class="col_full">
+                    * قیمت کلیدواژه بر اساس میزان تقاضا و قیمت گذاری دیگر آگهی دهندگان ارائه می شود. در صورتی که
+                    کلیدواژه
+                    توسط دیگر آگهی دهندگان انتخاب شده باشد، در صورت انتخاب آن کلیدواژه برای بالاتر بردن احتمال نمایش،
+                    نیاز است قیمت برابر یا بیشتر از دیگر آگهی دهندگان پیشنهاد شود.
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+{% endblock %}

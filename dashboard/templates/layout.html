@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+    <meta charset="utf-8"/>
+    <title>{% block title %}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta content="" name="description"/>
+    <meta content="" name="author"/>
+
+    {% block css %}
+    {% endblock %}
+
+    <!-- BEGIN PLUGIN CSS -->
+    <link href="{{ url_for('static', filename='assets/plugins/font-awesome/css/font-awesome.css') }}" rel="stylesheet"
+          type="text/css"/>
+    <!-- END PLUGIN CSS -->
+
+    <!-- BEGIN PLUGIN CSS -->
+    <link href="{{ url_for('static', filename='assets/plugins/pace/pace-theme-flash.css') }}" rel="stylesheet"
+          type="text/css" media="screen"/>
+    <link href="{{ url_for('static', filename='assets/plugins/bootstrapv3/css/bootstrap.min.css') }}" rel="stylesheet"
+          type="text/css"/>
+    <link href="{{ url_for('static', filename='assets/plugins/bootstrapv3/css/bootstrap-theme.min.css') }}"
+          rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="{{ url_for('static', filename='assets/plugins/animate.min.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ url_for('static', filename='assets/plugins/jquery-scrollbar/jquery.scrollbar.css') }}"
+          rel="stylesheet" type="text/css"/>
+    <!-- END PLUGIN CSS -->
+    <!-- BEGIN CORE CSS FRAMEWORK -->
+    <link href="{{ url_for('static', filename='dashboards/css/webarch.rtl.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ url_for('static', filename='dashboards/css/custom.css') }}" rel="stylesheet" type="text/css"/>
+    <!-- END CORE CSS FRAMEWORK -->
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="rtl">
+<!-- BEGIN HEADER -->
+<div class="header navbar navbar-inverse ">
+    <!-- BEGIN TOP NAVIGATION BAR -->
+    <div class="navbar-inner">
+        <div class="header-seperation">
+            <ul class="nav pull-left notifcation-center visible-xs visible-sm">
+                <li class="dropdown">
+                    <a href="#main-menu" data-webarch="toggle-left-side">
+                        <i class="material-icons">menu</i>
+                    </a>
+                </li>
+            </ul>
+            <!-- BEGIN LOGO -->
+            <a href="{{ url_for('dashboard') }}">
+                <img src="{{ url_for('static', filename='dashboards/img/logo-dashboard.png') }}" class="logo"
+                     alt="8tad Logo" data-src="{{ url_for('static', filename='dashboards/img/logo-dashboard.png') }}"
+                     width="110"/>
+            </a>
+            <!-- END LOGO -->
+
+        </div>
+        <!-- END RESPONSIVE MENU TOGGLER -->
+        <div class="header-quick-nav">
+            <!-- BEGIN TOP NAVIGATION MENU -->
+            <div class="pull-left">
+                <ul class="nav quick-section">
+                    <li class="quicklinks">
+                        <a href="#" class="" id="layout-condensed-toggle">
+                            <i class="material-icons">menu</i>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="nav quick-section">
+                    <li class="quicklinks  m-r-10">
+                        <a href="#" class="">
+                            <i class="material-icons">refresh</i>
+                        </a>
+                    </li>
+                    <li class="quicklinks">
+                        <a href="#" class="">
+                            <i class="material-icons">apps</i>
+                        </a>
+                    </li>
+                    <li class="quicklinks"><span class="h-seperate"></span></li>
+                    <li class="quicklinks">
+                        <a href="#" class="" id="my-task-list" data-placement="bottom" data-content=''
+                           data-toggle="dropdown" data-original-title="پیام ها">
+                            <i class="material-icons">notifications_none</i>
+                            <span class="badge badge-important bubble-only"></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="notification-list" style="display:none">
+                <div style="width:300px">
+
+                    {% if ticket_count > 0 %}
+                        <a href="{{ url_for('ticket_admin') }}">
+                            <div class="notification-messages info">
+                                <div class="message-wrapper">
+                                    <div class="heading"><i class="fa fa-ticket" aria-hidden="true"></i>
+                                        شما {{ ticket_count | enToPersianNumb }} تیکت برای مدیریت دارید.
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    {% endif %}
+
+                    {% if campaign_count > 0 %}
+                        <a href="{{ url_for('campaign_admin') }}">
+                            <div class="notification-messages info">
+                                <div class="message-wrapper">
+                                    <div class="heading"><i class="fa fa-bullhorn" aria-hidden="true"></i>
+                                        شما {{ campaign_count | enToPersianNumb }} کمپین برای مدیریت دارید.
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    {% endif %}
+                    {% if website_count > 0 %}
+                        <a href="{{ url_for('publisher_website_admin') }}">
+                            <div class="notification-messages info">
+                                <div class="message-wrapper">
+                                    <div class="heading"><i class="fa fa-television" aria-hidden="true"></i>
+                                        شما {{ website_count | enToPersianNumb }} وب سایت برای مدیریت دارید.
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    {% endif %}
+                    {% if credit_request_count > 0 %}
+                        <a href="{{ url_for('credit_request_admin') }}">
+                            <div class="notification-messages info">
+                                <div class="message-wrapper">
+                                    <div class="heading"><i class="fa fa-money" aria-hidden="true"></i>
+                                        شما {{ credit_request_count | enToPersianNumb }} درخواست برداشت برای مدیریت
+                                        دارید.
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+
+
+            <!-- END TOP NAVIGATION MENU -->
+            <!-- BEGIN CHAT TOGGLER -->
+            <div class="pull-right">
+                <div class="my-credit">
+                    <span class="my-credit-title">اعتبار</span>
+                    <span class="my-credit-price"><a class="btn btn-warning btn-cons"
+                                                     href="{{ url_for("financial_transaction") }}">{{ my_credit | format_currency | enToPersianNumb }} ریال </a></span>
+                </div>
+                <div class="chat-toggler sm">
+                    <div class="profile-pic">
+                        {#                        <img src="/static/assets/img/profiles/avatar_small.jpg" alt=""#}
+                        {#                             data-src="/static/assets/img/profiles/avatar_small.jpg"#}
+                        {#                             data-src-retina="/static/assets/img/profiles/avatar_small2x.jpg" width="35" height="35"/>#}
+                        <i class="material-icons">account_circle</i>
+                        <div class="availability-bubble online"></div>
+                    </div>
+                </div>
+                <ul class="nav quick-section dropdown-user-name">
+                    <li class="quicklinks">
+                        <a data-toggle="dropdown" class="dropdown-toggle  pull-right " href="#" id="user-options">
+                            <i class="fa fa-angle-down" aria-hidden="true"></i>
+                            <span>{{ my_name }}</span>
+                        </a>
+                        <ul class="dropdown-menu  pull-right user-options" role="menu" aria-labelledby="user-options">
+                            <li>
+                                <a href="{{ url_for('user_profile_edit') }}">ویرایش اطلاعات کاربری</a>
+                            </li>
+                            <li>
+                                <a href="{{ url_for_security('change_password') }}">تغییر کلمه عبور</a>
+                            </li>
+                            <li>
+                                <a href="{{ url_for('user_email_edit') }}">تغییر ایمیل</a>
+                            </li>
+                            <li>
+                                <a href="{{ url_for('user_bank_account_edit') }}">ویرایش اطلاعات مالی</a>
+                            </li>
+                            <li>
+                                {#                                <a href="{{ url_for('user_financial_edit') }}">تغییر اطلاعات مالی</a>#}
+                            </li>
+                            {#                            <li>#}
+                            {#                                <a href="#">تیکت ها&nbsp;<span class="badge badge-important animated bounceIn">2</span>#}
+                            {##}
+                            {#                                </a>#}
+                            {#                            </li>#}
+                            <li class="divider"></li>
+                            <li>
+                                <a href="/">نمایش وب سایت&nbsp;<i class="material-icons">visibility</i></a>
+                            </li>
+                            <li>
+                                <a href="{{ url_for_security('logout') }}">خروج&nbsp;<i class="material-icons">power_settings_new</i></a>
+                            </li>
+                        </ul>
+                    </li>
+                    {#                    <li class="quicklinks"><span class="h-seperate"></span></li>#}
+                    {#                    <li class="quicklinks">#}
+                    {#                        <a href="#" class="chat-menu-toggle" data-webarch="toggle-right-side"><i class="material-icons">chat</i><span#}
+                    {#                                class="badge badge-important hide">1</span>#}
+                    {#                        </a>#}
+                    {#                    </li>#}
+                </ul>
+            </div>
+            <!-- END CHAT TOGGLER -->
+        </div>
+        <!-- END TOP NAVIGATION MENU -->
+    </div>
+    <!-- END TOP NAVIGATION BAR -->
+</div>
+<!-- END HEADER -->
+<!-- BEGIN CONTAINER -->
+<div class="page-container row-fluid">
+    <!-- BEGIN SIDEBAR -->
+    <div class="page-sidebar " id="main-menu">
+        <!-- BEGIN MINI-PROFILE -->
+        <div class="page-sidebar-wrapper scrollbar-dynamic" id="main-menu-wrapper">
+
+            <!-- END MINI-PROFILE -->
+            <!-- BEGIN SIDEBAR MENU -->
+
+            {% if current_user.has_role('superadmin') %}
+                <p class="menu-title sm">مدیر کل سامانه<span class="pull-right"></span>
+                </p>
+                <ul>
+
+                    <li class="menu-user menu-user-edit">
+                        <a href="javascript:;"> <i class="fa fa-users" aria-hidden="true"></i> <span
+                                class="title">کاربران</span> <span class=" arrow"></span> </a>
+                        <ul class="sub-menu">
+                            <li class="menu-user menu-user-edit"><a href="{{ url_for("user") }}">مدیریت کاربران</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+            {% endif %}
+
+
+            {% if current_user.has_role('admin') %}
+                <p class="menu-title sm">مدیر سامانه <span class="pull-right"></span>
+                </p>
+                <ul>
+                    <li class="start menu-admin-dashboard">
+                        <a href="{{ url_for("admin_dashboard") }}"><i class="fa fa-tachometer" aria-hidden="true"></i>
+                            <span
+                                    class="title">داشبورد</span> <span
+                                    class="selected"></span></a>
+                    </li>
+
+                    <li class="menu-credit-request-admin">
+                        <a href="{{ url_for("credit_request_admin") }}"><i class="fa fa-money" aria-hidden="true"></i>
+                            <span
+                                    class="title">درخواست های برداشت</span>
+                            <span
+                                    class="selected"></span></a>
+                    </li>
+
+                    <li class="menu-advertising-type menu-advertising-type-new menu-advertising-type-edit">
+                        <a href="{{ url_for("advertising_type") }}"><i class="fa fa-money" aria-hidden="true"></i>
+                            <span
+                                    class="title">انواع تبلیغات</span>
+                            <span
+                                    class="selected"></span></a>
+                    </li>
+
+                    <li class="menu-campaign-admin menu-campaign-admin-edit menu-admin-campaign-ctr">
+                        <a href="javascript:;"> <i class="fa fa-bullhorn" aria-hidden="true"></i>
+
+                            <span
+                                    class="title">کمپین ها</span> <span class=" arrow"></span> </a>
+                        <ul class="sub-menu">
+                            <li class="menu-campaign-admin menu-campaign-admin-edit"><a
+                                    href="{{ url_for("campaign_admin") }}">مدیریت کمپین ها</a></li>
+                            <li class="menu-admin-campaign-ctr"><a
+                                    href="{{ url_for("admin_campaign_ctr") }}">نرخ کلیک کمپین ها</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="menu-publisher-website-admin menu-publisher-website-admin-edit menu-admin-website-ctr">
+                        <a href="javascript:;"> <i class="fa fa-television" aria-hidden="true"></i>
+                            <span
+                                    class="title">وب سایت ها</span> <span class=" arrow"></span> </a>
+                        <ul class="sub-menu">
+                            <li class="menu-publisher-website-admin menu-publisher-website-admin-edit"><a
+                                    href="{{ url_for("publisher_website_admin") }}">مدیریت وب سایت ها</a></li>
+                            <li class="menu-admin-website-ctr"><a
+                                    href="{{ url_for("admin_website_ctr") }}">نرخ کلیک وب سایت ها</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="menu-targeted-subject menu-targeted-subject-new menu-targeted-subject-edit menu-targeted-geography menu-targeted-geography-new menu-targeted-geography-edit menu-operating-system menu-operating-system-new menu-operating-system-edit menu-targeted-keyword menu-targeted-keyword-new menu-targeted-keyword-edit">
+                        <a href="javascript:;"> <i class="fa fa-cogs" aria-hidden="true"></i>
+                            <span
+                                    class="title">تنظیمات هدفمندی</span>
+                            <span class=" arrow"></span> </a>
+
+                        <ul class="sub-menu">
+                            <li class="menu-targeted-subject menu-targeted-subject-new menu-targeted-subject-edit"><a
+                                    href="{{ url_for("targeted_subject") }}">موضوعی</a></li>
+                            <li class="menu-targeted-geography menu-targeted-geography-new menu-targeted-geography-edit">
+                                <a href="{{ url_for("targeted_geography") }}">جغرافیایی</a></li>
+                            <li class="menu-operating-system menu-operating-system-new menu-operating-system-edit"><a
+                                    href="{{ url_for("operating_system") }}">سیستم عامل</a></li>
+                            <li class="menu-targeted-keyword menu-targeted-keyword-new menu-targeted-keyword-edit"><a
+                                    href="{{ url_for("targeted_keyword") }}">کلمات کلیدی</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="menu-campaign-type menu-campaign-type-new menu-campaign-type-edit">
+                        <a href="javascript:;"> <i class="fa fa-th" aria-hidden="true"></i>
+                            <span
+                                    class="title">انواع کمپین</span>
+                            <span class=" arrow"></span> </a>
+
+                        <ul class="sub-menu">
+                            <li class="menu-campaign-type menu-campaign-type-new menu-campaign-type-edit"><a
+                                    href="{{ url_for("campaign_type") }}">مدیریت نوع کمپین</a></li>
+                        </ul>
+                    </li>
+                    {#                    <li>#}
+                    {#                        <a href="javascript:;"> <i class="material-icons">library_books</i> <span#}
+                    {#                                class="title">بسته ها</span>#}
+                    {#                            <span class=" arrow"></span> </a>#}
+                    {##}
+                    {#                        <ul class="sub-menu">#}
+                    {#                            <li><a href="{{ url_for("package") }}">مدیریت بسته ها</a></li>#}
+                    {#                        </ul>#}
+                    {#                    </li>#}
+                    <li class="menu-banner-size menu-banner-size-new menu-banner-size-edit">
+                        <a href="javascript:;"> <i class="fa fa-picture-o" aria-hidden="true"></i>
+                            <span class="title">بنر ها</span>
+                            <span class=" arrow"></span> </a>
+
+                        <ul class="sub-menu">
+                            <li class="menu-banner-size menu-banner-size-new menu-banner-size-edit"><a
+                                    href="{{ url_for("banner_size") }}">اندازه بنرها</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="menu-ticket-show-admin menu-ticket-admin menu-ticket-category menu-ticket-category-new menu-ticket-category-edit">
+                        <a href="javascript:;"> <i class="fa fa-ticket" aria-hidden="true"></i>
+                            <span class="title">تیکت ها</span>
+                            <span class=" arrow"></span> </a>
+                        <ul class="sub-menu">
+                            <li class="menu-ticket-show-admin menu-ticket-admin"><a
+                                    href="{{ url_for('ticket_admin') }}">مدیریت تیکت ها</a></li>
+                            <li class="menu-ticket-category menu-ticket-category-new menu-ticket-category-edit"><a
+                                    href="{{ url_for("ticket_category") }}">مدیریت بخش ها</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+            {% endif %}
+            {% if current_user.has_role('advertiser') %}
+                <p class="menu-title sm">آگهی دهنده<span class="pull-right"></span>
+                </p>
+                <ul>
+                    <li class="start menu-advertiser-dashboard">
+                        <a href="{{ url_for("advertiser_dashboard") }}"><i class="fa fa-tachometer"
+                                                                           aria-hidden="true"></i> <span
+                                class="title">داشبورد</span> <span
+                                class="selected"></span></a>
+                    </li>
+
+                    <li class="menu-advertiser-campaign menu-advertiser-campaign-new menu-advertiser-campaign-steps menu-advertiser-dashboard-statistics menu-advertiser-dashboard-daily-details advertiser-dashboard-daily-statistics">
+                        <a href="{{ url_for("advertiser_campaign") }}"> <i class="fa fa-bullhorn"
+                                                                           aria-hidden="true"></i>
+                            </i>
+
+                            <span class="title">کمپین های من</span>
+                        </a>
+                    </li>
+
+                    <li class="menu-blocked-website menu-blocked-website-new menu-blocked-website-edit">
+                        <a href="{{ url_for("blocked_website") }}"> <i class="fa fa-ban" aria-hidden="true"></i>
+
+                            <span class="title">نمایش دهنده های مسدود</span>
+                        </a>
+                    </li>
+                </ul>
+            {% endif %}
+            {% if current_user.has_role('publisher') %}
+                <p class="menu-title sm">نمایش دهنده<span class="pull-right"></span>
+                </p>
+
+                <ul>
+                    <li class="start menu-publisher-dashboard">
+                        <a href="{{ url_for("publisher_dashboard") }}"><i class="fa fa-tachometer"
+                                                                          aria-hidden="true"></i> <span
+                                class="title">داشبورد</span> <span
+                                class="selected"></span></a>
+                    </li>
+
+                    {#                    <li class="menu-publisher-website menu-publisher-website-new menu-publisher-website-edit menu-publisher-dashboard-statistics menu-publisher-dashboard-daily-statistics menu-publisher-dashboard-daily-details">#}
+                    {#                        <a href=""><i class="fa fa-television" aria-hidden="true"></i>#}
+                    {#                            <span#}
+                    {#                                    class="title">کانال های من</span>#}
+                    {#                            <span#}
+                    {#                                    class="selected"></span></a>#}
+                    {#                    </li>#}
+
+                    <li class="menu-publisher-website menu-publisher-website-new menu-publisher-website-edit menu-publisher-dashboard-statistics menu-publisher-dashboard-daily-statistics menu-publisher-dashboard-daily-details">
+                        <a href="{{ url_for("publisher_website") }}"><i class="fa fa-television" aria-hidden="true"></i>
+                            <span
+                                    class="title">وب سایت های من</span>
+                            <span
+                                    class="selected"></span></a>
+                    </li>
+
+                    <li class="menu-publisher-website-code">
+                        <a href="{{ url_for("publisher_website_code") }}"><i class="fa fa-code" aria-hidden="true"></i>
+                            <span
+                                    class="title">دریافت کد</span>
+                            <span
+                                    class="selected"></span></a>
+                    </li>
+
+                    <li class="menu-publisher-blocked-website menu-publisher-blocked-website-new menu-publisher-blocked-website-edit">
+                        <a href="{{ url_for("publisher_blocked_website") }}"> <i class="fa fa-ban"
+                                                                                 aria-hidden="true"></i>
+
+                            <span class="title">آگهی دهنده های مسدود</span>
+                        </a>
+                    </li>
+
+                </ul>
+            {% endif %}
+
+
+            <p class="menu-title sm">تراکنش های مالی<span class="pull-right"></span>
+            </p>
+
+            <ul>
+                <li class="start menu-financial-transaction">
+                    <a href="{{ url_for("financial_transaction") }}"><i class="fa fa-list-alt" aria-hidden="true"></i>
+                        <span
+                                class="title">لیست تراکنش های مالی</span> <span
+                                class="selected"></span></a>
+                </li>
+
+                {% if current_user.has_role('advertiser') %}
+                    <li class="menu-credit-charge">
+                        <a href="{{ url_for("credit_charge") }}"><i class="fa fa-credit-card" aria-hidden="true"></i>
+                            <span
+                                    class="title">افزایش اعتبار</span>
+                            <span
+                                    class="selected"></span></a>
+                    </li>
+                {% endif %}
+
+                {% if current_user.has_role('publisher') %}
+                    <li class="menu-credit-request">
+                        <a href="{{ url_for("credit_request") }}"><i class="fa fa-money" aria-hidden="true"></i>
+                            <span
+                                    class="title">درخواست های برداشت</span>
+                            <span
+                                    class="selected"></span></a>
+                    </li>
+                {% endif %}
+
+            </ul>
+
+            <p class="menu-title sm">پشتیبانی<span class="pull-right"></span>
+            </p>
+
+            <ul>
+                <li class="menu-ticket-show menu-ticket">
+                    <a href="{{ url_for("ticket") }}"><i class="fa fa-ticket" aria-hidden="true"></i>
+                        <span
+                                class="title">لیست تیکت ها</span>
+                        <span
+                                class="selected"></span></a>
+                </li>
+                <li class="menu-ticket-new" style="margin-bottom:30px">
+                    <a href="{{ url_for("ticket_new") }}"><i class="fa fa-ticket" aria-hidden="true"></i>
+                        <span
+                                class="title">ارسال تیکت</span>
+                        <span
+                                class="selected"></span></a>
+                </li>
+            </ul>
+
+
+            <div class="clearfix"></div>
+            <!-- END SIDEBAR MENU -->
+        </div>
+    </div>
+    <a href="#" class="scrollup">Scroll</a>
+
+    <div class="footer-widget">
+        <div class="pull-right">
+            <p>
+                Copyright © 2017 8tad
+            </p>
+        </div>
+    </div>
+    <!-- END SIDEBAR -->
+
+    <div class="clearfix"></div>
+
+    <!-- BEGIN PAGE CONTAINER-->
+    <div class="page-content">
+        <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+        <div id="portlet-config" class="modal hide">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button"></button>
+                <h3>Widget Settings</h3>
+            </div>
+            <div class="modal-body"> Widget settings form goes here</div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="content">
+            {% block content %}
+            {% endblock %}
+        </div>
+        {#        <div class="chat-footer-btn" onclick="$('#sidr').toggleChat();">#}
+        {#            <i class="material-icons">chat</i>#}
+        {#        </div>#}
+    </div>
+
+    <div class="clearfix"></div>
+
+    <!-- BEGIN CHAT -->
+    <div class="chat-window-wrapper">
+        <div id="main-chat-wrapper" class="inner-content">
+            <div class="chat-window-wrapper scroller scrollbar-dynamic" id="chat-users">
+                <div class="chat-header">
+                    <div class="pull-left">
+                        <input type="text" placeholder="جستجو">
+                    </div>
+                    <div class="pull-right">
+                        <a href="#" class="">
+                            <div class="iconset top-settings-dark "></div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="chat-window-wrapper" id="messages-wrapper" style="display:none">
+                <div class="chat-header">
+                    <div class="pull-left">
+                        <input type="text" placeholder="search">
+                    </div>
+                    <div class="pull-right">
+                        <a href="#" class="">
+                            <div class="iconset top-settings-dark "></div>
+                        </a>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="chat-messages-header">
+                    <div class="status online"></div>
+                    <span class="semi-bold">Jane Smith(Typing..)</span>
+                    <a href="#" class="chat-back"><i class="icon-custom-cross"></i></a>
+                </div>
+                <div class="chat-messages scrollbar-dynamic clearfix">
+
+                </div>
+                <div class="chat-input-wrapper" style="display:none">
+                    <textarea id="chat-message-input" rows="1" placeholder="Type your message"></textarea>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    <!-- END CHAT -->
+    <div class="clearfix"></div>
+</div>
+<!-- END CONTAINER -->
+<script src="{{ url_for('static', filename='assets/plugins/pace/pace.min.js') }}" type="text/javascript"></script>
+<!-- BEGIN JS DEPENDECENCIES-->
+<script src="{{ url_for('static', filename='assets/plugins/jquery/jquery-1.11.3.min.js') }}"
+        type="text/javascript"></script>
+<script src="{{ url_for('static', filename='assets/plugins/bootstrapv3/js/bootstrap.min.js') }}"
+        type="text/javascript"></script>
+<script src="{{ url_for('static', filename='assets/plugins/jquery-block-ui/jqueryblockui.min.js') }}"
+        type="text/javascript"></script>
+<script src="{{ url_for('static', filename='assets/plugins/jquery-unveil/jquery.unveil.min.js') }}"
+        type="text/javascript"></script>
+<script src="{{ url_for('static', filename='assets/plugins/jquery-scrollbar/jquery.scrollbar.min.js') }}"
+        type="text/javascript"></script>
+<script src="{{ url_for('static', filename='assets/plugins/jquery-numberAnimate/jquery.animateNumbers.js') }}"
+        type="text/javascript"></script>
+<script src="{{ url_for('static', filename='assets/plugins/jquery-validation/js/jquery.validate.min.js') }}"
+        type="text/javascript"></script>
+<!-- END CORE JS DEPENDECENCIES-->
+<!-- BEGIN CORE TEMPLATE JS -->
+<script src="{{ url_for('static', filename='dashboards/js/webarch.js') }}" type="text/javascript"></script>
+<script src="{{ url_for('static', filename='assets/js/chat.js') }}" type="text/javascript"></script>
+<!-- END CORE TEMPLATE JS -->
+<script>
+    $(document).ready(function () {
+        $(".menu-{{request.endpoint | replace("_","-")}}").addClass("active open");
+    })
+</script>
+{% block js %}
+{% endblock %}
+<!-- Global site tag (gtag.js) - Google Analytics -->
+{#<script async src="https://www.googletagmanager.com/gtag/js?id=UA-109269582-1"></script>#}
+{#<script>#}
+{#    window.dataLayer = window.dataLayer || [];#}
+{#    function gtag() {#}
+{#        dataLayer.push(arguments);#}
+{#    }#}
+{#    gtag('js', new Date());#}
+{##}
+{#    gtag('config', 'UA-109269582-1');#}
+{#</script>#}
+{##}
+{#<script type="text/javascript">#}
+{#    function statsgathering() {#}
+{#        var docurl = document.location;#}
+{#        var docreferrer = "" + document.referrer;#}
+{#        var sc2 = document.createElement('script');#}
+{#        sc2.type = 'text/javascript';#}
+{#        sc2.async = true;#}
+{#        var prt = 'http:';#}
+{#        if (location.protocol == 'https:')#}
+{#            prt = location.protocol;#}
+{#        sc2.src = prt + '//newstats.8tad.ir?url=' + escape(docurl) + "&sts_r=" + escape(docreferrer) + "&sts_tp=m" + "&sts_t=" + (Math.random() * 9999999);#}
+{#        var sa = document.getElementsByTagName('script')[0];#}
+{#        sa.parentNode.insertBefore(sc2, sa);#}
+{#    }#}
+{#    statsgathering();#}
+{#</script>#}
+
+</body>
+</html>

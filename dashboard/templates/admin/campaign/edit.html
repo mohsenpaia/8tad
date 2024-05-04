@@ -1,0 +1,119 @@
+{% extends "layout.html" %}
+{% from 'macros.html' import render_form, render_page_title, render_transaction_alert %}
+
+{% block title %}
+    {{ configs.page_title | default_title }}
+{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block content %}
+    {{ render_page_title(configs.module, configs.url_index, configs.action) }}
+
+    {% if message %}
+        {{ render_transaction_alert(message.type,message.message) }}
+    {% endif %}
+
+    <!-- BEGIN BASIC FORM ELEMENTS-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="grid simple">
+                <div class="grid-title no-border">
+                    <h4>&nbsp;</h4>
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse"></a>
+                        <a href="#grid-config" data-toggle="modal" class="config"></a>
+                        <a href="javascript:;" class="reload"></a>
+                        <a href="javascript:;" class="remove"></a>
+                    </div>
+                </div>
+                <div class="grid-body no-border">
+                    <br>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-4 col-xs-4">
+                        </div>
+                        <div id="{{ configs.from_id }}" class="col-md-8 col-sm-8 col-xs-8">
+
+                            {{ render_form(form, action_url=url_for(configs.url, id=configs.id), action_text='ثبت تغییرات' ,btn_class='btn btn-primary btn-cons') }}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END BASIC FORM ELEMENTS-->
+{% endblock %}
+
+{% block js %}
+    <script src="{{ url_for('static', filename='assets/js/form_validations.js') }}?v=2" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            validatecCoef = function (element, value) {
+                if (!/^\d+$/.test(value) || (value < 1) || (value > 20)) {
+                    var icon = $(element).parent('.input-with-icon').children('i');
+                    var parent = $(element).parent('.input-with-icon');
+                    icon.removeClass('fa fa-check').addClass('fa fa-exclamation');
+                    parent.removeClass('success-control').addClass('error-control');
+                    $("form button").prop("disabled", true);
+                } else {
+                    var icon = $(element).parent('.input-with-icon').children('i');
+                    var parent = $(element).parent('.input-with-icon');
+                    icon.removeClass("fa fa-exclamation").addClass('fa fa-check');
+                    parent.removeClass('error-control').addClass('success-control');
+                    $("form button").prop("disabled", false);
+                }
+            };
+
+            validateNumber = function (element, value) {
+                if (!/^\d+$/.test(value)) {
+                    var icon = $(element).parent('.input-with-icon').children('i');
+                    var parent = $(element).parent('.input-with-icon');
+                    icon.removeClass('fa fa-check').addClass('fa fa-exclamation');
+                    parent.removeClass('success-control').addClass('error-control');
+                    $("form button").prop("disabled", true);
+                } else {
+                    var icon = $(element).parent('.input-with-icon').children('i');
+                    var parent = $(element).parent('.input-with-icon');
+                    icon.removeClass("fa fa-exclamation").addClass('fa fa-check');
+                    parent.removeClass('error-control').addClass('success-control');
+                    $("form button").prop("disabled", false);
+                }
+            };
+            function commaSeparateNumber(val) {
+                while (/(\d+)(\d{3})/.test(val.toString())) {
+                    val = val.toString().replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
+                }
+                return val;
+            }
+
+            $("#total_budget").keyup(function () {
+                var noCommas = $(this).val().replace(/,/g, '');
+                validateNumber(this, noCommas);
+                $(this).val(commaSeparateNumber(noCommas));
+            });
+            $("#daily_budget").keyup(function () {
+                var noCommas = $(this).val().replace(/,/g, '');
+                validateNumber(this, noCommas);
+                $(this).val(commaSeparateNumber(noCommas));
+            });
+            $("#click_price").keyup(function () {
+                var noCommas = $(this).val().replace(/,/g, '');
+                validateNumber(this, noCommas);
+                $(this).val(commaSeparateNumber(noCommas));
+            });
+
+            $("#coef").keyup(function () {
+                validatecCoef(this, $(this).val());
+            });
+
+            $("#total_budget").val(commaSeparateNumber($("#total_budget").val()));
+            $("#daily_budget").val(commaSeparateNumber($("#daily_budget").val()));
+            $("#click_price").val(commaSeparateNumber($("#click_price").val()));
+
+        });
+    </script>
+
+{% endblock %}

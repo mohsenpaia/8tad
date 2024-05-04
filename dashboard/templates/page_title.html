@@ -1,0 +1,11 @@
+{% macro render_page_title(module, action) -%}
+    <ul class="breadcrumb">
+        <li>
+            <a href="{{ url_for('dashboard') }}">داشبورد</a>
+        </li>
+        <li><a href="#" class="active">{{ module }}</a></li>
+    </ul>
+    <div class="page-title"><i class="icon-custom-right"></i>
+        <h3>{{ action }}</h3>
+    </div>
+{%- endmacro %}

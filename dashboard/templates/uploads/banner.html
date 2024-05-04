@@ -1,0 +1,596 @@
+<style>
+    #upload-form {
+        text-align: center;
+    }
+
+    #dropbox {
+        border: 1px dashed #ccc;
+        padding: 20px;
+        direction: rtl;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+
+    }
+
+    #dropbox.active {
+        border: 1px dashed #0077C0;
+    }
+
+    input[type="file"] {
+        display: none;
+    }
+
+    .custom-file-upload {
+        border: 1px solid #ccc;
+        display: inline-block;
+        padding: 6px 12px;
+        cursor: pointer;
+    }
+
+    .modal-body, .modal-footer {
+        background-color: #fff;
+    }
+
+    .nav-tabs > .active > a, .nav-tabs > .active > a:hover, .nav-tabs > .active > a:focus {
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .banner-frame {
+        display: inline-block;
+        float: right;
+        position: relative;
+        width: 100%;
+        height: 105px;
+    }
+
+    .banner-frame img {
+        border: 1px solid #eee;
+    }
+
+    .banner-description p {
+        text-align: center;
+        margin: 0;
+        padding: 5px 0;
+    }
+
+    .banner-description {
+        float: right;
+        width: 100%;
+    }
+
+    #gallery-show {
+        float: right;
+        width: 100%;
+    }
+
+    #gallery-show #gallery-show-body {
+        overflow-y: auto;
+    }
+
+    #gallery-show #gallery-show-body .gallery-bnrs-title {
+        background-color: #f6f6f6;
+        height: 30px;
+        line-height: 30px;
+        padding-right: 10px;
+    }
+
+    #gallery-show #gallery-show-body .gallery-bnrs-title p {
+        padding: 0;
+        margin: 0;
+    }
+
+    #gallery-show #gallery-show-body ul {
+        text-align: right;
+        padding-right: 0;
+        padding-top: 10px;
+        padding-bottom: 20px;
+    }
+
+    #gallery-show #gallery-show-body li {
+        display: inline-block;
+        list-style: none;
+        padding: 2px;
+        border: 2px solid #fff;
+        cursor: pointer;
+        background-color: #F6F6F6;
+        width: 16.2%;
+    }
+
+    #gallery-show #gallery-show-body li:hover {
+        border: 2px solid #ccc;
+    }
+
+    #gallery-show #gallery-show-body li:hover .other-files a {
+        display: block;
+    }
+
+    #gallery-show .gallery-show-footer {
+        margin-top: 20px;
+    }
+
+    .banner-size-item {
+        background-color: #D1DADE;
+        float: right;
+        margin-bottom: 50px;
+        margin-left: 50px;
+        cursor: pointer;
+        position: relative;
+        background-size: cover;
+        position: relative;
+    }
+
+    .banner-size-item .banner-size-toolbar {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        -webkit-transition: all 0.3s;
+        -o-transition: all 0.3s;
+        transition: all 0.3s;
+        cursor: pointer;
+        text-align: center;
+    }
+
+    .banner-size-item:hover .banner-size-toolbar {
+        opacity: 1;
+    }
+
+    .banner-size-item .banner-size-toolbar .tool-icon-remove {
+        top: 15px;
+        left: 10px;
+        transform: translateY(-50%);
+        display: inline-block;
+        position: absolute;
+    }
+
+    .banner-size-item .banner-size-toolbar a i {
+        color: #fff;
+        font-size: 15px;
+    }
+
+    .banner-size-item .banner-size-content {
+        position: absolute;
+        text-align: center;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 100%;
+    }
+
+    .banner-size-item .banner-size-content p {
+        margin: 0;
+        padding: 0;
+    }
+
+    .modal-header .close {
+        margin-top: 0px;
+        float: left;
+    }
+
+    .modal-header {
+        text-align: right;
+    }
+</style>
+<script type="application/javascript">
+    /******************************************************************************
+     * HTML5 Multiple File Uploader Demo                                          *
+     ******************************************************************************/
+        // Constants
+    var MAX_UPLOAD_FILE_SIZE = 200 * 1024; // 200 KB
+    var UPLOAD_URL = "{{ url_for('upload_banner') }}";
+
+    // List of pending files to handle when the Upload button is finally clicked.
+    var PENDING_FILES = [];
+
+    $(document).ready(function () {
+        // Set up the drag/drop zone.
+        initDropbox();
+
+        // Set up the handler for the file input box.
+        $("#file-picker").on("change", function () {
+            handleFiles(this.files);
+            $("#dropbox p").text(PENDING_FILES.length + " " + "بنر برای آپلود آماده است.");
+            $("#dropbox lable").css("display", "none");
+            $("#upload-button").css("display", "block");
+        });
+
+        // Handle the submit button.
+        $("#upload-button").on("click", function (e) {
+            // If the user has JS disabled, none of this code is running but the
+            // file multi-upload input box should still work. In this case they'll
+            // just POST to the upload endpoint directly. However, with JS we'll do
+            // the POST using ajax and then redirect them ourself when done.
+            e.preventDefault();
+            doUpload();
+        })
+    });
+
+    function doUpload() {
+        if (PENDING_FILES.length == 0) {
+            return;
+        }
+        $("#progress").show();
+        var $progressBar = $("#progress-bar");
+
+        // Gray out the form.
+        //$("#upload-form :input").attr("disabled", "disabled");
+
+        // Initialize the progress bar.
+        $progressBar.css({"width": "0%"});
+
+        // Collect the form data.
+        fd = collectFormData();
+
+        // Attach the files.
+        for (var i = 0, ie = PENDING_FILES.length; i < ie; i++) {
+            // Collect the other form data.
+            fd.append("file", PENDING_FILES[i]);
+        }
+
+        // Inform the back-end that we're doing this over ajax.
+        fd.append("__ajax", "true");
+
+        var xhr = $.ajax({
+            xhr: function () {
+                var xhrobj = $.ajaxSettings.xhr();
+                if (xhrobj.upload) {
+                    xhrobj.upload.addEventListener("progress", function (event) {
+                        var percent = 0;
+                        var position = event.loaded || event.position;
+                        var total = event.total;
+                        if (event.lengthComputable) {
+                            percent = Math.ceil(position / total * 100);
+                        }
+
+                        // Set the progress bar.
+                        $progressBar.css({"width": percent + "%"});
+                        $progressBar.text(percent + "%");
+                    }, false)
+                }
+                return xhrobj;
+            },
+            url: UPLOAD_URL,
+            method: "POST",
+            contentType: false,
+            processData: false,
+            cache: false,
+            data: fd,
+            success: function (data) {
+                $progressBar.css({"width": "100%"});
+                data = JSON.parse(data);
+
+                // How'd it go?
+                if (data.status === "error") {
+                    // Uh-oh.
+                    window.alert(data.msg);
+                    $("#dropbox p").text("بنرهای خود را به اینجا بکشید ( Drag and Drop )");
+                    $("#dropbox lable").css("display", "block");
+                    $("#upload-button").css("display", "none");
+                    $(".progress-bar").css({"width": "0"});
+                    $(".progress-bar").text("0%");
+                    $("#upload-form :input").removeAttr("disabled");
+                    return;
+                }
+                else {
+                    // Ok! Get the UUID.
+                    var upload_status = '';
+                    for (i = 0; i < data.files.length; i++) {
+                        if (data.files[i]['upload_status'] == 'ok') {
+                            var str = data.files[i]['file_name'];
+                            var n = str.lastIndexOf(".");
+                            var ext = str.substr(n + 1);
+                            var html = '';
+                            html += '<li data-width="' + data.files[i]['file_width'] + '" data-height="' + data.files[i]['file_height'] + '" data-src="/static/uploads/' + data.files[i]['folder_name'] + '/' + data.files[i]['file_name'] + '" data-selected="0" data-id="' + data.files[i]['file_id'] + '">';
+                            html += '<div class="banner-frame" style="position: relative; left: 0; top: 0; background: url(/static/uploads/' + data.files[i]['folder_name'] + '/' + data.files[i]['file_name'] + ') center center no-repeat; background-size: cover;" title="' + data.files[i]['file_name'] + '">';
+                            html += '</div><div class="banner-description"><p>';
+                            html += data.files[i]['file_name'];
+                            html += '</p></div></li>';
+                            if ($("#gallery-show-body .gallery-bnr" + data.files[i]['file_width'] + "x" + data.files[i]['file_height'] + " ul").length) {
+                                $("#gallery-show-body .gallery-bnr" + data.files[i]['file_width'] + "x" + data.files[i]['file_height'] + " ul").prepend(html);
+                            } else {
+                                var frame = '';
+                                frame += '<div class="gallery-bnr' + data.files[i]['file_width'] + 'x' + data.files[i]['file_height'] + '">';
+                                frame += '<ul>';
+                                frame += html + '</ul></div>';
+                                $("#gallery-show #gallery-show-body").prepend(frame);
+                            }
+                        }
+                        upload_status+=data.files[i]['file_name']+': '+data.files[i]['status_message']+'\n';
+                    }
+                    alert(upload_status);
+                    $("#gallery-show-body > div").each(function () {
+                        $(this).css("display", "none");
+                    });
+                    $(".gallery-bnr" + $("#uploadBox .modal-header span").attr("data-size")).css("display", "block");
+                    $("#gallery-show-tab-btn").click();
+                    $("#dropbox p").text("بنرهای خود را به اینجا بکشید ( Drag and Drop )");
+                    $("#dropbox lable").css("display", "block");
+                    $("#upload-button").css("display", "none");
+                    $(".progress-bar").css({"width": "0"});
+                    $(".progress-bar").text("0%");
+                }
+            },
+        });
+        PENDING_FILES = [];
+        //var $dropbox = $("#dropbox");
+        //$dropbox.html('<p>بنرهاي خود را به اينجا بکشيد ( Drag and Drop )</p><br><label for="file-picker" class="custom-file-upload">انتخاب فايل ها</label><input id="file-picker" type="file" name="file" accept="image/*" multiple>');
+
+    }
+
+    function collectFormData() {
+        // Go through all the form fields and collect their names/values.
+        var fd = new FormData();
+
+        $("#upload-form :input").each(function () {
+            var $this = $(this);
+            var name = $this.attr("name");
+            var type = $this.attr("type") || "";
+            var value = $this.val();
+
+            // No name = no care.
+            if (name === undefined) {
+                return;
+            }
+
+            // Skip the file upload box for now.
+            if (type === "file") {
+                return;
+            }
+
+            // Checkboxes? Only add their value if they're checked.
+            if (type === "checkbox" || type === "radio") {
+                if (!$this.is(":checked")) {
+                    return;
+                }
+            }
+
+            fd.append(name, value);
+        });
+
+        return fd;
+    }
+
+    function handleFiles(files) {
+        // Add them to the pending files list.
+        for (var i = 0, ie = files.length; i < ie; i++) {
+            PENDING_FILES.push(files[i]);
+        }
+    }
+
+    function initDropbox() {
+        var $dropbox = $("#dropbox");
+
+        // On drag enter...
+        $dropbox.on("dragenter", function (e) {
+            e.stopPropagation();
+            e.preventDefault();
+            $(this).addClass("active");
+        });
+
+        // On drag over...
+        $dropbox.on("dragover", function (e) {
+            e.stopPropagation();
+            e.preventDefault();
+        });
+
+        // On drop...
+        $dropbox.on("drop", function (e) {
+            e.preventDefault();
+            $(this).removeClass("active");
+
+            // Get the files.
+            var files = e.originalEvent.dataTransfer.files;
+            handleFiles(files);
+
+            // Update the display to acknowledge the number of pending files.
+            $dropbox.text(PENDING_FILES.length + " " + "بنر برای آپلود آماده است.");
+            $("#upload-button").css("display", "block");
+        });
+
+        // If the files are dropped outside of the drop zone, the browser will
+        // redirect to show the files in the window. To avoid that we can prevent
+        // the 'drop' event on the document.
+        function stopDefault(e) {
+            e.stopPropagation();
+            e.preventDefault();
+        }
+
+        $(document).on("dragenter", stopDefault);
+        $(document).on("dragover", stopDefault);
+        $(document).on("drop", stopDefault);
+    }
+</script>
+
+<script type="text/javascript">
+    var csrf_token = "{{ csrf_token() }}";
+    $.ajaxSetup({
+        beforeSend: function (xhr, settings) {
+            if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrf_token);
+            }
+        }
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $(document).on('click', "#gallery-show li", function () {
+            $(".bnr" + $(this).attr("data-width") + "x" + $(this).attr("data-height")).css('background-image', 'url(' + $(this).attr("data-src") + ')');
+            $(".bnr" + $(this).attr("data-width") + "x" + $(this).attr("data-height") + " .banner-size-content").css('top', '100%');
+            $(".bnr" + $(this).attr("data-width") + "x" + $(this).attr("data-height") + " .banner-size-content").css('transform', 'translateY(0%)');
+            $(".bnr" + $(this).attr("data-width") + "x" + $(this).attr("data-height") + " input").val($(this).attr("data-id"));
+            $(".modal-header .close").click();
+        });
+
+        $(document).on('click', ".banner-size-item", function () {
+            $("#gallery-show-body > div").each(function () {
+                $(this).css("display", "none");
+            });
+            $(".gallery-bnr" + $(this).attr("data-width") + "x" + $(this).attr("data-height")).css("display", "block");
+            $("#uploadBox .modal-header span").text("انتخاب بنر " + $(this).attr("data-width") + " در " + $(this).attr("data-height") + " پیکسل ");
+            $("#uploadBox .modal-header span").attr("data-size", $(this).attr("data-width") + "x" + $(this).attr("data-height"));
+            $("#dropbox p").text("بنرهای خود را به اینجا بکشید ( Drag and Drop )");
+            $("#dropbox lable").css("display", "block");
+            $("#upload-button").css("display", "none");
+            $(".progress-bar").css({"width": "0"});
+            $(".progress-bar").text("0%");
+            $('#uploadBox').modal('show');
+            $("#gallery-show-tab-btn").click();
+        });
+
+        $(document).on('click', ".banner-size-item .banner-size-toolbar .tool-icon-remove", function (event) {
+            $(".bnr" + $(this).attr("data-width") + "x" + $(this).attr("data-height")).css('background-image', 'url("")');
+            $(".bnr" + $(this).attr("data-width") + "x" + $(this).attr("data-height") + " .banner-size-content").css('top', '50%');
+            $(".bnr" + $(this).attr("data-width") + "x" + $(this).attr("data-height") + " .banner-size-content").css('transform', 'translateY(-50%)');
+            $(".bnr" + $(this).attr("data-width") + "x" + $(this).attr("data-height") + " input").val('');
+            event.stopPropagation();
+        });
+
+
+        $(document).ready(ajustamodal);
+        $(window).resize(ajustamodal);
+        function ajustamodal() {
+            var altura = $(window).height() - 255; //value corresponding to the modal heading + footer
+            $(".ativa-scroll").css({"height": altura, "overflow-y": "auto"});
+        };
+
+    });
+</script>
+<!-- Modal -->
+<div id="uploadBox" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <span></span>
+                <button type="button" class="close"
+                        data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-tabs">
+                    <li class="pull-left active">
+                        <a data-toggle="tab" href="#home">
+                            آپلود بنر
+                        </a>
+                    </li>
+                    <li class="pull-left">
+                        <a id="gallery-show-tab-btn" data-toggle="tab"
+                           href="#gallery-show">
+                            لیست بنرهای شما
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div id="home" class="tab-pane fade in active ativa-scroll">
+                        <div>
+                            <form id="upload-form"
+                                  action=""
+                                  method="POST"
+                                  enctype="multipart/form-data">
+                                <br>
+
+                                <div id="dropbox">
+                                    <p>
+                                        بنرهای خود را به اینجا بکشید ( Drag and Drop )
+                                    </p>
+                                    <br>
+                                    <label for="file-picker"
+                                           class="custom-file-upload">
+                                        انتخاب بنرها
+                                    </label>
+                                    <input id="file-picker" type="file"
+                                           name="file" accept="image/*"
+                                           multiple>
+
+                                </div>
+                                <br>
+
+                                <div class="text-right">
+                                    <p>
+                                        پسوند های مجاز: <span dir="ltr">.png .jpg .jpeg .gif</span>
+                                    </p>
+
+                                    <p>
+                                        حجم مجاز بنر: 200 کیلوبایت
+                                    </p>
+
+                                    <p>
+                                        سایز های مجاز: 468x60 , 300x250 , 728x90 , 240x240 , 120x240 , 125x125 , 600x300
+                                        , 300x100 , 120x600 , 160x600
+                                    </p>
+
+                                </div>
+
+                                <fieldset id="progress">
+                                    <div class="progress-trough">
+                                        <div id="progress-bar" class="progress-bar">0%
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <br>
+
+                                <div class="text-right">
+                                    <button style="display:none" type="button" class="btn btn-primary"
+                                            id="upload-button">
+                                        آپلود بنر
+                                        <i class="fa fa-upload"></i>
+                                    </button>
+                                </div>
+
+
+                            </form>
+                        </div>
+                    </div>
+                    <div id="gallery-show" class="tab-pane fade ativa-scroll">
+                        <div id="gallery-show-body">
+                            {% if banners %}
+                                <div class="gallery-bnr{{ banners[0]['banner_size']['banner_size_width'] }}x{{ banners[0]['banner_size']['banner_size_height'] }}">
+                                    <ul>
+                                        {% set banner_size = {'id': banners[0]["banner_size"]["banner_size_id"]} %}
+                                        {% for banner in banners %}
+                                            {% if banner["banner_size"]["banner_size_id"] != banner_size.id %}
+                                                </ul>
+                                                </div>
+                                                <div class="gallery-bnr{{ banner['banner_size']['banner_size_width'] }}x{{ banner['banner_size']['banner_size_height'] }}">
+                                                <ul>
+                                                {% if banner_size.update({'id': banner["banner_size"]["banner_size_id"]}) %}
+                                                {% endif %}
+                                            {% endif %}
+                                            <li data-src="{{ url_for('static', filename='uploads/'+banner['banner_file']['file_path']+'/'+banner['banner_file']['file_name']) }}"
+                                                data-selected="0"
+                                                data-width="{{ banner['banner_size']['banner_size_width'] }}"
+                                                data-height="{{ banner['banner_size']['banner_size_height'] }}"
+                                                data-id="{{ banner['banner_id'] }}">
+                                                <div style="position: relative; left: 0; top: 0; background: url({{ url_for('static', filename='uploads/'+banner['banner_file']['file_path']+'/'+banner['banner_file']['file_name']) }}) center center no-repeat; background-size: cover;"
+                                                     title="{{ banner['banner_file']['file_name'] }}"
+                                                     class="banner-frame">
+                                                </div>
+                                                <div class="banner-description">
+                                                    <p>
+                                                        {{ banner['banner_file']['file_name'] }}
+                                                    </p>
+                                                </div>
+                                            </li>
+                                        {% endfor %}
+                                        </ul>
+                                        </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+
+    </div>
+</div>

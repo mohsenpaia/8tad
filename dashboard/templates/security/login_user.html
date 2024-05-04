@@ -1,0 +1,39 @@
+{% extends "one_page_layout.html" %}
+{% from 'macros.html' import render_form_security %}
+
+{% block title %}
+    {{ title | default_title }}
+{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block content %}
+    <div class="row login-container animated">
+        <!-- Logo
+               ============================================= -->
+        <div id="logo">
+            <a href="{{ url_for('home') }}" class="standard-logo"><img
+                    src="{{ url_for('static', filename='frontend/images/logo-security.png') }}" alt="8tad Logo"></a>
+        </div><!-- #logo end -->
+        <div class="col-md-6 col-md-offset-3 tiles white no-padding">
+
+            <div class="p-t-30 p-b-20 xs-p-t-10 xs-p-l-10 xs-p-b-10">
+                <div class="text-center" role="tablist">
+                    <a href="{{ url_for_security('login') }}" class="btn btn-info btn-cons">ورود به حساب کاربری</a> یا&nbsp;&nbsp;
+                    <a href="{{ url_for_security('register') }}" class="btn btn-info btn-cons">ساخت حساب کاربری</a>
+                </div>
+            </div>
+            <div class="col-md-12 tiles white p-t-20 p-b-20 no-margin text-black">
+                <div id="tab_login">
+                    {{ render_form_security(login_user_form, action_url=url_for_security('login'), action_text='ورود' ,btn_class='btn btn-warning btn-cons') }}
+                </div>
+                <a href="/accounts/password/reset">کلمه عبورم را فراموش کرده ام</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+{% endblock %}
+

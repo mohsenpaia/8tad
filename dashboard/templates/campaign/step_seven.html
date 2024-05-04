@@ -1,0 +1,236 @@
+{% extends "layout.html" %}
+{% from 'macros.html' import render_page_title, render_campaign_steps, render_campaign_steps_search_engine %}
+
+{% block title %}
+    {{ configs.page_title | default_title }}
+{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block content %}
+    {{ render_page_title(configs.module, configs.url_index, configs.action) }}
+
+    {% if configs.campaign_type_name == 'banner' or configs.campaign_type_name == 'mobile' or configs.campaign_type_name == 'native' or configs.campaign_type_name == 'iframe' %}
+        {{ render_campaign_steps(configs.campaign_id,'active','active','active','active','active','active', 'current') }}
+    {% elif configs.campaign_type_name == 'search_engine' %}
+        {{ render_campaign_steps_search_engine(configs.campaign_id,'active','active','active','active','active','active', 'current') }}
+    {% endif %}
+
+    <!-- BEGIN BASIC FORM ELEMENTS-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="grid simple">
+                <div class="grid-title no-border">
+                    <h4>ذخیره و پرداخت کمپین</h4>
+
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse"></a>
+                        <a href="#grid-config" data-toggle="modal" class="config"></a>
+                        <a href="javascript:;" class="reload"></a>
+                        <a href="javascript:;" class="remove"></a>
+                    </div>
+                </div>
+                <div class="grid-body no-border">
+                    <br>
+
+                    <div class="row campaign-step-seven-icons">
+
+                        <div class="col-md-4 col-sm-12 pull-left">
+
+                            <div class="campaign-step-seven-icon">
+                                <i class="fa fa-bullhorn" aria-hidden="true"></i>
+                            </div>
+                            <div class="campaign-step-seven-info">
+                                نوع کمپین:
+                                <br>
+                                <span class="muted">{{ campaign["campaign_type"]["campaign_type_title"] }}</span>
+                                <br>
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-4 col-sm-12 pull-left">
+
+                            <div class="campaign-step-seven-icon">
+                                <i class="fa fa-folder-open-o" aria-hidden="true"></i>
+                            </div>
+                            <div class="campaign-step-seven-info">
+                                نام کمپین:
+                                <br>
+                                <span class="muted">{{ campaign["campaign_name"] }}</span><br>
+                                <br>
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-4 col-sm-12 pull-left">
+
+                            <div class="campaign-step-seven-icon">
+                                <i class="fa fa-credit-card" aria-hidden="true"></i>
+                            </div>
+                            <div class="campaign-step-seven-info">
+                                بودجه کمپین:
+                                <br>
+                                <span class="muted"> بودجه کل: {% if campaign["campaign_total_budget"] is none %} تعیین
+                                    نشده  {% else %}
+                                    {{ campaign["campaign_total_budget"] | format_currency }}{% endif %}</span><br>
+                                <span
+                                        class="muted">  بودجه روزانه:{% if campaign["campaign_daily_budget"] is none %}
+                                    تعیین
+                                    نشده  {% else %}
+                                    {{ campaign["campaign_daily_budget"] | format_currency }}{% endif %}</span>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-4 col-sm-12 pull-left">
+
+                            <div class="campaign-step-seven-icon">
+                                <i class="fa fa-picture-o" aria-hidden="true"></i>
+                            </div>
+                            <div class="campaign-step-seven-info">
+                                آپلود بنر:
+                                <br>
+                                <span class="muted">شما {{ campaign_banners_len }} بنر آپلود کرده اید.</span><br>
+                                <br>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-4 col-sm-12 pull-left">
+
+                            <div class="campaign-step-seven-icon">
+                                <i class="fa fa-link" aria-hidden="true"></i>
+                            </div>
+                            <div class="campaign-step-seven-info">
+                                لینک مقصد:
+                                <br>
+                                <span dir="ltr" class="muted">{% if campaign["campaign_landing_page_url"] is none %}
+                                    تعیین
+                                    نشده  {% else %}<a href="{{ campaign["campaign_landing_page_url"] }}"
+                                                       target="_blank">{{ campaign["campaign_landing_page_url"] }}</a>{% endif %}</span><br>
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-4 col-sm-12 pull-left">
+
+                            <div class="campaign-step-seven-icon">
+                                <i class="fa fa-bullseye" aria-hidden="true"></i>
+                            </div>
+                            <div class="campaign-step-seven-info">
+                                هدفگذاری کمپین:
+                                <br>
+                                <span class="muted">قیمت هر کلیک: <span class="click-price-current">{{ campaign["campaign_click_price"] | format_currency }}</span></span><br>
+                                <br>
+                                <span class="muted"> هدفگذای کلمات کلیدی: {% if campaign['campaign_targeted_keyword_all'] %}نمایش برای تمامی کلمات کلیدی{% elif campaign['campaign_targeted_keyword_special'] %}{% for value in keywords %}<strong>{{ value }}</strong>{% endfor %}{% endif %}</span><br>
+                                <span class="muted"> هدفگذاری جغرافیایی: {% if campaign['campaign_targeted_geography_all'] %}نمایش در تمامی نقاط{% elif campaign['campaign_targeted_geography_iran'] %}فقط در ایران{% elif campaign['campaign_targeted_geography_not_iran'] %}فقط خارج از ایران{% elif campaign['campaign_targeted_geography_special'] %}{% for value in states %}<strong>{{ value }}</strong>{% endfor %}{% endif %}</span><br>
+                                <span class="muted"> سیستم عامل: {% if campaign['campaign_targeted_operating_system_all'] %}نمایش در تمامی سیستم عامل‌ها{% elif campaign['campaign_targeted_operating_system_special'] %}{% for value in operating_systems %}<strong>{{ value }}</strong>{% endfor %}{% endif %}</span><br>
+                                <span class="muted"> هدفگذاری موضوعی: {% if campaign['campaign_targeted_subject_all'] %}نمایش در تمام موضوعات{% elif campaign['campaign_targeted_subject_special'] %}{% for value in subjects %}<strong>{{ value }}</strong>{% endfor %}{% endif %}</span><br>
+                                <span class="muted"> زمان پخش: {% if campaign['campaign_playtime_all'] %}همه ساعات{% elif campaign['campaign_playtime_special'] %}{% if campaign['campaign_playtime_not_24_08'] %}<strong>عدم پخش در ساعات 24 تا 8</strong>{% endif %}{% if campaign['campaign_playtime_not_08_16'] %}<strong>عدم پخش در ساعات 8 تا 16</strong>{% endif %}{% if campaign['campaign_playtime_not_16_24'] %}<strong>عدم پخش در ساعات 16 تا 24</strong>{% endif %}{% endif %}</span><br>
+                                <span class="muted"> نوع سایت های پخش کننده: {% if campaign['campaign_network_class_a'] %}کلاس A{% elif campaign['campaign_network_class_b'] %}کلاس B{% elif campaign['campaign_network_class_c'] %}کلاس C{% endif %}</span><br>
+                                <span class="muted"> هدفگیری مجدد: {% if campaign['campaign_retargeting'] %}هدفگیری مجدد{% else %}بدون هدفگیری مجدد{% endif %}</span><br>
+
+                            </div>
+
+                        </div>
+
+
+                      <div class="col-lg-12 campaign-step-seven-click-price">
+                          <div>
+                              با توجه به هدفمندی هایی که تعیین نموده اید قیمت هر کلیک کمپین شما برابر <span class="click-price-current">{{ campaign["campaign_click_price"] | format_currency }}</span> ریال شده است. شما می توانید این قیمت را کاهش یا افزایش دهید. توجه داشته باشید که قیمت هر کلیک در میزان نمایش کمپین شما و جایگاه نمایش آن بسیار موثر است.
+                          </div>
+                          <div>
+                              با توجه به کمپین های موجود، در شبکه تبلیغات هشتاد، در صورتیکه قیمت هر کلیک کمپین شما بیشتر از <span>{{ campaigns_max_click_price | format_currency }}</span> ریال باشد کمپین شما در جایگاه نخست نتایج جستجو قرار می گیرد و نمایش بیشتری از سایر کمپین ها خواهد داشت.
+                          </div>
+                          <div class="col-sm-6 col-md-3 pull-left click-price-increase-decrease input-group">
+                              <div class="form-group">
+                                    <input id="click-price-input" dir="ltr" class="form-control" type="number" min="1600" step="100" value ="{{ campaign["campaign_click_price"] }}"/>
+                              </div>
+                              <span class="input-group-btn">
+                                  <button id="click-price-btn" class="btn btn-info btn-cons">ثبت قیمت</button>
+                              </span>
+                          </div>
+
+                        </div>
+
+
+                        {% if campaign['campaign_total_budget'] %}
+                            {% if campaign['campaign_total_budget'] | int - my_credit | int > 0 %}
+                                <div class="col-md-12 col-sm-12 pull-left text-left p-t-40 campaign-step-seven-activate">
+
+                                    <div class="col-sm-12 col-md-4" style="margin-top:0">
+                                    <a class="btn btn-primary btn-cons"
+                                       href="{{ url_for("credit_charge", credit=campaign['campaign_total_budget'] | int - my_credit | int) }}">افزایش
+                                        اعتبار</a>
+                                    <a class="btn btn-default btn-cons" href="{{ url_for('advertiser_campaign') }}">ذخیره
+                                        کمپین و پرداخت در آینده</a>
+                                     </div>
+                                    <div class="col-sm-12 col-md-8">
+
+                                    <p class="text-right">
+                                        بودجه کل کمپین شما <span class="campaign-step-seven-activate-my-credit" >{{ campaign["campaign_total_budget"] | format_currency }}</span> ریال است.
+
+                                        اعتبار فعلی شما <span class="campaign-step-seven-activate-my-credit" >{{ my_credit | format_currency }}</span> ریال است.
+
+                                        برای فعال سازی کمپین اعتبار خود را
+                                        <span>{{ (campaign['campaign_total_budget'] | int - my_credit) | format_currency }}</span>
+                                        ریال
+                                        افزایش دهید، سپس در قسمت کمپین های من آن را فعال نمایید.
+                                    </p>
+                                    </div>
+
+                                </div>
+                            {% else %}
+                                <div class="col-md-12 col-sm-12 pull-left text-left p-t-40">
+                                    <a class="btn btn-primary btn-cons"
+                                       href="{{ url_for('campaign_advertiser_activate', campaign_id=campaign["campaign_id"]) }}">فعال
+                                        سازی</a>
+                                </div>
+                            {% endif %}
+                        {% endif %}
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END BASIC FORM ELEMENTS-->
+{% endblock %}
+
+{% block js %}
+
+    <script type="text/javascript">
+        var csrf_token = "{{ csrf_token() }}";
+        $.ajaxSetup({
+            beforeSend: function (xhr, settings) {
+                if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrf_token);
+                }
+            }
+        });
+    </script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(document).on('click', "#click-price-btn", function () {
+                $.ajax({
+                    url: '/dashboard/advertiser/campaign/{{ campaign['campaign_id'] }}/click/price/edit',
+                    type: "post",
+                    data: {"amount":$('#click-price-input').val()},
+                    success: function (result) {
+                        $('.click-price-current').text(result);
+                        alert('قیمت هر کلیک برابر '+result+' ریال شد.');
+                    }
+                });
+            });
+        })
+    </script>
+
+{% endblock %}

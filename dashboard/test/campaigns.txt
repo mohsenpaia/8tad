@@ -1,0 +1,1005 @@
+ad_show_campaign_author_name
+کمپین هوشمند
+ad_show_campaign_author_user_id
+آگهی دهنده
+ad_click_counter
+1
+ad_show_campaign_total_budget
+0
+ad_show_counter
+95
+ad_show_campaign_type
+کمپین بنری
+ad_show_campaign_landing_page_url
+http://www.digikala.com
+##############################################################
+ad_show_campaign_author_name
+کمپین بنری ساده
+ad_show_campaign_author_user_id
+آگهی دهنده
+ad_click_counter
+15
+ad_show_campaign_total_budget
+0
+ad_show_counter
+226
+ad_show_campaign_type
+کمپین بنری
+ad_show_campaign_landing_page_url
+http://www.filimo.com
+##############################################################
+ad_show_campaign_author_name
+کمپین بنری هوشمند دوم
+ad_show_campaign_author_user_id
+آگهی دهنده
+ad_click_counter
+2
+ad_show_campaign_total_budget
+0
+ad_show_counter
+37
+ad_show_campaign_type
+کمپین بنری
+ad_show_campaign_landing_page_url
+http://www.farsnews.com
+##############################################################
+ad_show_campaign_author_name
+موسسه حسابرسی آزمون پرداز
+ad_show_campaign_author_user_id
+هماپلاس (آگهی دهنده)
+ad_click_counter
+4886
+ad_show_campaign_total_budget
+17025600
+ad_show_counter
+11308800
+ad_show_campaign_type
+کمپین بنری
+ad_show_campaign_landing_page_url
+http://www.azpar.com/?utm_source=8tad.ir&utm_campaign=branding&utm_medium=clickads
+##############################################################
+ad_show_campaign_author_name
+خبررسان هشتگ
+ad_show_campaign_author_user_id
+هماپلاس (آگهی دهنده)
+ad_click_counter
+14783
+ad_show_campaign_total_budget
+15353600
+ad_show_counter
+33824160
+ad_show_campaign_type
+کمپین بنری
+ad_show_campaign_landing_page_url
+http://8tag.ir/?utm_source=8tad.ir&utm_campaign=branding&utm_medium=clickads
+##############################################################
+ad_show_campaign_author_name
+ساهوما
+ad_show_campaign_author_user_id
+هماپلاس (آگهی دهنده)
+ad_click_counter
+6688
+ad_show_campaign_total_budget
+15803200
+ad_show_counter
+25012367
+ad_show_campaign_type
+کمپین بنری
+ad_show_campaign_landing_page_url
+https://cafebazaar.ir/app/com.arad.app.sahoma/?l=fa
+##############################################################
+ad_show_campaign_author_name
+پیکلاد بنری
+ad_show_campaign_author_user_id
+مصطفی موذن
+ad_click_counter
+792
+ad_show_campaign_total_budget
+0
+ad_show_counter
+1019816
+ad_show_campaign_type
+کمپین بنری
+ad_show_campaign_landing_page_url
+https://www.pcloudiran.com/
+##############################################################
+ad_show_campaign_author_name
+معرفی هشتاد - بنری
+ad_show_campaign_author_user_id
+هماپلاس (آگهی دهنده)
+ad_click_counter
+2321
+ad_show_campaign_total_budget
+40000000
+ad_show_counter
+6340268
+ad_show_campaign_type
+کمپین بنری
+ad_show_campaign_landing_page_url
+http://8tad.ir?utm_source=8tad.ir&utm_campaign=branding&utm_medium=clickads
+##############################################################
+ad_show_campaign_author_name
+فرازین
+ad_show_campaign_author_user_id
+Mohsen Arabsorkhi
+ad_click_counter
+869
+ad_show_campaign_total_budget
+19708800
+ad_show_counter
+3736612
+ad_show_campaign_type
+کمپین بنری
+ad_show_campaign_landing_page_url
+http://www.faraazin.ir/
+##############################################################
+ad_show_campaign_author_name
+کمپین سفیدی مو 5040
+ad_show_campaign_author_user_id
+حمید باغبانی
+ad_click_counter
+4712
+ad_show_campaign_total_budget
+19266800
+ad_show_counter
+9969128
+ad_show_campaign_type
+کمپین بنری
+ad_show_campaign_landing_page_url
+https://goo.gl/FDL53R
+##############################################################
+ad_show_campaign_author_name
+چروک 5040
+ad_show_campaign_author_user_id
+حمید باغبانی
+ad_click_counter
+1127
+ad_show_campaign_total_budget
+18329600
+ad_show_counter
+1091449
+ad_show_campaign_type
+کمپین بنری
+ad_show_campaign_landing_page_url
+http://www.5040.ir/instant-anti-wrinkle-cream.html?site=hashtad2&type=3
+##############################################################
+ad_show_campaign_author_name
+ریزش موی 5040
+ad_show_campaign_author_user_id
+حمید باغبانی
+ad_click_counter
+4097
+ad_show_campaign_total_budget
+13574800
+ad_show_counter
+8015061
+ad_show_campaign_type
+کمپین بنری
+ad_show_campaign_landing_page_url
+https://goo.gl/3L1irX
+##############################################################
+ad_show_campaign_author_name
+ریزش مو 5040 بنری کلمات کلیدی
+ad_show_campaign_author_user_id
+حمید باغبانی
+ad_click_counter
+263
+ad_show_campaign_total_budget
+4554720
+ad_show_counter
+749131
+ad_show_campaign_type
+کمپین بنری
+ad_show_campaign_landing_page_url
+http://www.5040.ir/%D8%A8%D8%B3%D8%AA%D9%87_%D8%B6%D8%AF_%D8%B1%DB%8C%D8%B2%D8%B4_%D9%85%D9%88.html?site=hashtad2&type=70
+##############################################################
+ad_show_campaign_author_name
+فیلم نهنگ عنبر 2
+ad_show_campaign_author_user_id
+وحید مولایی
+ad_click_counter
+61
+ad_show_campaign_total_budget
+9905600
+ad_show_counter
+171584
+ad_show_campaign_type
+کمپین بنری
+ad_show_campaign_landing_page_url
+https://shop.upera.co/ref/83xT/7UxEu2si
+##############################################################
+ad_show_campaign_author_name
+فیلم هوس
+ad_show_campaign_author_user_id
+وحید مولایی
+ad_click_counter
+54
+ad_show_campaign_total_budget
+1421600
+ad_show_counter
+165850
+ad_show_campaign_type
+کمپین بنری
+ad_show_campaign_landing_page_url
+https://shop.upera.co/ref/83xT/8vVT0sz6
+##############################################################
+ad_show_campaign_author_name
+بنری 5040
+ad_show_campaign_author_user_id
+حمید باغبانی
+ad_click_counter
+831
+ad_show_campaign_total_budget
+19702000
+ad_show_counter
+9596015
+ad_show_campaign_type
+کمپین بنری
+ad_show_campaign_landing_page_url
+http://www.5040.ir/%D8%A8%D8%B3%D8%AA%D9%87_%D8%B6%D8%AF_%D8%B1%DB%8C%D8%B2%D8%B4_%D9%85%D9%88.html?site=hashtad2&type=100
+##############################################################
+ad_show_campaign_author_name
+کمپین کلید واژه اقتصاد نیوز
+ad_show_campaign_author_user_id
+آگهی دهنده
+ad_click_counter
+16
+ad_show_campaign_total_budget
+571840
+ad_show_counter
+155895
+ad_show_campaign_type
+کمپین بنری
+ad_show_campaign_landing_page_url
+http://www.digikala.com
+##############################################################
+ad_show_campaign_author_name
+الوپیک بنری
+ad_show_campaign_author_user_id
+sajad jamalian
+ad_click_counter
+208
+ad_show_campaign_total_budget
+52824000
+ad_show_counter
+1537925
+ad_show_campaign_type
+کمپین بنری
+ad_show_campaign_landing_page_url
+https://alopeyk.com/?utm_source=8tad&utm_medium=cpc&utm_campaign=alp000001
+##############################################################
+ad_show_campaign_author_name
+تک عروسی بنری
+ad_show_campaign_author_user_id
+سمیرا معراج
+ad_click_counter
+236
+ad_show_campaign_total_budget
+2681600
+ad_show_counter
+1091771
+ad_show_campaign_type
+کمپین بنری
+ad_show_campaign_landing_page_url
+https://takaroosi.com/
+##############################################################
+ad_show_campaign_author_name
+بنری مشهد
+ad_show_campaign_author_user_id
+sajad jamalian
+ad_click_counter
+20
+ad_show_campaign_total_budget
+1500000
+ad_show_counter
+13028
+ad_show_campaign_type
+کمپین بنری
+ad_show_campaign_landing_page_url
+https://alopeyk.com/register/courier?utm_source=8tad&utm_medium=cpc&utm_campaign=alp000013
+##############################################################
+ad_show_campaign_author_name
+بنری استخدام تهران
+ad_show_campaign_author_user_id
+sajad jamalian
+ad_click_counter
+104
+ad_show_campaign_total_budget
+2500000
+ad_show_counter
+107210
+ad_show_campaign_type
+کمپین بنری
+ad_show_campaign_landing_page_url
+https://alopeyk.com/register/courier?utm_source=8tad&utm_medium=cpc&utm_campaign=alp000004
+##############################################################
+ad_show_campaign_author_name
+بنری استخدام کرج
+ad_show_campaign_author_user_id
+sajad jamalian
+ad_click_counter
+1
+ad_show_campaign_total_budget
+1500000
+ad_show_counter
+4830
+ad_show_campaign_type
+کمپین بنری
+ad_show_campaign_landing_page_url
+https://alopeyk.com/register/courier?utm_source=8tad&utm_medium=cpc&utm_campaign=alp000012
+##############################################################
+ad_show_campaign_author_name
+بنری درخواست تهران 
+ad_show_campaign_author_user_id
+sajad jamalian
+ad_click_counter
+58
+ad_show_campaign_total_budget
+2000000
+ad_show_counter
+84600
+ad_show_campaign_type
+کمپین بنری
+ad_show_campaign_landing_page_url
+https://alopeyk.com/?utm_source=8tad&utm_medium=cpc&utm_campaign=alp000001
+##############################################################
+ad_show_campaign_author_name
+بنری درخواست کرج
+ad_show_campaign_author_user_id
+sajad jamalian
+ad_click_counter
+1
+ad_show_campaign_total_budget
+1000000
+ad_show_counter
+2630
+ad_show_campaign_type
+کمپین بنری
+ad_show_campaign_landing_page_url
+https://alopeyk.com/?utm_source=8tad&utm_medium=cpc&utm_campaign=alp000001
+##############################################################
+ad_show_campaign_author_name
+کمپین موتور جستجو
+ad_show_campaign_author_user_id
+آگهی دهنده
+ad_click_counter
+8
+ad_show_campaign_total_budget
+0
+ad_show_counter
+30
+ad_show_campaign_type
+کمپین موتورهای جستجو
+ad_show_campaign_landing_page_url
+http://www.digiato.com
+##############################################################
+ad_show_campaign_author_name
+کمپین آزمون پرداز - موتور جستجو
+ad_show_campaign_author_user_id
+هماپلاس (آگهی دهنده)
+ad_click_counter
+145
+ad_show_campaign_total_budget
+9832000
+ad_show_counter
+4175
+ad_show_campaign_type
+کمپین موتورهای جستجو
+ad_show_campaign_landing_page_url
+http://www.azpar.com/
+##############################################################
+ad_show_campaign_author_name
+ضد ریزش مو 5040
+ad_show_campaign_author_user_id
+حمید باغبانی
+ad_click_counter
+49
+ad_show_campaign_total_budget
+9934400
+ad_show_counter
+2308
+ad_show_campaign_type
+کمپین موتورهای جستجو
+ad_show_campaign_landing_page_url
+http://www.5040.ir/%D8%A8%D8%B3%D8%AA%D9%87_%D8%B6%D8%AF_%D8%B1%DB%8C%D8%B2%D8%B4_%D9%85%D9%88.html?site=hashtad2&type=75
+##############################################################
+ad_show_campaign_author_name
+کمپین کلمات کلیدی
+ad_show_campaign_author_user_id
+مدیر کل سامانه
+ad_click_counter
+7
+ad_show_campaign_total_budget
+482000
+ad_show_counter
+211
+ad_show_campaign_type
+کمپین موتورهای جستجو
+ad_show_campaign_landing_page_url
+http://www.digikala.com
+##############################################################
+ad_show_campaign_author_name
+سفیدی مو 5040
+ad_show_campaign_author_user_id
+حمید باغبانی
+ad_click_counter
+1
+ad_show_campaign_total_budget
+5000000
+ad_show_counter
+90
+ad_show_campaign_type
+کمپین موتورهای جستجو
+ad_show_campaign_landing_page_url
+http://www.5040.ir/2260005-black-hair.html?site=hashtad2&type=75
+##############################################################
+ad_show_campaign_author_name
+ضد چروک 5040
+ad_show_campaign_author_user_id
+حمید باغبانی
+ad_click_counter
+1
+ad_show_campaign_total_budget
+5000000
+ad_show_counter
+58
+ad_show_campaign_type
+کمپین موتورهای جستجو
+ad_show_campaign_landing_page_url
+http://www.5040.ir/instant-anti-wrinkle-cream.html?site=hashtad2&type=75
+##############################################################
+ad_show_campaign_author_name
+الو پیک کلمات کلیدی
+ad_show_campaign_author_user_id
+sajad jamalian
+ad_click_counter
+0
+ad_show_campaign_total_budget
+5000000
+ad_show_counter
+20
+ad_show_campaign_type
+کمپین موتورهای جستجو
+ad_show_campaign_landing_page_url
+https://blog.alopeyk.com/%D8%A8%D8%A7-%D8%A7%D9%84%D9%88%D9%BE%DB%8C%DA%A9%D8%8C-%D9%87%D8%B2%DB%8C%D9%86%D9%87-%D9%87%D8%A7%DB%8C-%D8%A7%D8%B1%D8%B3%D8%A7%D9%84%D9%85-10-%D8%A8%D8%B1%D8%A7%D8%A8%D8%B1-%DA%A9%D9%85%D8%AA/?utm_source=8tad&utm_medium=cpc&ut
+##############################################################
+ad_show_campaign_author_name
+مشاوره مالیاتی کلمات کلیدی
+ad_show_campaign_author_user_id
+مسعود گودرزی
+ad_click_counter
+2
+ad_show_campaign_total_budget
+1000000
+ad_show_counter
+324
+ad_show_campaign_type
+کمپین موتورهای جستجو
+ad_show_campaign_landing_page_url
+http://taxationir.com/2018/02/03/%D8%A8%D8%B1%D8%A7%DB%8C-%D8%A7%D9%86%D8%AA%D8%AE%D8%A7%D8%A8-%DB%8C%DA%A9-%D9%88%DA%A9%DB%8C%D9%84-%D9%85%D8%A7%D9%84%DB%8C%D8%A7%D8%AA%DB%8C%D8%8C-%DA%86%D9%87-%D9%86%DA%A9%D8%A7%D8%AA%DB%8C-%D8%B1/
+##############################################################
+ad_show_campaign_author_name
+فرازین کلمات کلیدی
+ad_show_campaign_author_user_id
+Mohsen Arabsorkhi
+ad_click_counter
+0
+ad_show_campaign_total_budget
+2000000
+ad_show_counter
+207
+ad_show_campaign_type
+کمپین موتورهای جستجو
+ad_show_campaign_landing_page_url
+http://www.faraazin.ir/
+##############################################################
+ad_show_campaign_author_name
+ساهوما - موبایلی
+ad_show_campaign_author_user_id
+هماپلاس (آگهی دهنده)
+ad_click_counter
+4522
+ad_show_campaign_total_budget
+8688000
+ad_show_counter
+986251
+ad_show_campaign_type
+کمپین موبایلی
+ad_show_campaign_landing_page_url
+https://cafebazaar.ir/app/com.arad.app.sahoma/?l=fa
+##############################################################
+ad_show_campaign_author_name
+خبررسان هشتگ - موبایلی
+ad_show_campaign_author_user_id
+هماپلاس (آگهی دهنده)
+ad_click_counter
+8418
+ad_show_campaign_total_budget
+8506000
+ad_show_counter
+970209
+ad_show_campaign_type
+کمپین موبایلی
+ad_show_campaign_landing_page_url
+https://cafebazaar.ir/app/com.homaplus.hashtag.hashtag/
+##############################################################
+ad_show_campaign_author_name
+موسسه حسابرسی آزمون پرداز - موبایلی
+ad_show_campaign_author_user_id
+هماپلاس (آگهی دهنده)
+ad_click_counter
+4581
+ad_show_campaign_total_budget
+8572000
+ad_show_counter
+1002066
+ad_show_campaign_type
+کمپین موبایلی
+ad_show_campaign_landing_page_url
+http://www.azpar.com/?utm_source=8tad.ir&utm_campaign=branding&utm_medium=mobileclickads
+##############################################################
+ad_show_campaign_author_name
+معرفی هشتاد - موبایلی
+ad_show_campaign_author_user_id
+هماپلاس (آگهی دهنده)
+ad_click_counter
+154
+ad_show_campaign_total_budget
+1718000
+ad_show_counter
+32127
+ad_show_campaign_type
+کمپین موبایلی
+ad_show_campaign_landing_page_url
+http://8tad.ir?utm_source=8tad.ir&utm_campaign=branding&utm_medium=mobileclickads
+##############################################################
+ad_show_campaign_author_name
+معرفی کانال تلگرافی
+ad_show_campaign_author_user_id
+هماپلاس (آگهی دهنده)
+ad_click_counter
+802
+ad_show_campaign_total_budget
+8576000
+ad_show_counter
+29849
+ad_show_campaign_type
+کمپین موبایلی
+ad_show_campaign_landing_page_url
+https://t.me/tlgrphy
+##############################################################
+ad_show_campaign_author_name
+موبایلی سفیدی موی 5040
+ad_show_campaign_author_user_id
+حمید باغبانی
+ad_click_counter
+1002
+ad_show_campaign_total_budget
+18200000
+ad_show_counter
+255756
+ad_show_campaign_type
+کمپین موبایلی
+ad_show_campaign_landing_page_url
+https://goo.gl/FDL53R
+##############################################################
+ad_show_campaign_author_name
+موبایلی چروک 5040
+ad_show_campaign_author_user_id
+حمید باغبانی
+ad_click_counter
+90
+ad_show_campaign_total_budget
+19870000
+ad_show_counter
+14458
+ad_show_campaign_type
+کمپین موبایلی
+ad_show_campaign_landing_page_url
+http://5040.ir/smsbot.php?text=دریافت،%20مشاوره%20رایگان%20،%20برای%20رفع،%20چروک%20صورت.&number=10005040
+##############################################################
+ad_show_campaign_author_name
+موبایلی ریزش مو 5040
+ad_show_campaign_author_user_id
+حمید باغبانی
+ad_click_counter
+3322
+ad_show_campaign_total_budget
+4386000
+ad_show_counter
+653437
+ad_show_campaign_type
+کمپین موبایلی
+ad_show_campaign_landing_page_url
+https://goo.gl/3L1irX
+##############################################################
+ad_show_campaign_author_name
+الوپیک موبایلی
+ad_show_campaign_author_user_id
+sajad jamalian
+ad_click_counter
+158
+ad_show_campaign_total_budget
+21644800
+ad_show_counter
+32091
+ad_show_campaign_type
+کمپین موبایلی
+ad_show_campaign_landing_page_url
+https://alopeyk.com/?utm_source=8tad&utm_medium=cpc&utm_campaign=alp000001
+##############################################################
+ad_show_campaign_author_name
+موبایلی مشهد
+ad_show_campaign_author_user_id
+sajad jamalian
+ad_click_counter
+27
+ad_show_campaign_total_budget
+1500000
+ad_show_counter
+3760
+ad_show_campaign_type
+کمپین موبایلی
+ad_show_campaign_landing_page_url
+https://alopeyk.com/register/courier?utm_source=8tad&utm_medium=cpc&utm_campaign=alp000013
+##############################################################
+ad_show_campaign_author_name
+موبایلی استخدام تهران
+ad_show_campaign_author_user_id
+sajad jamalian
+ad_click_counter
+93
+ad_show_campaign_total_budget
+2500000
+ad_show_counter
+19724
+ad_show_campaign_type
+کمپین موبایلی
+ad_show_campaign_landing_page_url
+https://alopeyk.com/register/courier?utm_source=8tad&utm_medium=cpc&utm_campaign=alp000004
+##############################################################
+ad_show_campaign_author_name
+موبایلی استخدام کرج
+ad_show_campaign_author_user_id
+sajad jamalian
+ad_click_counter
+16
+ad_show_campaign_total_budget
+1500000
+ad_show_counter
+1765
+ad_show_campaign_type
+کمپین موبایلی
+ad_show_campaign_landing_page_url
+https://alopeyk.com/register/courier?utm_source=8tad&utm_medium=cpc&utm_campaign=alp000012
+##############################################################
+ad_show_campaign_author_name
+موبایلی درخواست تهران
+ad_show_campaign_author_user_id
+sajad jamalian
+ad_click_counter
+69
+ad_show_campaign_total_budget
+2000000
+ad_show_counter
+15838
+ad_show_campaign_type
+کمپین موبایلی
+ad_show_campaign_landing_page_url
+https://alopeyk.com/?utm_source=8tad&utm_medium=cpc&utm_campaign=alp000001
+##############################################################
+ad_show_campaign_author_name
+موبایلی درخواست کرج
+ad_show_campaign_author_user_id
+sajad jamalian
+ad_click_counter
+2
+ad_show_campaign_total_budget
+1000000
+ad_show_counter
+513
+ad_show_campaign_type
+کمپین موبایلی
+ad_show_campaign_landing_page_url
+https://alopeyk.com/?utm_source=8tad&utm_medium=cpc&utm_campaign=alp000001
+##############################################################
+ad_show_campaign_author_name
+کمپین همسان 1
+ad_show_campaign_author_user_id
+آگهی دهنده
+ad_click_counter
+63
+ad_show_campaign_total_budget
+12000
+ad_show_counter
+133766
+ad_show_campaign_type
+کمپین محتوایی / همسان
+ad_show_campaign_landing_page_url
+http://www.digikala.com
+##############################################################
+ad_show_campaign_author_name
+کمپین همسان 2
+ad_show_campaign_author_user_id
+آگهی دهنده
+ad_click_counter
+47
+ad_show_campaign_total_budget
+29600
+ad_show_counter
+133755
+ad_show_campaign_type
+کمپین محتوایی / همسان
+ad_show_campaign_landing_page_url
+http://www.digikala.com
+##############################################################
+ad_show_campaign_author_name
+کمپین همسان 3
+ad_show_campaign_author_user_id
+مدیر کل سامانه
+ad_click_counter
+7
+ad_show_campaign_total_budget
+400
+ad_show_counter
+10830
+ad_show_campaign_type
+کمپین محتوایی / همسان
+ad_show_campaign_landing_page_url
+http://www.digikala.com
+##############################################################
+ad_show_campaign_author_name
+کمپین همسان 4
+ad_show_campaign_author_user_id
+آگهی دهنده
+ad_click_counter
+71
+ad_show_campaign_total_budget
+15200
+ad_show_counter
+133055
+ad_show_campaign_type
+کمپین محتوایی / همسان
+ad_show_campaign_landing_page_url
+http://www.filimo.com
+##############################################################
+ad_show_campaign_author_name
+کمپین همسان 5 
+ad_show_campaign_author_user_id
+آگهی دهنده
+ad_click_counter
+83
+ad_show_campaign_total_budget
+800
+ad_show_counter
+87293
+ad_show_campaign_type
+کمپین محتوایی / همسان
+ad_show_campaign_landing_page_url
+http://www.filimo.com
+##############################################################
+ad_show_campaign_author_name
+5040 همسان چروک
+ad_show_campaign_author_user_id
+حمید باغبانی
+ad_click_counter
+4467
+ad_show_campaign_total_budget
+10000000
+ad_show_counter
+7028204
+ad_show_campaign_type
+کمپین محتوایی / همسان
+ad_show_campaign_landing_page_url
+http://www.5040.ir/instant-anti-wrinkle-cream.html?site=hashtad2&type=50
+##############################################################
+ad_show_campaign_author_name
+ریزش مو همسان 5040
+ad_show_campaign_author_user_id
+حمید باغبانی
+ad_click_counter
+4674
+ad_show_campaign_total_budget
+8500800
+ad_show_counter
+7108104
+ad_show_campaign_type
+کمپین محتوایی / همسان
+ad_show_campaign_landing_page_url
+http://www.5040.ir/%D8%A8%D8%B3%D8%AA%D9%87_%D8%B6%D8%AF_%D8%B1%DB%8C%D8%B2%D8%B4_%D9%85%D9%88.html?site=hashtad2&type=50
+##############################################################
+ad_show_campaign_author_name
+سفیدی مو 5040 همسان
+ad_show_campaign_author_user_id
+حمید باغبانی
+ad_click_counter
+4176
+ad_show_campaign_total_budget
+10225600
+ad_show_counter
+7177674
+ad_show_campaign_type
+کمپین محتوایی / همسان
+ad_show_campaign_landing_page_url
+http://www.5040.ir/2260005-black-hair.html?site=hashtad2&type=50
+##############################################################
+ad_show_campaign_author_name
+شهرزاد قسمت سوم
+ad_show_campaign_author_user_id
+مدیر کل سامانه
+ad_click_counter
+2498
+ad_show_campaign_total_budget
+6627200
+ad_show_counter
+1684453
+ad_show_campaign_type
+کمپین محتوایی / همسان
+ad_show_campaign_landing_page_url
+https://shop.upera.co/ref/83xT/99IRloop
+##############################################################
+ad_show_campaign_author_name
+الوپیک همسان
+ad_show_campaign_author_user_id
+sajad jamalian
+ad_click_counter
+379
+ad_show_campaign_total_budget
+4324000
+ad_show_counter
+671312
+ad_show_campaign_type
+کمپین محتوایی / همسان
+ad_show_campaign_landing_page_url
+https://alopeyk.com/?utm_source=8tad&utm_medium=cpc&utm_campaign=alp000001
+##############################################################
+ad_show_campaign_author_name
+الوپیک همسان (درخواست)
+ad_show_campaign_author_user_id
+sajad jamalian
+ad_click_counter
+6
+ad_show_campaign_total_budget
+49988000
+ad_show_counter
+69464
+ad_show_campaign_type
+کمپین محتوایی / همسان
+ad_show_campaign_landing_page_url
+https://alopeyk.com/?utm_source=8tad&utm_medium=cpc&utm_campaign=alp000001
+##############################################################
+ad_show_campaign_author_name
+تک عروسی همسان
+ad_show_campaign_author_user_id
+سمیرا معراج
+ad_click_counter
+4722
+ad_show_campaign_total_budget
+2998400
+ad_show_counter
+1417852
+ad_show_campaign_type
+کمپین محتوایی / همسان
+ad_show_campaign_landing_page_url
+http://takaroosi.com
+##############################################################
+ad_show_campaign_author_name
+مشاوره مالیاتی همسان
+ad_show_campaign_author_user_id
+مسعود گودرزی
+ad_click_counter
+616
+ad_show_campaign_total_budget
+1840000
+ad_show_counter
+2785420
+ad_show_campaign_type
+کمپین محتوایی / همسان
+ad_show_campaign_landing_page_url
+http://taxationir.com/
+##############################################################
+ad_show_campaign_author_name
+پارسی جو همسان
+ad_show_campaign_author_user_id
+Mostafa Baghbeheshti
+ad_click_counter
+18
+ad_show_campaign_total_budget
+19980800
+ad_show_counter
+90524
+ad_show_campaign_type
+کمپین محتوایی / همسان
+ad_show_campaign_landing_page_url
+http://pblog.parsijoo.ir/news/articles/موشن-ویدیوی-معرفی-جستجوگر-پارسی‌جو-قسمت-اول?utm_source=8tad&utm_medium=cpc&utm_campaign=native
+##############################################################
+ad_show_campaign_author_name
+همسان مشهد
+ad_show_campaign_author_user_id
+sajad jamalian
+ad_click_counter
+41
+ad_show_campaign_total_budget
+2000000
+ad_show_counter
+98396
+ad_show_campaign_type
+کمپین محتوایی / همسان
+ad_show_campaign_landing_page_url
+https://alopeyk.com/register/courier?utm_source=8tad&utm_medium=cpc&utm_campaign=alp000013
+##############################################################
+ad_show_campaign_author_name
+همسان استخدام تهران
+ad_show_campaign_author_user_id
+sajad jamalian
+ad_click_counter
+255
+ad_show_campaign_total_budget
+4586000
+ad_show_counter
+683200
+ad_show_campaign_type
+کمپین محتوایی / همسان
+ad_show_campaign_landing_page_url
+https://alopeyk.com/register/courier?utm_source=8tad&utm_medium=cpc&utm_campaign=alp000004
+##############################################################
+ad_show_campaign_author_name
+همسان استخدام کرج
+ad_show_campaign_author_user_id
+sajad jamalian
+ad_click_counter
+21
+ad_show_campaign_total_budget
+3000000
+ad_show_counter
+44640
+ad_show_campaign_type
+کمپین محتوایی / همسان
+ad_show_campaign_landing_page_url
+https://alopeyk.com/register/courier?utm_source=8tad&utm_medium=cpc&utm_campaign=alp000012
+##############################################################
+ad_show_campaign_author_name
+همسان درخواست تهران
+ad_show_campaign_author_user_id
+sajad jamalian
+ad_click_counter
+233
+ad_show_campaign_total_budget
+2744000
+ad_show_counter
+925769
+ad_show_campaign_type
+کمپین محتوایی / همسان
+ad_show_campaign_landing_page_url
+https://alopeyk.com/?utm_source=8tad&utm_medium=cpc&utm_campaign=alp000001
+##############################################################
+ad_show_campaign_author_name
+همسان درخواست کرج
+ad_show_campaign_author_user_id
+sajad jamalian
+ad_click_counter
+5
+ad_show_campaign_total_budget
+1000000
+ad_show_counter
+25340
+ad_show_campaign_type
+کمپین محتوایی / همسان
+ad_show_campaign_landing_page_url
+https://alopeyk.com/?utm_source=8tad&utm_medium=cpc&utm_campaign=alp000001
+##############################################################
+ad_show_campaign_author_name
+کمپین تعاملی 5040
+ad_show_campaign_author_user_id
+حمید باغبانی
+ad_click_counter
+523
+ad_show_campaign_total_budget
+9395200
+ad_show_counter
+550995
+ad_show_campaign_type
+کمپین Iframe
+ad_show_campaign_landing_page_url
+http://www.5040.ir/
+##############################################################

@@ -1,0 +1,140 @@
+{% extends "layout.html" %}
+{% from 'macros.html' import render_form, render_page_title, render_transaction_alert %}
+
+{% block title %}
+    {{ configs.page_title | default_title }}
+{% endblock %}
+
+{% block css %}
+     <link href="{{ url_for('static', filename='dashboards/css/persian-datepicker.min.css') }}" rel="stylesheet"
+          type="text/css" media="screen"/>
+{% endblock %}
+
+{% block content %}
+    {{ render_page_title(configs.module, configs.url_index, configs.action) }}
+
+    {% if message %}
+        {{ render_transaction_alert(message.type,message.message) }}
+    {% endif %}
+
+    <div class="col-md-12">
+            <div class="grid simple vertical blue">
+                <div class="grid-title no-border">
+                    <h4>گزارش تاریخ</h4>
+                </div>
+                <div class="grid-body no-border">
+                    <div class="row-fluid">
+
+                        <form action="{{ url_for('advertiser_dashboard') }}" method="post">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                            <div id="report-range-selector">
+                                <input type="text" value="{{ from_date }}" name="from_date" class="input-persian-calendar"/>
+
+                                <span>تا</span>
+
+                                <input type="text" value="{{ to_date }}" name="to_date" class="input-persian-calendar"/>
+
+                                <button type="submit" class="btn btn-success btn-cons">نمایش گزارش</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+    </div>
+
+
+    <!-- BEGIN DASHBOARD TILES -->
+    <div class="col-md-12">
+        <div class="col-md-3 col-vlg-3 col-sm-6">
+            <div class="tiles green m-b-10">
+                <div class="tiles-body">
+                    <div class="controller">
+                        <a href="javascript:;" class="reload"></a>
+                        <a href="javascript:;" class="remove"></a>
+                    </div>
+                    <h4 class="no-margin semi-bold">کل نمایش نمودار</h4>
+                    <div class="heading"><span class="animate-number" data-value="{{ dashboard["shows_count"] }}"
+                                               data-animation-duration="1000">0</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-vlg-3 col-sm-6">
+            <div class="tiles blue m-b-10">
+                <div class="tiles-body">
+                    <div class="controller">
+                        <a href="javascript:;" class="reload"></a>
+                        <a href="javascript:;" class="remove"></a>
+                    </div>
+                    <h4 class="no-margin semi-bold">کل کلیک نمودار</h4>
+                    <div class="heading"><span class="animate-number" data-value="{{ dashboard["clicks_count"] }}"
+                                               data-animation-duration="1000">0</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-vlg-3 col-sm-6">
+            <div class="tiles purple m-b-10">
+                <div class="tiles-body">
+                    <div class="controller">
+                        <a href="javascript:;" class="reload"></a>
+                        <a href="javascript:;" class="remove"></a>
+                    </div>
+                    <h4 class="no-margin semi-bold">کمپین های فعال</h4>
+                    <div class="heading"><span class="animate-number" data-value="{{ dashboard["campaigns_count"] }}"
+                                               data-animation-duration="1000">0</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-vlg-3 col-sm-6">
+            <div class="tiles red m-b-10">
+                <div class="tiles-body">
+                    <div class="controller">
+                        <a href="javascript:;" class="reload"></a>
+                        <a href="javascript:;" class="remove"></a>
+                    </div>
+                    <h4 class="no-margin semi-bold">بودجه باقی مانده </h4>
+                    <div class="heading"><span class="animate-number" data-value="{{ dashboard["remaining_budget"] }}"
+                                               data-animation-duration="1000">0</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END DASHBOARD TILES -->
+
+    <div class="row">
+        {% if clicks or shows %}
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div dir="ltr" id="container" style="height: 400px; min-width: 310px"></div>
+            </div>
+        {% else %}
+            <p class="text-center p-t-100">
+                اطلاعاتی برای نمایش وجود ندارد.
+            </p>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script src="{{ url_for('static', filename='dashboards/js/persian-date.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='dashboards/js/persian-datepicker.min.js') }}"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".input-persian-calendar").persianDatepicker({
+                format: 'YYYY-MM-DD',
+                calendar:{
+                    persian: {
+                        locale: 'en'
+                    }
+                }
+            });
+        });
+    </script>
+
+
+    {% if clicks or shows %}
+        {% with threshold='threshold: null,' %}
+            {% include 'dashboard/chart/column.html' %}
+        {% endwith %}
+    {% endif %}
+{% endblock %}

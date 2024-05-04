@@ -1,0 +1,449 @@
+{% extends "layout.html" %}
+{% from 'macros.html' import render_form, render_page_title %}
+
+{% block title %}
+    {{ configs.page_title | default_title }}
+{% endblock %}
+
+{% block css %}
+    <!-- BEGIN PLUGIN CSS -->
+    <link href="{{ url_for('static', filename='assets/plugins/font-awesome/css/font-awesome.css') }}" rel="stylesheet"
+          type="text/css"/>
+    <link href="{{ url_for('static', filename='assets/plugins/bootstrap-select2/select2.css') }}" rel="stylesheet"
+          type="text/css" media="screen"/>
+    <link href="{{ url_for('static', filename='assets/plugins/jquery-datatable/css/jquery.dataTables.css') }}"
+          rel="stylesheet"
+          type="text/css"/>
+    <link href="{{ url_for('static', filename='assets/plugins/datatables-responsive/css/datatables.responsive.css') }}"
+          rel="stylesheet"
+          type="text/css" media="screen"/>
+    <!-- END PLUGIN CSS -->
+{% endblock %}
+
+{% block content %}
+    {{ render_page_title(configs.module, configs.url_index, configs.action) }}
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="grid simple ">
+                <div class="grid-title">
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse"></a>
+                        <a href="#grid-config" data-toggle="modal" class="config"></a>
+                        <a href="javascript:;" class="reload"></a>
+                        <a href="javascript:;" class="remove"></a>
+                    </div>
+                </div>
+                <div class="grid-body ">
+                    <form action="{{ url_for(configs.url_index) }}" method="POST">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                        <table class="table table-striped table-condensed" id="example">
+                            <thead>
+                            <tr>
+                                <th>
+
+                                </th>
+                                <th>
+                                    نام و نام خانوادگی
+                                </th>
+
+                                <th>
+                                    ایمیل
+                                </th>
+
+                                <th>
+                                    تلفن تماس
+                                </th>
+
+                                <th>
+                                    نوع حساب
+                                </th>
+                                <th>
+                                    شناسه شبا
+                                </th>
+
+                                <th>
+                                    وضعیت حساب
+                                </th>
+
+                                <th class="defaultSort">
+                                    آخرین ورود
+                                </th>
+
+                                <th style="width:160px;">
+                                    عملیات
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {% for record in result %}
+                                <tr>
+                                    <td class="v-align-middle">
+                                        <div class="checkbox check-default">
+                                            <input type="checkbox" value="{{ record[configs.id_name] }}"
+                                                   id="checkbox{{ record[configs.id_name] }}">
+                                            <label for="checkbox{{ record[configs.id_name] }}"></label>
+                                        </div>
+                                    </td>
+
+                                    <td class="v-align-middle">
+                                        <a target="_blank"
+                                           href="{{ url_for('user', user_id = record[configs.id_name] ) }}"><span
+                                                class="muted">{{ record["user_fullname"] }}</span></a>
+                                    </td>
+
+                                    <td class="v-align-middle">
+                                        <span class="muted">{{ record["user_email"] }}</span>
+                                    </td>
+
+                                    <td class="v-align-middle">
+                                        <span class="muted">{{ record["user_phone"] }}</span>
+                                    </td>
+
+                                    <td class="v-align-middle">
+                                        <span class="muted">{{ record["user_account_type"] }}</span>
+                                    </td>
+
+                                    <td class="v-align-middle text-center">
+                                        <span class="muted">{% if record["user_bank_account"]["shaba_code"] is not none %}
+                                            {{ record["user_bank_account"]["shaba_code"] }} {% else %} تعیین
+                                            نشده {% endif %}</span>
+                                    </td>
+
+                                    <td class="v-align-middle text-center">
+                                        <span class="muted {% if record["user_active"] %} text-success{% else %} text-error{% endif %}">{{ record["user_active"] | boolean_status | safe }}</span>
+                                    </td>
+
+                                    <td dir="ltr" class="v-align-middle text-right">
+                                        {% if record["user_current_login_at"] != "None" %}
+                                            <span class="muted">{{ record["user_current_login_at"] | gregorian_date_to_persian_date_local | enToPersianNumb }}</span>
+                                        {% endif %}
+                                    </td>
+
+                                    <td class="actions_column">
+                                        <div class="btn-group ">
+                                            <a href="{{ url_for(configs.url_edit, id=record[configs.id_name]) }}"
+                                               class="btn btn-white btn-demo-space">
+                                                ویرایش
+                                            </a>
+
+                                            <a class="btn btn-white dropdown-toggle btn-demo-space"
+                                               data-toggle="dropdown"
+                                               href="">
+                                            <span class="caret">
+
+                                            </span>
+                                            </a>
+                                            <ul class="dropdown-menu row_actions dropdown-menu-right clearfix">
+                                                <li>
+                                                    <a
+                                                            href="{{ url_for('financial_transaction', user_id=record[configs.id_name]) }}">
+                                                        تراکنش های مالی
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a data-user="{{ record["user_fullname"] }}"
+                                                       data-id="{{ record[configs.id_name] }}" class="charge-btn"
+                                                       href="javascript:void(0)">شارژ کیف پول</a>
+                                                </li>
+                                                <li>
+                                                    <a data-user="{{ record["user_fullname"] }}"
+                                                       data-id="{{ record[configs.id_name] }}" class="roles-btn"
+                                                       href="javascript:void(0)">مجوزهای دسترسی</a>
+                                                </li>
+                                                <li>
+
+
+                                                    <a data-user="{{ record["user_fullname"] }}"
+                                                       data-id="{{ record[configs.id_name] }}" class="financial-btn"
+                                                       href="javascript:void(0)">اطلاعات مالی</a>
+                                                </li>
+
+                                                <li>
+                                                    <a data-user="{{ record["user_fullname"] }}"
+                                                       data-id="{{ record[configs.id_name] }}" href="javascript:void(0)"
+                                                       class="credit-btn">کیف پول کاربر</a>
+                                                </li>
+
+                                                {% if record["user_token"] %}
+                                                    <li>
+                                                        <a href="{{ url_for('token_login', token=record["user_token"]) }}">ورود
+                                                            از دید کاربر</a>
+                                                    </li>
+                                                {% endif %}
+
+                                                <li>
+                                                    <button class="btn btn-default btn-md btn-danger btn-block"
+                                                            value="{{ record[configs.id_name] }}"
+                                                            name="action"
+                                                            type="submit">
+                                                        حذف
+                                                    </button>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+
+                                </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="financial-modal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">اطلاعات مالی</h4>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">بستن</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+
+    <div id="roles-modal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">مجوزهای دسترسی</h4>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary roles-btn-submit">ثبت تغییرات</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">بستن</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+    <div id="credit-modal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">کیف پول</h4>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">بستن</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+    <div id="charge-modal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">شارژ کیف پول</h4>
+                </div>
+                <div class="modal-body">
+                    {{ render_form(form, action_url='#', action_text='ثبت تراکنش',btn_class='btn btn-primary btn-cons') }}
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+{% endblock %}
+
+{% block js %}
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <script src="{{ url_for('static', filename='assets/plugins/bootstrap-select2/select2.js') }}"
+            type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='assets/plugins/bootstrap-select2/select2_locale_fa.js') }}"
+            type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='assets/plugins/jquery-datatable/js/jquery.dataTables.min.js') }}"
+            type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='assets/plugins/jquery-datatable/extra/js/dataTables.tableTools.min.js') }}"
+            type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='assets/plugins/datatables-responsive/js/datatables.responsive.js') }}"
+            type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='assets/plugins/datatables-responsive/js/lodash.min.js') }}"
+            type="text/javascript"></script>
+    <!-- END PAGE LEVEL JS INIT -->
+    <script src="{{ url_for('static', filename='assets/js/datatables.js') }}"
+            type="text/javascript"></script>
+    <!-- END JAVASCRIPTS -->
+
+
+    <script type="text/javascript">
+        var csrf_token = "{{ csrf_token() }}";
+        $.ajaxSetup({
+            beforeSend: function (xhr, settings) {
+                if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrf_token);
+                }
+            }
+        });
+    </script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(document).on('click', ".financial-btn", function () {
+                $("#financial-modal .modal-body").html('');
+                $("#financial-modal .modal-title").text('اطلاعات مالی ' + $(this).attr("data-user"));
+                $.ajax({
+                    url: '/dashboard/admin/user/' + $(this).attr("data-id") + '/financial', success: function (result) {
+                        $("#financial-modal .modal-body").html(result);
+                    }
+                });
+                $('#financial-modal').modal('show');
+            });
+        })
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(document).on('click', ".credit-btn", function () {
+                $("#credit-modal .modal-body").html('');
+                $("#credit-modal .modal-title").text('کیف پول ' + $(this).attr("data-user"));
+                $.ajax({
+                    url: '/dashboard/user/' + $(this).attr("data-id") + '/credit', success: function (result) {
+                        result = '<h5> موجودی کیف پول ' + result + ' ریال است.</h5>';
+                        $("#credit-modal .modal-body").html(result);
+                    }
+                });
+                $('#credit-modal').modal('show');
+            });
+        })
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(document).on('click', ".roles-btn", function () {
+                $("#roles-modal .modal-body").html('');
+                $("#roles-modal .modal-title").text('مجوزهای دسترسی ' + $(this).attr("data-user"));
+                $.ajax({
+                    url: '/dashboard/admin/user/' + $(this).attr("data-id") + '/roles', success: function (result) {
+                        $("#roles-modal .modal-body").html(result);
+                    }
+                });
+                $(".roles-btn-submit").attr("data-id", $(this).attr("data-id"));
+                $('#roles-modal').modal('show');
+            });
+
+            $(document).on('click', ".roles-btn-submit", function () {
+                var serializedData = $("#roles-modal-form").serialize();
+                $.ajax({
+                    url: '/dashboard/admin/user/' + $(this).attr("data-id") + '/roles',
+                    type: "post",
+                    data: serializedData,
+                    success: function (result) {
+                        alert("مجوز دسترسی کاربر با موفقیت ویرایش شد.");
+                    }
+                });
+            });
+
+        })
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(document).on('click', ".charge-btn", function () {
+                $("#charge-modal form button").attr("data-id", $(this).attr("data-id"));
+                $("#charge-modal .modal-title").text('شارژ کیف پول ' + $(this).attr("data-user"));
+                $("#charge-modal form button").prop('disabled', false);
+                $("#charge-modal form input[name=amount]").val("");
+                $("#charge-modal form textarea[name=description]").val("");
+                $("#charge-modal form input[name=amount_status][value=deposit]").prop('checked', true);
+                var icon = $("#charge-modal form input[name=amount]").parent('.input-with-icon').children('i');
+                var parent = $("#charge-modal form input[name=amount]").parent('.input-with-icon');
+                icon.removeClass('fa fa-check').removeClass('fa fa-exclamation');
+                parent.removeClass('success-control').removeClass('error-control');
+                $('#charge-modal').modal('show');
+            });
+
+            $("#charge-modal form").submit(function (event) {
+                event.preventDefault();
+                $("#charge-modal form button").prop('disabled', true);
+                var serializedData = $(this).serialize();
+                $.ajax({
+                    url: '/dashboard/admin/user/' + $("#charge-modal form button").attr("data-id") + '/charge',
+                    type: "post",
+                    data: serializedData,
+                    success: function (result) {
+                        alert("کیف پول " + result + " ریال شارژ شد.");
+                    }
+                });
+
+            });
+
+
+        })
+    </script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            function commaSeparateNumber(val) {
+                while (/(\d+)(\d{3})/.test(val.toString())) {
+                    val = val.toString().replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
+                }
+                return val;
+            }
+
+            validateNumber = function (element, value) {
+                if (!/^\d+$/.test(value)) {
+                    var icon = $(element).parent('.input-with-icon').children('i');
+                    var parent = $(element).parent('.input-with-icon');
+                    icon.removeClass('fa fa-check').addClass('fa fa-exclamation');
+                    parent.removeClass('success-control').addClass('error-control');
+                } else {
+                    var icon = $(element).parent('.input-with-icon').children('i');
+                    var parent = $(element).parent('.input-with-icon');
+                    icon.removeClass("fa fa-exclamation").addClass('fa fa-check');
+                    parent.removeClass('error-control').addClass('success-control');
+                }
+            };
+
+            $("#charge-modal form input[name=amount]").keyup(function () {
+                var noCommas = $(this).val().replace(/,/g, '');
+                validateNumber(this, noCommas);
+                $(this).val(commaSeparateNumber(noCommas));
+            });
+
+            $("#charge-modal form input[name=amount]").val(commaSeparateNumber($("#charge-modal form input[name=amount]").val()));
+        });
+    </script>
+
+
+
+{% endblock %}

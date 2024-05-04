@@ -1,0 +1,255 @@
+<script src="{{ url_for('static', filename='dashboards/js/jdate.min.js') }}"></script>
+<script src="http://code.highcharts.com/stock/highstock.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        // Load the fonts
+        Highcharts.theme = {
+            colors: ["#01B5C0", "#7D5AAB", "#90ee7e", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee",
+                "#55BF3B", "#DF5353", "#7798BF", "#aaeeee"],
+            chart: {
+                backgroundColor: null,
+                style: {
+                    {#                        fontFamily: "Dosis, sans-serif"#}
+                }
+            },
+            title: {
+                style: {
+                    fontSize: '16px',
+                    fontWeight: 'bold',
+                    textTransform: 'uppercase'
+                }
+            },
+            tooltip: {
+                borderWidth: 0,
+                backgroundColor: 'rgba(219,219,216,0.8)',
+                shadow: false
+            },
+            legend: {
+                itemStyle: {
+                    fontWeight: 'bold',
+                    fontSize: '13px'
+                }
+            }
+        };
+
+        // Apply the theme
+        Highcharts.setOptions(Highcharts.theme);
+
+        Highcharts.setOptions({
+            global: {
+                Date: JDate
+            },
+            lang: {
+                months: ['فروردين', 'ارديبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'],
+                shortMonths: ['فروردين', 'ارديبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'],
+                weekdays: ["یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنج‌شنبه", "جمعه", "شنبه"],
+                rangeSelectorZoom: 'بزرگنمایی'
+            }
+
+        });
+
+        $('#container').highcharts('StockChart', {
+            rangeSelector: {
+                enabled:false,
+                inputEnabled: false,
+                buttons: [{
+                    type: 'month',
+                    count: 1,
+                    text: 'ماه 1'
+                }, {
+                    type: 'month',
+                    count: 3,
+                    text: 'ماه 3'
+                }, {
+                    type: 'month',
+                    count: 6,
+                    text: 'ماه 6'
+                }, {
+                    type: 'ytd',
+                    text: 'سالانه'
+                }, {
+                    type: 'year',
+                    count: 1,
+                    text: 'سال 1'
+                }, {
+                    type: 'all',
+                    text: 'همه'
+                }],
+
+                inputBoxBorderColor: 'gray',
+                inputBoxWidth: 120,
+                inputBoxHeight: 18,
+                inputStyle: {
+                    color: '#039',
+                    fontWeight: 'bold'
+                },
+                labelStyle: {
+                    color: '#505458',
+                    fontWeight: 'bold'
+                }
+            },
+
+            navigator: {
+                enabled: true,
+                xAxis: {
+                    labels: {
+                        style: {
+                            color: '#505458',
+                            fontWeight: 'bold'
+                        }
+                    }
+                }
+            },
+
+            scrollbar: {
+                enabled: false
+            },
+
+            yAxis: [
+                {
+                    gridLineWidth: 1,
+                    gridLineColor: '#4E5168',
+                    gridLineDashStyle: 'dash',
+                    labels: {
+                        format: '{value}',
+                        style: {
+                            fontWeight: 'bold',
+                            fontSize: '14px',
+                            color: Highcharts.getOptions().colors[0]
+                        }
+                    },
+                    title: {
+                        text: 'کلیک',
+                        style: {
+                            fontWeight: 'bold',
+                            fontSize: '14px',
+                            color: Highcharts.getOptions().colors[0]
+                        }
+                    },
+                    opposite: false,
+                    lineWidth: 1,
+                    lineColor: '#4E5168',
+                    min: 0
+                },
+                {
+                    gridLineWidth: 1,
+                    gridLineColor: '#4E5168',
+                    gridLineDashStyle: 'dash',
+                    labels: {
+                        format: '{value}',
+                        style: {
+                            fontWeight: 'bold',
+                            fontSize: '14px',
+                            color: Highcharts.getOptions().colors[1]
+                        }
+                    },
+                    title: {
+                        text: 'نمایش',
+                        style: {
+                            fontWeight: 'bold',
+                            fontSize: '14px',
+                            color: Highcharts.getOptions().colors[1]
+                        }
+                    },
+                    opposite: true,
+                    lineWidth: 1,
+                    lineColor: '#4E5168',
+                    min: 0
+                }
+            ],
+
+
+            tooltip: {
+                shared: true,
+                useHTML: true,
+                headerFormat: '<table><tr><td></td><td></td><td style="text-align:right;direction:rtl;font-size:13px" ><b>{point.x:%d %b %Y}</b></td></tr>',
+                pointFormat: '<tr><td style="text-align: left;font-size:13px" ><b>{point.y:.0f}</b></td><td></td>' +
+                '<td style="text-align: right;direction:rtl;font-size:13px"><b>{series.name}:&nbsp;</b></td></tr>',
+                footerFormat: '</table>',
+                //   backgroundColor: '#FCFFC5',
+                borderColor: '#666666',
+                borderRadius: 3,
+                borderWidth: 1
+
+            },
+
+            legend: {
+                enabled: 'true',
+                layout: 'horizontal',
+                align: 'center',
+                verticalAlign: 'bottom',
+                floating: false,
+                itemStyle: {
+                    color: '#505458',
+                    fontWeight: 'bold'
+                }
+            },
+
+            xAxis: {
+                type: 'datetime',
+                {{ tickInterval }}
+                lineColor: '#4E5168',
+                labels: {
+                    style: {
+                        fontWeight: 'bold',
+                        fontSize: '13px',
+                        color: '#505458'
+                    }
+                },
+                lineWidth: 1
+            },
+            credits: {
+                enabled: false
+            },
+
+
+            series: [{
+                name: 'کلیک',
+                data: [{% for key,value in clicks.items() %}[{{ key  }},{{ value}}], {% endfor %}],
+                type: 'column',
+                {{ threshold }}
+                id: 'dataseries',
+                yAxis: 0,
+                tooltip: {
+                    valueDecimals: 2
+                },
+                fillColor: {
+                    linearGradient: {
+                        x1: 0,
+                        y1: 0,
+                        x2: 0,
+                        y2: 1
+                    },
+                    stops: [
+                        [0, Highcharts.getOptions().colors[0]],
+                        [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                    ]
+                }
+            },
+                {
+                    name: 'نمایش',
+                    data: [{% for key,value in shows.items() %}[{{ key  }},{{ value }}], {% endfor %}],
+                    type: 'column',
+                    {{ threshold }}
+                    id: 'dataseries',
+                    yAxis: 1,
+                    tooltip: {
+                        valueDecimals: 2
+                    },
+                    fillColor: {
+                        linearGradient: {
+                            x1: 0,
+                            y1: 0,
+                            x2: 0,
+                            y2: 1
+                        },
+                        stops: [
+                            [0, Highcharts.getOptions().colors[1]],
+                            [1, Highcharts.Color(Highcharts.getOptions().colors[1]).setOpacity(0).get('rgba')]
+                        ]
+                    }
+                }]
+        });
+    });
+</script>

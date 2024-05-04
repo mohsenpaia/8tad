@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="fa">
+<head>
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="author" content="SemiColonWeb"/>
+
+    <meta name="title" content="هشتاد | تبلیغات دیجیتال هوشمندتر از همیشه">
+    <meta name="description" content="با هشتاد، تبلیغات شما، نیازمندی های مشتری است. با پیوند تبلیغات آنلاین و هوش مصنوعی، کمپین تبلیغاتی شما را به مشتریان تان نمایش می دهیم.">
+    <meta name="keywords" content="تبلیغات بنری، تبلیغات کلیکی، تبلیغات موبایلی، تبلیغات همسان، تبلیغات در موتورهای جستجو">
+
+
+    <!-- Stylesheets
+    ============================================= -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/bootstrap.css') }}" type="text/css"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/bootstrap-rtl.css') }}" type="text/css"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='frontend/style.css') }}" type="text/css"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='frontend/style-rtl.css') }}" type="text/css"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/dark.css') }}" type="text/css"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/dark-rtl.css') }}" type="text/css"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/font-icons.css') }}" type="text/css"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/font-icons-rtl.css') }}" type="text/css"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/animate.css') }}" type="text/css"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/magnific-popup.css') }}" type="text/css"/>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/responsive.css') }}" type="text/css"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/responsive-rtl.css') }}" type="text/css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!--[if lt IE 9]>
+		<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+	<![endif]-->
+
+    <!-- Document Title
+    ============================================= -->
+    <title>هشتاد - تبلیغات اینترنتی، تبلیغات کلیکی، تبلیغات موتورهای جستجو</title>
+
+</head>
+
+<body class="stretched rtl no-transition">
+
+<!-- Document Wrapper
+============================================= -->
+<div id="wrapper" class="clearfix">
+
+    <!-- Top Bar
+    ============================================= -->
+    <div id="top-bar">
+
+        <div class="container clearfix">
+
+            <div class="col_half nobottommargin">
+
+                <!-- Top Links
+                ============================================= -->
+                <div class="top-links">
+                    <ul>
+                        <li><a href="{{ url_for_security('login') }}">ورود</a></li>
+                        <li><a href="{{ url_for_security('register') }}">ثبت نام</a></li>
+                    </ul>
+                </div><!-- .top-links end -->
+
+            </div>
+
+            <div class="col_half fleft col_last nobottommargin">
+
+                <!-- Top Social
+                ============================================= -->
+                <div id="top-social">
+                    <ul>
+{#                        <li><a href="#" class="si-facebook"><span class="ts-icon"><i#}
+{#                                class="icon-facebook"></i></span><span class="ts-text">Facebook</span></a></li>#}
+{#                        <li><a href="#" class="si-twitter"><span class="ts-icon"><i#}
+{#                                class="icon-twitter"></i></span><span class="ts-text">Twitter</span></a></li>#}
+{#                        <li><a href="#" class="si-dribbble"><span class="ts-icon"><i#}
+{#                                class="icon-dribbble"></i></span><span class="ts-text">Dribbble</span></a></li>#}
+{#                        <li><a href="#" class="si-github"><span class="ts-icon"><i#}
+{#                                class="icon-github-circled"></i></span><span class="ts-text">Github</span></a></li>#}
+{#                        <li><a href="#" class="si-pinterest"><span class="ts-icon"><i class="icon-pinterest"></i></span><span#}
+{#                                class="ts-text">Pinterest</span></a></li>#}
+{#                        <li><a href="#" class="si-instagram"><span class="ts-icon"><i#}
+{#                                class="icon-instagram2"></i></span><span class="ts-text">Instagram</span></a></li>#}
+                        <li><a href="mailto:info@8tad.ir" class="si-email3"><span class="ts-icon"><i
+                                class="icon-email3"></i></span><span class="ts-text">info@8tad.ir</span></a></li>
+                        <li><a href="tel:+982188202747" class="si-call"><span class="ts-icon"><i class="icon-call"></i></span><span
+                                class="ts-text">۰۲۱-۸۸۲۰۲۷۴۷</span></a></li>
+                    </ul>
+                </div><!-- #top-social end -->
+
+            </div>
+
+        </div>
+
+    </div><!-- #top-bar end -->
+
+
+    <!-- Header
+    ============================================= -->
+    <header id="header">
+
+        <div id="header-wrap">
+
+            <div class="container clearfix">
+
+                <div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
+
+                <!-- Logo
+               ============================================= -->
+                <div id="logo">
+                    <a href="{{ url_for('home') }}" class="standard-logo"><img
+                            src="{{ url_for('static', filename='frontend/images/logo-security.png') }}" alt="8tad Logo"></a>
+                </div><!-- #logo end -->
+
+                <!-- Primary Navigation
+                ============================================= -->
+                <nav id="primary-menu" class="sub-title">
+
+                    <ul>
+                        <li {% if request.endpoint == 'home' %}class="current"{% endif %}>
+                            <a href="{{ url_for('home') }}">
+                                <div>صفحه اصلی</div>
+                                <span>Home</span></a>
+                        </li>
+                        <li {% if request.endpoint == 'technology' %}class="current"{% endif %}><a
+                                href="{{ url_for('technology') }}">
+                            <div>تکنولوژی</div>
+                            <span>Technology</span></a>
+
+                        </li>
+                        <li {% if request.endpoint == 'pricing' %}class="current"{% endif %}><a
+                                href="{{ url_for('pricing') }}">
+                            <div>تعرفه ها</div>
+                            <span>Pricing</span></a>
+
+                        </li>
+                        <li><a href="#">
+                            <div>سوالات متداول</div>
+                            <span>FAQS</span></a>
+
+                        </li>
+                        <li><a href="#">
+                            <div>بلاگ</div>
+                            <span>Blog</span></a>
+                        </li>
+                        <li {% if request.endpoint == 'about' %}class="current"{% endif %}><a
+                                href="{{ url_for('about') }}">
+                            <div>درباره ما</div>
+                            <span>About US</span></a>
+
+                        </li>
+                        <li {% if request.endpoint == 'contact' %}class="current"{% endif %}><a
+                                href="{{ url_for('contact') }}">
+                            <div>تماس با ما</div>
+                            <span>Contact US</span></a>
+
+                        </li>
+                    </ul>
+
+                </nav><!-- #primary-menu end -->
+
+            </div>
+
+        </div>
+
+    </header><!-- #header end -->
+
+
+
+    {% block content %}
+    {% endblock %}
+
+
+
+    <!-- Footer
+    ============================================= -->
+    <footer id="footer" class="dark">
+
+        <div class="container">
+
+            <!-- Footer Widgets
+            ============================================= -->
+            <div class="footer-widgets-wrap clearfix">
+
+                <div class="col_full">
+
+                    <div class="heading-block center nobottommargin">
+                        <h2>نیاز به مشاوره دارید؟ میزبان صدای گرمتان هستیم</h2>
+                        <h2 dir="rtl" style="padding-top:20px;"><strong>۰۲۱-۸۸۲۰۲۷۴۷</strong></h2>
+                    </div>
+
+                </div>
+
+            </div><!-- .footer-widgets-wrap end -->
+
+        </div>
+
+        <!-- Copyrights
+        ============================================= -->
+        <div id="copyrights">
+
+            <div class="container clearfix">
+
+                <div class="col_half">
+                    © کپی‌رایت ۱۳۹۶. کلیه حقوق مادی و معنوی این وب سایت متعلق به شرکت هماپلاس می‌باشد. <br>
+                    <div class="copyright-links">هشتاد توسط سرورهای قدرتمند ابری<a href="http://XaaS.ir/" target="_blank" style="color:#fff;" >XaaS</a> میزبانی می شود.</div>
+                </div>
+
+                <div class="col_half col_last tright">
+                    <div class="fleft clearfix">
+{#                        <a href="#" class="social-icon si-small si-borderless si-facebook">#}
+{#                            <i class="icon-facebook"></i>#}
+{#                            <i class="icon-facebook"></i>#}
+{#                        </a>#}
+{##}
+{#                        <a href="#" class="social-icon si-small si-borderless si-twitter">#}
+{#                            <i class="icon-twitter"></i>#}
+{#                            <i class="icon-twitter"></i>#}
+{#                        </a>#}
+{##}
+{#                        <a href="#" class="social-icon si-small si-borderless si-gplus">#}
+{#                            <i class="icon-gplus"></i>#}
+{#                            <i class="icon-gplus"></i>#}
+{#                        </a>#}
+{##}
+{#                        <a href="#" class="social-icon si-small si-borderless si-pinterest">#}
+{#                            <i class="icon-pinterest"></i>#}
+{#                            <i class="icon-pinterest"></i>#}
+{#                        </a>#}
+{##}
+{#                        <a href="#" class="social-icon si-small si-borderless si-vimeo">#}
+{#                            <i class="icon-vimeo"></i>#}
+{#                            <i class="icon-vimeo"></i>#}
+{#                        </a>#}
+{##}
+{#                        <a href="#" class="social-icon si-small si-borderless si-github">#}
+{#                            <i class="icon-github"></i>#}
+{#                            <i class="icon-github"></i>#}
+{#                        </a>#}
+{##}
+{#                        <a href="#" class="social-icon si-small si-borderless si-yahoo">#}
+{#                            <i class="icon-yahoo"></i>#}
+{#                            <i class="icon-yahoo"></i>#}
+{#                        </a>#}
+{##}
+{#                        <a href="#" class="social-icon si-small si-borderless si-linkedin">#}
+{#                            <i class="icon-linkedin"></i>#}
+{#                            <i class="icon-linkedin"></i>#}
+{#                        </a>#}
+                    </div>
+
+                     <div class="clear"></div>
+
+                </div>
+
+            </div>
+
+        </div><!-- #copyrights end -->
+
+    </footer><!-- #footer end -->
+
+</div><!-- #wrapper end -->
+
+<!-- Go To Top
+============================================= -->
+<div id="gotoTop" class="icon-angle-up"></div>
+
+<!-- External JavaScripts
+============================================= -->
+<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/jquery.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/plugins.js') }}"></script>
+
+<!-- Footer Scripts
+============================================= -->
+<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/functions.js') }}"></script>
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAprusxKxNBmDuZMDGUou1qjV_kl--8xA"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='frontend/js/jquery.gmap.js') }}"></script>
+
+<script type="text/javascript">
+
+    $('#google-map').gMap({
+        latitude: '35.731026',
+        longitude: '51.417973',
+        maptype: 'ROADMAP',
+        zoom: 15,
+        markers: [
+            {
+                latitude: '35.731026',
+                longitude: '51.417973',
+                icon: {
+                    image: "/static/frontend/images/map-icon-red.png",
+                    iconsize: [32, 39],
+                    iconanchor: [13, 39]
+                },
+                popup: true
+            }
+        ],
+        doubleclickzoom: false,
+        controls: {
+            panControl: true,
+            zoomControl: true,
+            mapTypeControl: true,
+            scaleControl: false,
+            streetViewControl: false,
+            overviewMapControl: false
+        }
+    });
+
+</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+{#<script async src="https://www.googletagmanager.com/gtag/js?id=UA-109269582-1"></script>#}
+{#<script>#}
+{#  window.dataLayer = window.dataLayer || [];#}
+{#  function gtag(){dataLayer.push(arguments);}#}
+{#  gtag('js', new Date());#}
+{##}
+{#  gtag('config', 'UA-109269582-1');#}
+{#</script>#}
+{##}
+{#<script type="text/javascript">#}
+{#    function statsgathering() {#}
+{#        var docurl = document.location;#}
+{#        var docreferrer="" +document.referrer;#}
+{#        var sc2 = document.createElement('script'); sc2.type = 'text/javascript'; sc2.async = true;#}
+{#        var prt = 'http:';#}
+{#		if (location.protocol=='https:')#}
+{#			prt = location.protocol;#}
+{#        sc2.src = prt+'//newstats.8tad.ir?url=' + escape(docurl) + "&sts_r=" + escape(docreferrer) +  "&sts_tp=m" +  "&sts_t=" + (Math.random() * 9999999);#}
+{#        var sa = document.getElementsByTagName('script')[0]; sa.parentNode.insertBefore(sc2, sa);#}
+{#    }#}
+{#    statsgathering();#}
+{#</script>#}
+
+</body>
+</html>
