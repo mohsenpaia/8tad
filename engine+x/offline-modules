@@ -1,0 +1,8 @@
+#!/bin/bash
+while true
+do 
+	echo 'Running...'
+	/usr/share/nginx/click/ofu.sh
+	echo 'End of Running'
+	sleep 10
+done
